@@ -16,16 +16,22 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class RobotMap {
+
+    // climber
     public final int climbMotorPort = -1;
+    public final int climberSolOnPort = 2;
+    public final int climberSolOffPort = 3;
+    public final double climberSpeed = -0.0;
+
+    // shooter
     public final int shootMotorOnePort = 1;
-    public final int shootMotorTwoPort = -1;
-    public final int shootMotorThreePort = -1;
-    public final int shootMotorFourPort = -1;
-    
-    public final int topLimitPort = 0;
-    public final int bottomLimitPort = 1;
+    public final int shootMotorTwoPort = 2;
+    public final int feedMotorOnePort = 3;
+    public final int topLimitPort = -1;
+    public final int bottomLimitPort = -1;
 
     public final int joystickPortOne = 0;
 
-    public final int shooterMaxRPM = 3000;
+    public final int shooterMaxRPM = 2540;
+    public final int feederMaxRPM = 1800;
 }
