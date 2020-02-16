@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.intake;
+package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
@@ -14,36 +14,39 @@ import frc.robot.Robot;
 import java.util.HashSet;
 import java.util.Set;
 
-public class IntakeSpinRoller implements Command {
-  public IntakeSpinRoller() {
+public class ShooterStop implements Command {
+  public ShooterStop() {
   }
 
   @Override
   public Set<Subsystem> getRequirements() {
     Set<Subsystem> list = new HashSet<Subsystem>();
-    list.add(Robot.INTAKE);
+    list.add(Robot.SHOOTER);
     return list;
   }
 
   @Override
   public void initialize() {
+    
   }
 
   @Override
   public void execute() {
-    Robot.INTAKE.spinRoller(Robot.ROBOT_MAP.intakeSpeed);
+    System.out.println("stopping");
+    Robot.SHOOTER.shoot(0.0); // Insert Vision - distance equation
   }
 
   @Override
   public boolean isFinished() {
+    System.out.println("finishing");
     return true;
   }
 
   @Override
   public void end(boolean interrupted) {
-    if(interrupted)
-    {
-      Robot.INTAKE.stop();
+    if (interrupted) {
+      System.out.println("ending");
+      Robot.SHOOTER.stop();
     }
   }
 }

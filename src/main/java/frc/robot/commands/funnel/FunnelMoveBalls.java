@@ -21,7 +21,7 @@ public class FunnelMoveBalls implements Command {
   @Override
   public Set<Subsystem> getRequirements() {
     Set<Subsystem> list = new HashSet<Subsystem>();
-    //list.add(Robot.FUNNEL);
+    list.add(Robot.FUNNEL);
     return list;
   }
 
@@ -31,7 +31,8 @@ public class FunnelMoveBalls implements Command {
 
   @Override
   public void execute() {
-    //Robot.FUNNEL.moveBalls(true);
+    System.out.println("funning");
+    Robot.FUNNEL.moveBalls(true);
   }
 
   @Override

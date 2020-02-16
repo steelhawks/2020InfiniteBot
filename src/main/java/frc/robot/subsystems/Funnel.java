@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.util.subsystems.MechanicalSubsystem;
 
+
 public class Funnel extends MechanicalSubsystem {
   // TALON SRX MOTOR CONTROLLER
   public final WPI_TalonSRX funnelMotorOne;

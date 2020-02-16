@@ -33,7 +33,12 @@ public final class RobotMap {
   public final String pathName = "/home/lvuser/deploy/log_2020-02-14_212213.csv";
   public final String[] paths = {"straight.csv", "back.csv" };
   public final String deployDirectory = "C:/Code/2020AutonBot/deploy";
-  public final SequentialCommandGroup autonCommands = new SequentialCommandGroup(new RequestBall(), new Follow(), new RequestBay(), new Align(), new Follow());
+  public final SequentialCommandGroup autonCommands = 
+    new SequentialCommandGroup(new RequestBall(), 
+                                new Follow(), 
+                                new RequestBay(), 
+                                new Align(), 
+                                new Follow());
 
   /*****
    * Input
@@ -43,20 +48,22 @@ public final class RobotMap {
   public final int gamepadOnePort = 1;
 
   public final int climberToggleSolenoidButton = Gamepad.kGamepadButtonStart;
-  public final int climberRollWinchButton = Gamepad.kGamepadButtonRightStick;
+  public final int climberRollWinchButton = Gamepad.kGamepadButtonA;
+  public final int climberUnrollButton = Gamepad.kGamepadButtonBack;
 
   public final int drivetrainShiftButton = 1;
   public final int drivetrainReverseDirectionButton = 2;
   public final int drivetrainCoolFalconsButton = 3;
 
-  public final int funnelMoveBallsForwardButton = Gamepad.kGamepadButtonX;
-  public final int funnelMoveBallsReverseButton = -1; //not used
+  // public final int funnelMoveBallsForwardButton = Gamepad.kGamepadButtonX;
+  // public final int funnelMoveBallsReverseButton = -1; //not used
 
   public final int intakeSpinRollerForwardButton = Gamepad.kGamepadButtonShoulderR;
   public final int intakeSpinRollerReverseButton = -1; //not used
-  public final int intakeToggleSolenoidButton = Gamepad.kGamepadButtonA;
+  public final int intakeToggleSolenoidButton = Gamepad.kGamepadButtonX;
 
   public final int shooterSpinForwardButton = Gamepad.kGamepadButtonShoulderL;
+  public final int shooterStopButton = Gamepad.kGamepadTriggerLeft;
   public final int shooterSpinReverseButton = -1; //not used
 
   public final int storageMoveBallsForwardButton = Gamepad.kGamepadButtonY;
@@ -106,7 +113,7 @@ public final class RobotMap {
    * Funnel
    */
 
-  public final int funnelMotorOnePort= -9;
+  public final int funnelMotorOnePort= 9;
 
   public final double funnelSpeed = 0.5;
 
@@ -128,8 +135,8 @@ public final class RobotMap {
    */
 
   public final int storageMotorOnePort = 13; // no motorized storage, set to obscure value for init purposes
-
-  public final double storageSpeed = -0.0; // no motorized storage
+  public final int storageMotorTwoPort = 14;
+  public final double storageSpeed = 0.9; // no motorized storage
 
   /*****
    * Shooter

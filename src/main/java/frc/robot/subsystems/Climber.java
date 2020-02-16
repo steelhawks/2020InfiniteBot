@@ -54,6 +54,7 @@ public class Climber extends MechanicalSubsystem {
   }
 
   public void rollWinch(boolean isForward) {
+    System.out.println("winching");
     if (isForward) {
       this.climberMotorGroup.set(Robot.ROBOT_MAP.climberSpeed);
     } else {
@@ -71,6 +72,10 @@ public class Climber extends MechanicalSubsystem {
     return climberMotorOne.isAlive();
   }
 
+  public void stopClimb()
+  {
+    this.climberMotorGroup.set(0.0);
+  }
   public void ping() {
   }
 

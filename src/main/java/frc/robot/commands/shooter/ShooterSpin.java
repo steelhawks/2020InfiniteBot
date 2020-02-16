@@ -27,21 +27,25 @@ public class ShooterSpin implements Command {
 
   @Override
   public void initialize() {
+    
   }
 
   @Override
   public void execute() {
+    System.out.println("shooting");
     Robot.SHOOTER.shoot(0.8); // Insert Vision - distance equation
   }
 
   @Override
   public boolean isFinished() {
+    System.out.println("finishing");
     return true;
   }
 
   @Override
   public void end(boolean interrupted) {
     if (interrupted) {
+      System.out.println("ending");
       Robot.SHOOTER.stop();
     }
   }

@@ -50,7 +50,7 @@ public class Robot extends TimedRobot {
   public static final Shooter SHOOTER = new Shooter();
   public static final Storage STORAGE = new Storage();
   public static final Drivetrain DRIVETRAIN = new Drivetrain();
-  //public static final Funnel FUNNEL = new Funnel();
+  public static final Funnel FUNNEL = new Funnel();
   public static final Intake INTAKE = new Intake();
   public static final Vision VISION = new Vision();
   public static final VisionLight VISION_LIGHT = new VisionLight();
@@ -66,7 +66,8 @@ public class Robot extends TimedRobot {
     //CLIMBER.retractSolenoid();
     DRIVETRAIN.lowGear();
     INTAKE.intakeMotorOne.stopMotor();
-    // INTAKE.up();
+    
+    INTAKE.up();
     //DASHBOARDWS.connect();
     //DASHBOARDWS.baseConfig();
     //TRACKINGWS.connect();
@@ -94,7 +95,7 @@ public class Robot extends TimedRobot {
     // SmartDashboard.putString("Auton", "Position: " + this.startingPosition.toString() + "\nDeploying Path" + this.autonPath.toString());
 
     // Vision periodic
-    //VISION_LIGHT.runLights();
+    // VISION_LIGHT.runLights();
     //DASHBOARDWS.reconnect();
     //TRACKINGWS.reconnect();
 
@@ -134,16 +135,16 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     CommandScheduler.getInstance().enable();
     DRIVETRAIN.lowGear();
-    // INTAKE.down();
+    INTAKE.down();
   }
 
   @Override
   public void teleopPeriodic() {
     CommandScheduler.getInstance().run();
-    if (DriverStation.getInstance().getMatchTime() < 10) {
-      CommandScheduler.getInstance().schedule(
-          new ParallelCommandGroup(new FunnelVomit(), new IntakeVomit(), new ShooterVomit(), new StorageVomit()));
-    }
+    // if (DriverStation.getInstance().getMatchTime() < 10) {
+    //   CommandScheduler.getInstance().schedule(
+    //       new ParallelCommandGroup(new IntakeVomit(), new ShooterVomit(), new StorageVomit()));
+    // }
   }
 
   public void shouldCoolFalcons() {

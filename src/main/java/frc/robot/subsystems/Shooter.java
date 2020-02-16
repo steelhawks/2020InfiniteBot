@@ -102,16 +102,17 @@ public class Shooter extends MechanicalSubsystem {
 
   // initalizing shooter
   public boolean stop() {
-    this.shooterMotorOne.set(0);
-    this.shooterMotorTwo.set(0);
+    System.out.println("stopping");
+    this.shooterMotorOne.set(ControlMode.PercentOutput, 0);
+    this.shooterMotorTwo.set(ControlMode.PercentOutput, 0);
     this.isSpooled = false;
     return true;
   }
 
   public void spool(double output) {
-    this.shooterMotorOne.set(ControlMode.Velocity, output);
-    this.shooterMotorTwo.set(ControlMode.Velocity, output);
-    if (this.shooterMotorOne.getSelectedSensorVelocity() == output)
+    this.shooterMotorOne.set(ControlMode.PercentOutput, output);
+    this.shooterMotorTwo.set(ControlMode.PercentOutput, output);
+    if (this.shooterMotorOne.get() >= output)
     {
       this.isSpooled = true;
     }
@@ -120,8 +121,8 @@ public class Shooter extends MechanicalSubsystem {
   public void shoot(double output) {
     
     shooterRPM();
-    this.shooterMotorOne.set(ControlMode.Velocity, output);
-    this.shooterMotorTwo.set(ControlMode.Velocity, output);
+    this.shooterMotorOne.set(ControlMode.PercentOutput, output);
+    this.shooterMotorTwo.set(ControlMode.PercentOutput, output);
   }
 
   public double shooterRPM() {

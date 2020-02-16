@@ -39,11 +39,11 @@ public class Intake extends MechanicalSubsystem {
   }
 
   public void spinRoller(boolean isForward) {
-    System.out.println("spinning motors1");
+    System.out.println("spinning motors");
     if (isForward) {
-      this.intakeMotorGroup.set(-Robot.ROBOT_MAP.intakeSpeed);
-    } else {
       this.intakeMotorGroup.set(Robot.ROBOT_MAP.intakeSpeed);
+    } else {
+      this.intakeMotorGroup.set(-Robot.ROBOT_MAP.intakeSpeed);
     }
   }
 
@@ -85,7 +85,7 @@ public class Intake extends MechanicalSubsystem {
   }
 
   public boolean stop() {
-    System.out.println("3");
+    // System.out.println("3");
     this.intakeMotorOne.stopMotor();
     return true;
   }

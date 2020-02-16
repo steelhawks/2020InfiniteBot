@@ -41,7 +41,7 @@ public class StorageVomit implements Command {
 
   @Override
   public void end(boolean interrupted) {
-    if (interrupted) {
+    if (true) {
       Robot.STORAGE.stop();
     }
   }

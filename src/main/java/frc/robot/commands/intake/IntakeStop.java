@@ -14,8 +14,8 @@ import frc.robot.Robot;
 import java.util.HashSet;
 import java.util.Set;
 
-public class IntakeSpinRoller implements Command {
-  public IntakeSpinRoller() {
+public class IntakeStop implements Command {
+  public IntakeStop() {
   }
 
   @Override
@@ -31,7 +31,7 @@ public class IntakeSpinRoller implements Command {
 
   @Override
   public void execute() {
-    Robot.INTAKE.spinRoller(Robot.ROBOT_MAP.intakeSpeed);
+    Robot.INTAKE.spinRoller(0.0);
   }
 
   @Override

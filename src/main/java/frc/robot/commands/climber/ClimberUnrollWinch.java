@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.intake;
+package frc.robot.commands.climber;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
@@ -14,14 +14,15 @@ import frc.robot.Robot;
 import java.util.HashSet;
 import java.util.Set;
 
-public class IntakeSpinRoller implements Command {
-  public IntakeSpinRoller() {
+public class ClimberUnrollWinch implements Command {
+
+  public ClimberUnrollWinch() {
   }
 
   @Override
   public Set<Subsystem> getRequirements() {
     Set<Subsystem> list = new HashSet<Subsystem>();
-    list.add(Robot.INTAKE);
+    list.add(Robot.CLIMBER);
     return list;
   }
 
@@ -31,7 +32,7 @@ public class IntakeSpinRoller implements Command {
 
   @Override
   public void execute() {
-    Robot.INTAKE.spinRoller(Robot.ROBOT_MAP.intakeSpeed);
+    Robot.CLIMBER.rollWinch(false);
   }
 
   @Override
@@ -41,9 +42,8 @@ public class IntakeSpinRoller implements Command {
 
   @Override
   public void end(boolean interrupted) {
-    if(interrupted)
-    {
-      Robot.INTAKE.stop();
+    if (interrupted) {
+      Robot.CLIMBER.stop();
     }
   }
 }

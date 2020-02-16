@@ -15,6 +15,8 @@ import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.climber.ClimberRollWinch;
 import frc.robot.commands.climber.ClimberToggleSolenoid;
+import frc.robot.commands.climber.ClimberStop;
+import frc.robot.commands.climber.ClimberUnrollWinch;
 import frc.robot.commands.drivetrain.DrivetrainCoolFalcons;
 import frc.robot.commands.drivetrain.DrivetrainDefault;
 import frc.robot.commands.drivetrain.DrivetrainReverseDirection;
@@ -22,6 +24,7 @@ import frc.robot.commands.drivetrain.DrivetrainShiftGear;
 import frc.robot.commands.funnel.FunnelMoveBalls;
 import frc.robot.commands.funnel.FunnelVomit;
 import frc.robot.commands.intake.IntakeSpinRoller;
+import frc.robot.commands.intake.IntakeStop;
 import frc.robot.commands.intake.IntakeToggleSolenoid;
 import frc.robot.commands.intake.IntakeVomit;
 import frc.robot.commands.pathcorder.EndRecording;
@@ -29,8 +32,10 @@ import frc.robot.commands.pathcorder.StartRecording;
 import frc.robot.commands.shooter.ShooterSpin;
 import frc.robot.commands.shooter.ShooterSpool;
 import frc.robot.commands.shooter.ShooterVomit;
+import frc.robot.commands.shooter.ShooterStop;
 import frc.robot.commands.storage.StorageMoveBalls;
 import frc.robot.commands.storage.StorageVomit;
+import frc.robot.commands.storage.StorageStop;
 import frc.robot.commands.vision.Align;
 import frc.robot.commands.vision.Connect;
 import frc.robot.commands.vision.RequestBall;
@@ -77,9 +82,13 @@ public class CommandLinker {
         Robot.ROBOT_MAP.climberToggleSolenoidButton);
     climberToggleSolenoidButton.whenPressed(new ClimberToggleSolenoid());
 
+    Button climberUnrollButton = new JoystickButton(this.operatorGamepad, Robot.ROBOT_MAP.climberUnrollButton);
+    climberUnrollButton.whenPressed(new ClimberUnrollWinch());
+    climberUnrollButton.whenReleased(new ClimberStop());
+
     Button climberRollWinchButton = new JoystickButton(this.operatorGamepad, Robot.ROBOT_MAP.climberRollWinchButton);
     climberRollWinchButton.whenPressed(new ClimberRollWinch());
-
+    climberRollWinchButton.whenReleased(new ClimberStop());
     // DRIVETRAIN
     Button drivetrainShiftButton = new JoystickButton(this.driveJoystick, Robot.ROBOT_MAP.drivetrainShiftButton);
     drivetrainShiftButton.whenPressed(new DrivetrainShiftGear());
@@ -101,6 +110,7 @@ public class CommandLinker {
     Button intakeSpinRollerForwardButton = new JoystickButton(this.operatorGamepad,
         Robot.ROBOT_MAP.intakeSpinRollerForwardButton);
     intakeSpinRollerForwardButton.whenPressed(new IntakeSpinRoller());
+    intakeSpinRollerForwardButton.whenReleased(new IntakeStop());
 
     Button intakeToggleSolenoidButton = new JoystickButton(this.operatorGamepad,
         Robot.ROBOT_MAP.intakeToggleSolenoidButton);
@@ -109,13 +119,15 @@ public class CommandLinker {
     // SHOOTER
     Button shooterSpinForwardButton = new JoystickButton(this.operatorGamepad,
         Robot.ROBOT_MAP.shooterSpinForwardButton);
-    shooterSpinForwardButton.whenPressed(new SequentialCommandGroup(/* request hex detection, */ new ShooterSpool(),
-        new ParallelCommandGroup(new ShooterSpin())));
+    shooterSpinForwardButton.whenPressed(new SequentialCommandGroup(/* request hex detection, */ new ShooterSpool()
+    ,new ShooterSpin()));
+    shooterSpinForwardButton.whenReleased(new ShooterStop());
 
     // STORAGE
     Button storageMoveBallsForwardButton = new JoystickButton(this.operatorGamepad,
         Robot.ROBOT_MAP.storageMoveBallsForwardButton);
     storageMoveBallsForwardButton.whenPressed(new StorageMoveBalls());
+    storageMoveBallsForwardButton.whenReleased(new StorageStop());
 
     // VISION
     Button alignButton = new JoystickButton(this.driveJoystick, Robot.ROBOT_MAP.visionAlignButton);
@@ -136,7 +148,7 @@ public class CommandLinker {
     // VOMIT
     Button vomitButton = new JoystickButton(this.operatorGamepad, Robot.ROBOT_MAP.vomitButton);
     vomitButton.whenPressed(
-        new ParallelCommandGroup(new IntakeVomit(), new ShooterVomit(), new StorageVomit()));
+        new ParallelCommandGroup(new FunnelVomit(),new IntakeVomit(), new ShooterVomit(), new StorageVomit()));
 
     // PATHCORDER
     Button startRecordingButton = new JoystickButton(Robot.COMMAND_LINKER.driveJoystick,

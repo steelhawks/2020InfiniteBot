@@ -16,6 +16,7 @@ import frc.util.subsystems.MechanicalSubsystem;
 public class Storage extends MechanicalSubsystem {
   // TALON SRX MOTOR CONTROLLER
   public final WPI_TalonSRX storageMotorOne;
+  public final WPI_TalonSRX storageMotorTwo;
 
   // SPEED CONTROLLER GROUP
   public final SpeedControllerGroup storageMotorGroup;
@@ -24,17 +25,23 @@ public class Storage extends MechanicalSubsystem {
   public Storage() {
     // SPARK MAX LEFT MOTORS
     this.storageMotorOne = new WPI_TalonSRX(Robot.ROBOT_MAP.storageMotorOnePort);
+    this.storageMotorTwo = new WPI_TalonSRX(Robot.ROBOT_MAP.storageMotorTwoPort);
 
     // SPEED CONTROLLER GROUPS
-    this.storageMotorGroup = new SpeedControllerGroup(this.storageMotorOne);
+    this.storageMotorGroup = new SpeedControllerGroup(this.storageMotorOne, this.storageMotorTwo);
   }
 
   public void moveBalls(boolean isForward) {
+    System.out.println("storing");
     if (isForward) {
       this.storageMotorGroup.set(Robot.ROBOT_MAP.storageSpeed);
     } else {
       this.storageMotorGroup.set(-Robot.ROBOT_MAP.storageSpeed);
     }
+  }
+
+  public void stopStorage(){
+    this.storageMotorGroup.set(0.0);
   }
 
   public void smartDashboard() {
