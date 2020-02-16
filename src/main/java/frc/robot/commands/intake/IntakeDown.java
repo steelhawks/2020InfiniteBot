@@ -41,5 +41,6 @@ public class IntakeDown implements Command {
 
   @Override
   public void end(boolean interrupted) {
+    Robot.INTAKE.stop();
   }
 }

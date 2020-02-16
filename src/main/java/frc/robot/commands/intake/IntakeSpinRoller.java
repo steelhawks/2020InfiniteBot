@@ -41,8 +41,9 @@ public class IntakeSpinRoller implements Command {
 
   @Override
   public void end(boolean interrupted) {
-    if (interrupted) {
-      Robot.STORAGE.stop();
+    if(true)
+    {
+      Robot.INTAKE.stop();
     }
   }
 }

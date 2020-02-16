@@ -65,6 +65,7 @@ public class Robot extends TimedRobot {
     COMMAND_LINKER.configureButtonBindings();
     //CLIMBER.retractSolenoid();
     DRIVETRAIN.lowGear();
+    INTAKE.intakeMotorOne.stopMotor();
     // INTAKE.up();
     //DASHBOARDWS.connect();
     //DASHBOARDWS.baseConfig();

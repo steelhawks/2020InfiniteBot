@@ -42,7 +42,7 @@ public class ShooterSpin implements Command {
   @Override
   public void end(boolean interrupted) {
     if (interrupted) {
-      Robot.STORAGE.stop();
+      Robot.SHOOTER.stop();
     }
   }
 }
