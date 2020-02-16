@@ -39,8 +39,8 @@ public final class RobotMap {
    * Input
    */
 
-  public final int joystickOnePort = 1;
-  public final int gamepadOnePort = 2;
+  public final int joystickOnePort = 0;
+  public final int gamepadOnePort = 1;
 
   public final int climberToggleSolenoidButton = Gamepad.kGamepadButtonStart;
   public final int climberRollWinchButton = Gamepad.kGamepadButtonRightStick;

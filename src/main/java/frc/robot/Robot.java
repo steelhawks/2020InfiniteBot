@@ -60,8 +60,10 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
+    COMMAND_LINKER.configureRegisteredSubsystems();
+    COMMAND_LINKER.configurePeriodicBindings();
     COMMAND_LINKER.configureButtonBindings();
-    CLIMBER.retractSolenoid();
+    //CLIMBER.retractSolenoid();
     DRIVETRAIN.lowGear();
     // INTAKE.up();
     //DASHBOARDWS.connect();
