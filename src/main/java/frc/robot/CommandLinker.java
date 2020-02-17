@@ -40,6 +40,8 @@ import frc.robot.commands.vision.Connect;
 import frc.robot.commands.vision.RequestBall;
 import frc.robot.commands.vision.RequestBay;
 import frc.robot.commands.vision.RequestPort;
+import frc.robot.controllers.Driver3DProController;
+import frc.robot.controllers.OperatorXboxController;
 import frc.robot.commands.vision.LiftCamera;
 import frc.util.Gamepad;
 
@@ -53,8 +55,10 @@ import frc.util.Gamepad;
 
 public class CommandLinker {
 
-  public final Joystick driveJoystick = new Joystick(Robot.ROBOT_MAP.joystickOnePort);
-  public final Gamepad operatorGamepad = new Gamepad(Robot.ROBOT_MAP.gamepadOnePort);
+  public final Joystick driveJoystick = new Joystick(Robot.BUTTON_MAP.joystickOnePort);
+  public final Gamepad operatorGamepad = new Gamepad(Robot.BUTTON_MAP.gamepadOnePort);
+  private final Driver3DProController driverController = new Driver3DProController(driveJoystick);
+  private final OperatorXboxController xboxController = new OperatorXboxController(operatorGamepad);
 
   public CommandLinker() {
   }
@@ -77,88 +81,7 @@ public class CommandLinker {
   }
 
   public void configureButtonBindings() {
-    // CLIMBER
-    Button climberToggleSolenoidButton = new JoystickButton(this.operatorGamepad,
-        Robot.ROBOT_MAP.climberToggleSolenoidButton);
-    climberToggleSolenoidButton.whenPressed(new ClimberToggleSolenoid());
-
-    Button climberUnrollButton = new JoystickButton(this.operatorGamepad, Robot.ROBOT_MAP.climberUnrollButton);
-    climberUnrollButton.whenPressed(new ClimberUnrollWinch())
-    .whenReleased(new ClimberStop());
-
-    Button climberRollWinchButton = new JoystickButton(this.operatorGamepad, Robot.ROBOT_MAP.climberRollWinchButton);
-     climberRollWinchButton.whenPressed(new ClimberRollWinch())
-    .whenReleased(new ClimberStop());
-    // DRIVETRAIN
-    Button drivetrainShiftButton = new JoystickButton(this.driveJoystick, Robot.ROBOT_MAP.drivetrainShiftButton);
-    drivetrainShiftButton.whenPressed(new DrivetrainShiftGear());
-
-    Button drivetrainReverDirectionButton = new JoystickButton(this.driveJoystick,
-        Robot.ROBOT_MAP.drivetrainReverseDirectionButton);
-    drivetrainReverDirectionButton.whenPressed(new DrivetrainReverseDirection());
-
-    Button drivetrainCoolFalconsButton = new JoystickButton(this.driveJoystick,
-        Robot.ROBOT_MAP.drivetrainCoolFalconsButton);
-    drivetrainCoolFalconsButton.whenPressed(new DrivetrainCoolFalcons());
-
-    // // FUNNEL
-    // Button funnelMoveBallsForwardButton = new JoystickButton(this.operatorGamepad,
-    //     Robot.ROBOT_MAP.funnelMoveBallsForwardButton);
-    // funnelMoveBallsForwardButton.whenPressed(new FunnelMoveBalls());
-
-    // INTAKE
-    Button intakeSpinRollerForwardButton = new JoystickButton(this.operatorGamepad,
-        Robot.ROBOT_MAP.intakeSpinRollerForwardButton);
-    intakeSpinRollerForwardButton.whenPressed(new IntakeSpinRoller())
-    .whenReleased(new IntakeStop());
-
-    Button intakeToggleSolenoidButton = new JoystickButton(this.operatorGamepad,
-        Robot.ROBOT_MAP.intakeToggleSolenoidButton);
-    intakeToggleSolenoidButton.whenPressed(new IntakeToggleSolenoid());
-
-    // SHOOTER
-    Button shooterSpinForwardButton = new JoystickButton(this.operatorGamepad,
-        Robot.ROBOT_MAP.shooterSpinForwardButton);
-    shooterSpinForwardButton.whenPressed(new SequentialCommandGroup(/* request hex detection, */ new ShooterSpool()
-    ,new ShooterSpin()))
-    .whenReleased(new ShooterStop());
-
-    // STORAGE
-    Button storageMoveBallsForwardButton = new JoystickButton(this.operatorGamepad,
-        Robot.ROBOT_MAP.storageMoveBallsForwardButton);
-    storageMoveBallsForwardButton.whenPressed(new StorageMoveBalls())
-    .whenReleased(new StorageStop());
-
-    // VISION
-    Button alignButton = new JoystickButton(this.driveJoystick, Robot.ROBOT_MAP.visionAlignButton);
-    alignButton.whenPressed(new Align());
-
-    Button bayButton = new JoystickButton(this.driveJoystick, Robot.ROBOT_MAP.bayButton);
-    bayButton.whenPressed(new RequestBay());
-
-    Button ballButton = new JoystickButton(this.driveJoystick, Robot.ROBOT_MAP.ballButton);
-    ballButton.whenPressed(new RequestBall());
-
-    Button portButton = new JoystickButton(this.driveJoystick, Robot.ROBOT_MAP.portButton);
-    portButton.whenPressed(new RequestPort());
-
-    Button connectButton = new JoystickButton(this.driveJoystick, Robot.ROBOT_MAP.connectButton);
-    connectButton.whenPressed(new Connect());
-
-    Button extendCameraButton = new JoystickButton(this.driveJoystick, Robot.ROBOT_MAP.cameraButton);
-    extendCameraButton.whenPressed(new LiftCamera());
-    // VOMIT
-    Button vomitButton = new JoystickButton(this.operatorGamepad, Robot.ROBOT_MAP.vomitButton);
-    vomitButton.whenPressed(
-        new ParallelCommandGroup(new IntakeVomit(), new ShooterVomit(), new StorageVomit()));
-
-    // PATHCORDER
-    Button startRecordingButton = new JoystickButton(Robot.COMMAND_LINKER.driveJoystick,
-        Robot.ROBOT_MAP.startRecordingButton);
-    startRecordingButton.whenPressed(new StartRecording());
-
-    Button endRecordingButton = new JoystickButton(Robot.COMMAND_LINKER.driveJoystick,
-        Robot.ROBOT_MAP.endRecordingButton);
-    endRecordingButton.whenPressed(new EndRecording());
+    driverController.mapButtons();
+    xboxController.mapButtons();
   }
 }

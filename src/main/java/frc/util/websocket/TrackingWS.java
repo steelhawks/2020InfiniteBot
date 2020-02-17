@@ -2,7 +2,7 @@
 package frc.util.websocket;
 
 import java.net.URI;
-
+import frc.robot.Robot;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft_6455;
 import org.java_websocket.handshake.ServerHandshake;
@@ -10,10 +10,12 @@ import org.java_websocket.handshake.ServerHandshake;
 public class TrackingWS {
     private String targetData;
     private WebSocketClient trackingWS;
+    private String trackingURL = "ws://" + Robot.ROBOT_MAP.jetsonNanoIP + ":" + Robot.ROBOT_MAP.jetsonNanoPort + "/dashboard/ws";
+
 
     public TrackingWS(){
             try {
-                trackingWS = new WebSocketClient(new URI("ws://10.26.1.74:8080/tracking/ws"), new Draft_6455()){
+                trackingWS = new WebSocketClient(new URI(trackingURL), new Draft_6455()){
                     @Override
                     public void onOpen(ServerHandshake handshakedata) {
                         System.out.println("Socket opened");

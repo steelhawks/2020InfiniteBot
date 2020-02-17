@@ -43,6 +43,7 @@ import frc.util.websocket.TrackingWS;
  */
 public class Robot extends TimedRobot {
   public static final RobotMap ROBOT_MAP = new RobotMap();
+  public static final ButtonMap BUTTON_MAP = new ButtonMap();
   public static final DashboardWS DASHBOARDWS = new DashboardWS();
   public static final TrackingWS TRACKINGWS = new TrackingWS();
   public static final Recorder RECORDER = new Recorder();

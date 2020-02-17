@@ -8,13 +8,16 @@ import org.java_websocket.drafts.Draft_6455;
 import org.java_websocket.handshake.ServerHandshake;
 import org.json.*;
 
+import frc.robot.Robot;
+
 public class DashboardWS {
     private WebSocketClient dashboardWS;
     String controls = "";
+    private String dashboardURL = "ws://" + Robot.ROBOT_MAP.jetsonNanoIP + ":" + Robot.ROBOT_MAP.jetsonNanoPort + "/dashboard/ws";
 
     public DashboardWS(){
             try {
-                dashboardWS = new WebSocketClient(new URI("ws://10.26.1.74:8080/dashboard/ws"), new Draft_6455()){
+                dashboardWS = new WebSocketClient(new URI(dashboardURL), new Draft_6455()){
                     @Override
                     public void onOpen(ServerHandshake handshakedata) {
                         System.out.println("Socket opened");
