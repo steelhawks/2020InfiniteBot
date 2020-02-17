@@ -46,14 +46,14 @@ public final class RobotMap {
 
   public final int joystickOnePort = 0;
   public final int gamepadOnePort = 1;
-
-  public final int climberToggleSolenoidButton = Gamepad.kGamepadButtonStart;
+ 
+  public final int climberToggleSolenoidButton = Gamepad.kGamepadButtonBack;
   public final int climberRollWinchButton = Gamepad.kGamepadButtonA;
-  public final int climberUnrollButton = Gamepad.kGamepadButtonBack;
+  public final int climberUnrollButton = Gamepad.kGamepadButtonStart;
 
   public final int drivetrainShiftButton = 1;
-  public final int drivetrainReverseDirectionButton = 2;
-  public final int drivetrainCoolFalconsButton = 3;
+  public final int drivetrainReverseDirectionButton = 3;
+  public final int drivetrainCoolFalconsButton = -3;
 
   // public final int funnelMoveBallsForwardButton = Gamepad.kGamepadButtonX;
   // public final int funnelMoveBallsReverseButton = -1; //not used
@@ -74,6 +74,7 @@ public final class RobotMap {
   public final int portButton = 11;
   public final int ballButton = 9;
   public final int connectButton = 12;
+  public final int cameraButton = 10;
 
   public final int vomitButton = Gamepad.kGamepadButtonB; //used in place of all "Reverse" buttons
 
@@ -95,8 +96,8 @@ public final class RobotMap {
   public final int drivetrainSolOnPort = 0;
   public final int drivetrainSolOffPort = 1;
 
-  public final int falconSolOnPort = 2;
-  public final int falconSolOffPort = 3;
+  public final int visionSolOnPort = 2;
+  public final int visionSolOffPort = 3;
 
   /*****
    * Climber
@@ -136,7 +137,8 @@ public final class RobotMap {
 
   public final int storageMotorOnePort = 13; // no motorized storage, set to obscure value for init purposes
   public final int storageMotorTwoPort = 14;
-  public final double storageSpeed = 0.9; // no motorized storage
+  public final double storageSpeedOne = 0.7; // no motorized storage
+  public final double storageSpeedTwo = 0.9;
 
   /*****
    * Shooter
@@ -145,8 +147,8 @@ public final class RobotMap {
   public final int shooterMotorOnePort = 10;
   public final int shooterMotorTwoPort = 11;
 
-  public final int shooterMaxRPM = 3000;
-
+  public int shooterMaxRPM = 3000;
+  public final double distanceToRpm = 0.21;
   /*****
    * Vision
    */

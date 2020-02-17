@@ -61,16 +61,23 @@ public class Intake extends MechanicalSubsystem {
     System.out.println("Shifted gears!");
   }
 
+  public void climbInitate(){
+    if (this.intakeSol.get() == DoubleSolenoid.Value.kForward) 
+    {
+      // do nothing
+    } else {
+      down();
+    }
+  }
+
   public void up() {
     System.out.println("up");
     this.intakeSol.set(DoubleSolenoid.Value.kReverse);
-    this.stop();
   }
 
   public void down() {
     System.out.println("down");
     this.intakeSol.set(DoubleSolenoid.Value.kForward);
-    this.stop();
   }
 
   public void smartDashboard() {

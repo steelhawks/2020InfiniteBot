@@ -20,6 +20,7 @@ public class Storage extends MechanicalSubsystem {
 
   // SPEED CONTROLLER GROUP
   public final SpeedControllerGroup storageMotorGroup;
+  public final SpeedControllerGroup storageMotorGroupTwo;
 
   // DRIVETRAIN CONSTRUCTOR
   public Storage() {
@@ -28,20 +29,25 @@ public class Storage extends MechanicalSubsystem {
     this.storageMotorTwo = new WPI_TalonSRX(Robot.ROBOT_MAP.storageMotorTwoPort);
 
     // SPEED CONTROLLER GROUPS
-    this.storageMotorGroup = new SpeedControllerGroup(this.storageMotorOne, this.storageMotorTwo);
+    this.storageMotorGroup = new SpeedControllerGroup(this.storageMotorOne);
+    this.storageMotorGroupTwo = new SpeedControllerGroup(this.storageMotorTwo);
   }
 
   public void moveBalls(boolean isForward) {
     System.out.println("storing");
     if (isForward) {
-      this.storageMotorGroup.set(Robot.ROBOT_MAP.storageSpeed);
+      this.storageMotorGroup.set(Robot.ROBOT_MAP.storageSpeedOne);
+      this.storageMotorGroupTwo.set(-Robot.ROBOT_MAP.storageSpeedTwo);
+
     } else {
-      this.storageMotorGroup.set(-Robot.ROBOT_MAP.storageSpeed);
+      this.storageMotorGroup.set(-Robot.ROBOT_MAP.storageSpeedOne);
+      this.storageMotorGroupTwo.set(Robot.ROBOT_MAP.storageSpeedTwo);
     }
   }
 
   public void stopStorage(){
     this.storageMotorGroup.set(0.0);
+    this.storageMotorGroupTwo.set(0.0);
   }
 
   public void smartDashboard() {
@@ -57,6 +63,7 @@ public class Storage extends MechanicalSubsystem {
 
   public boolean stop() {
     this.storageMotorOne.stopMotor();
+    this.storageMotorTwo.stopMotor();
     return true;
   }
 }

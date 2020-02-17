@@ -119,10 +119,10 @@ public class Shooter extends MechanicalSubsystem {
   }
 
   public void shoot(double output) {
-    
-    shooterRPM();
-    this.shooterMotorOne.set(ControlMode.PercentOutput, output);
-    this.shooterMotorTwo.set(ControlMode.PercentOutput, output);
+    this.output = output;
+    double speed = shooterRPM();
+    this.shooterMotorOne.set(ControlMode.PercentOutput, speed);
+    this.shooterMotorTwo.set(ControlMode.PercentOutput, speed);
   }
 
   public double shooterRPM() {

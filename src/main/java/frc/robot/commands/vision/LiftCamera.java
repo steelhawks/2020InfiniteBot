@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.funnel;
+package frc.robot.commands.vision;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
@@ -14,14 +14,15 @@ import frc.robot.Robot;
 import java.util.HashSet;
 import java.util.Set;
 
-public class FunnelVomit implements Command {
-  public FunnelVomit() {
+public class LiftCamera implements Command {
+
+  public LiftCamera() {
   }
 
   @Override
   public Set<Subsystem> getRequirements() {
     Set<Subsystem> list = new HashSet<Subsystem>();
-    //list.add(Robot.FUNNEL);
+    list.add(Robot.VISION_MOUNT);
     return list;
   }
 
@@ -31,7 +32,7 @@ public class FunnelVomit implements Command {
 
   @Override
   public void execute() {
-    //Robot.FUNNEL.moveBalls(false);
+    Robot.VISION_MOUNT.pistonPosition();
   }
 
   @Override
@@ -41,8 +42,5 @@ public class FunnelVomit implements Command {
 
   @Override
   public void end(boolean interrupted) {
-    if (interrupted) {
-      Robot.STORAGE.stop();
-    }
   }
 }
