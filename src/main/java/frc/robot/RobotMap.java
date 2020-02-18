@@ -15,14 +15,14 @@ public final class RobotMap {
    * Quirks
    */
 
-  public final String driver = "{[INSERT_OPERATOR]}";
+  public final String driver = "{[INSERT_DRIVER]}";
   public final String operator = "{[INSERT_OPERATOR]}";
 
   /*****
    * Networking & Auton
    */
 
-  public final String jetsonNanoIP = "10.26.1.7";
+  public final String jetsonNanoIP = "10.26.1.102";
   public final String driveStationIP = "10.26.1.5";
   public final String selfIP = "10.26.1.2";
 
@@ -35,7 +35,7 @@ public final class RobotMap {
     new SequentialCommandGroup(new RequestBall(), 
                                 new Follow(), 
                                 new RequestBay(), 
-                                new Align(), 
+                                new MiracleAlign(), 
                                 new Follow());
 
   /*****
@@ -65,7 +65,7 @@ public final class RobotMap {
   public final int climberSolOnPort = 4;
   public final int climberSolOffPort = 5;
 
-  public final double climberSpeed = 0.8;
+  public final double climberSpeed = 1.0;
 
   /*****
    * Funnel
@@ -105,7 +105,7 @@ public final class RobotMap {
   public final int shooterMotorTwoPort = 11;
 
   public int shooterMaxRPM = 3000;
-  public final double distanceToRpm = 0.21;
+  public final double distanceToShooterVelocity = 0.21;
   /*****
    * Vision
    */

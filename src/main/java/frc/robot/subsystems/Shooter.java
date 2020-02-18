@@ -26,6 +26,8 @@ public class Shooter extends MechanicalSubsystem {
   public double kF;
   public double bias;
   public double output;
+  public double shooterVelocity;
+
 
   // declaring rpm and PID variables
   public int maxRPM;
@@ -35,6 +37,7 @@ public class Shooter extends MechanicalSubsystem {
   // encoder values
   public int shooterEncoderValue;
 
+  public int spoolTime = 250;
   // solenoid
   //public DoubleSolenoid falconCoolSol;
 
@@ -52,6 +55,7 @@ public class Shooter extends MechanicalSubsystem {
     this.kD = 0.4;
     this.kF = 0.14;
     this.bias = 0;
+    this.shooterVelocity = 0;
 
     // giving rpm a value equal to a port
     this.maxRPM = Robot.ROBOT_MAP.shooterMaxRPM;
@@ -112,15 +116,43 @@ public class Shooter extends MechanicalSubsystem {
   public void spool(double output) {
     this.shooterMotorOne.set(ControlMode.PercentOutput, output);
     this.shooterMotorTwo.set(ControlMode.PercentOutput, output);
+    System.out.println(output +" : " + this.shooterMotorOne.get());
     if (this.shooterMotorOne.get() >= output)
     {
       this.isSpooled = true;
     }
+    if(spoolTime<=0)
+    {
+      this.isSpooled = true;
+    }   
+    spoolTime--;
+
   }
 
   public void shoot(double output) {
     this.shooterMotorOne.set(ControlMode.PercentOutput, output);
     this.shooterMotorTwo.set(ControlMode.PercentOutput, output);
+  }
+
+  public void setShooterVelocity(){
+    this.shooterVelocity = Robot.VISION.getDistance() / Robot.ROBOT_MAP.distanceToShooterVelocity;
+
+  }
+
+  public void visionShoot(){
+    this.shooterMotorOne.set(ControlMode.Velocity, this.shooterVelocity);
+    this.shooterMotorTwo.set(ControlMode.Velocity, this.shooterVelocity);
+  }
+
+  public void visionSpool(){
+    this.shooterMotorOne.set(ControlMode.Velocity, this.shooterVelocity);
+    this.shooterMotorTwo.set(ControlMode.Velocity, this.shooterVelocity);
+    if(spoolTime<=0)
+    {
+      this.isSpooled = true;
+    }   
+    spoolTime--;
+
   }
 
   public double shooterRPM() {
@@ -131,7 +163,7 @@ public class Shooter extends MechanicalSubsystem {
     return shooterRPM;
   }
 
-  
+
   public void ping() {}
 
   public void smartDashboard() {}

@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.vision;
+package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
@@ -13,9 +13,9 @@ import frc.robot.Robot;
 import java.util.Set;
 import java.util.HashSet;
 
-public class ChangeRPM implements Command
+public class ShooterSpinVision implements Command
 {
-    public ChangeRPM() {}
+    public ShooterSpinVision() {}
 
     @Override
     public Set<Subsystem> getRequirements() 
@@ -35,22 +35,20 @@ public class ChangeRPM implements Command
     @Override
     public void execute()
     {
-      if(Robot.VISION.objectPresent(Robot.TRACKINGWS.getTargetData())){
-        if(Robot.DASHBOARDWS.getCameraMode().equals("HEXAGON")){
-          Robot.VISION_RPM.changeRPM();
-        }
+      if(Robot.VISION.objectIsPresent){
+          Robot.SHOOTER.visionShoot();
       }
     }
 
     @Override
     public boolean isFinished()
     {
-        return false;
+        return true;
     }
 
     @Override
     public void end(boolean interrupted)
     {
-        
+        Robot.SHOOTER.stop();
     }
 }

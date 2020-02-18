@@ -42,7 +42,7 @@ public class VisionLight extends SensorSubsystem {
   {
     try{
     
-      if(Robot.DASHBOARDWS.getCameraMode().equals("BALL"))
+      if(Robot.DASHBOARDWS.cameraMode.equals("BALL"))
       {
         disable();
       }

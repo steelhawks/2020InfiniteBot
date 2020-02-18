@@ -22,7 +22,6 @@ import frc.robot.commands.shooter.ShooterSpool;
 import frc.robot.commands.shooter.ShooterStop;
 import frc.robot.commands.storage.StorageMoveBalls;
 import frc.robot.commands.storage.StorageStop;
-import frc.robot.commands.vision.Align;
 import frc.robot.commands.vision.Connect;
 import frc.robot.commands.vision.RequestBall;
 import frc.robot.commands.vision.RequestBay;
@@ -55,9 +54,8 @@ public class OperatorXboxController {
       .whenReleased(new ClimberStop());
     
     this.controller.mapButton(Robot.BUTTON_MAP.shooterSpinForwardButton)
-      .whenPressed(new SequentialCommandGroup( new ShooterSpool()
-      , new ParallelCommandGroup( new ShooterSpin(), new StorageMoveBalls())))
-      .whenReleased(new ParallelCommandGroup( new ShooterStop(), new StorageStop()));
+      .whenPressed(new SequentialCommandGroup( new ShooterSpool(),new ShooterSpin()))
+      .whenReleased(new ShooterStop());
 
     this.controller.mapButton(Robot.BUTTON_MAP.intakeSpinRollerForwardButton)
       .whenPressed(new IntakeSpinRoller())

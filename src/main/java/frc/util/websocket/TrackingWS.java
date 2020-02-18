@@ -10,7 +10,7 @@ import org.java_websocket.handshake.ServerHandshake;
 public class TrackingWS {
     private String targetData;
     private WebSocketClient trackingWS;
-    private String trackingURL = "ws://" + Robot.ROBOT_MAP.jetsonNanoIP + ":" + Robot.ROBOT_MAP.jetsonNanoPort + "/dashboard/ws";
+    private String trackingURL = "ws://" + Robot.ROBOT_MAP.jetsonNanoIP + ":" + Robot.ROBOT_MAP.jetsonNanoPort + "/tracking/ws";
 
 
     public TrackingWS(){

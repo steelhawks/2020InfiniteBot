@@ -37,7 +37,7 @@ public class ButtonMap{
   public final int connectButton = 12;
   public final int cameraButton = 10;
 
-  public final int vomitButton = Gamepad.kGamepadButtonB; //used in place of all "Reverse" buttons
+  public final int visionShootButton = Gamepad.kGamepadButtonB; //used in place of all "Reverse" buttons
 
   public final int startRecordingButton = 5;
   public final int endRecordingButton = 6;

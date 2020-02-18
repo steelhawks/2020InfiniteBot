@@ -11,6 +11,7 @@ import org.json.*;
 import frc.robot.Robot;
 
 public class DashboardWS {
+    public String cameraMode = "";
     private WebSocketClient dashboardWS;
     String controls = "";
     private String dashboardURL = "ws://" + Robot.ROBOT_MAP.jetsonNanoIP + ":" + Robot.ROBOT_MAP.jetsonNanoPort + "/dashboard/ws";
@@ -60,16 +61,15 @@ public class DashboardWS {
         
     }
 
-    public String getCameraMode(){
+    public void getCameraMode(){
         try{
             JSONObject websocketData = new JSONObject(controls);
             JSONObject visionControls = (JSONObject)(websocketData.get("controls"));
-            return visionControls.getString("camera_mode");
+            cameraMode = visionControls.getString("camera_mode");
 
         }
         catch(Exception e){
-            //System.out.println("couldn't find controls");
-            return "Object not found";
+            System.out.println("couldn't find camera mode");
         }
     }
 

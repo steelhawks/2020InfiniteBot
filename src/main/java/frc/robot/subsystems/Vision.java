@@ -20,6 +20,8 @@ public class Vision extends VisionSubsystem {
   private double xPosRightLimit;
   private double xPosOffset;
   private JSONObject closestTarget;
+  public boolean objectIsPresent;
+  public boolean isPressed = false;
 
   public void alignCurve() {
     double tuneValue = 300;
@@ -80,12 +82,24 @@ public class Vision extends VisionSubsystem {
         String targetDataValues = (targetData.getString("targets"));
         JSONArray targetArray = new JSONArray(targetDataValues);
         closestTarget = (JSONObject) targetArray.get(0);
+        this.objectIsPresent = true;
         return true;
-      } else {
+      } 
+      else {
+        this.objectIsPresent = false;
         return false;
       }
     } catch (Exception e) {
       return false;
+    }
+  }
+
+  public void press(){
+    if(this.isPressed == true){
+      this.isPressed = false;
+    }
+    else{
+      this.isPressed = true;
     }
   }
 

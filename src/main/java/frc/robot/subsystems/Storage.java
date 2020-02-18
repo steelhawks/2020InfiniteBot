@@ -54,6 +54,7 @@ public class Storage extends MechanicalSubsystem {
     SmartDashboard.putNumber("Intake Motor One Speed", this.storageMotorOne.get());
   }
 
+
   public boolean isAlive() {
     return storageMotorOne.isAlive();
   }

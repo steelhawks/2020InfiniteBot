@@ -45,7 +45,7 @@ public class Driver3DProController {
 
     // VISION
     this.controller.mapButton(Robot.BUTTON_MAP.visionAlignButton)
-      .whenPressed(new Align());
+      .whenPressed(new MiracleAlign());
 
     this.controller.mapButton(Robot.BUTTON_MAP.bayButton)
       .whenPressed(new RequestBay());

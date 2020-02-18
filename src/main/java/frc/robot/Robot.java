@@ -16,10 +16,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.drivetrain.DrivetrainCoolFalcons;
-import frc.robot.commands.intake.IntakeVomit;
-import frc.robot.commands.shooter.ShooterVomit;
-import frc.robot.commands.storage.StorageVomit;
-import frc.robot.commands.vision.ChangeRPM;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
@@ -28,7 +24,6 @@ import frc.robot.subsystems.Storage;
 import frc.robot.subsystems.Vision;
 import frc.robot.subsystems.VisionLight;
 import frc.robot.subsystems.VisionMount;
-import frc.robot.subsystems.VisionRPM;
 import frc.util.pathcorder.Follower;
 import frc.util.pathcorder.Recorder;
 import frc.util.websocket.DashboardWS;
@@ -56,7 +51,6 @@ public class Robot extends TimedRobot {
   public static final Vision VISION = new Vision();
   public static final VisionLight VISION_LIGHT = new VisionLight();
   public static final VisionMount VISION_MOUNT = new VisionMount();
-  public static final VisionRPM VISION_RPM = new VisionRPM();
   public static final CommandLinker COMMAND_LINKER = new CommandLinker();
   public NetworkTableEntry startingPosition;
   public NetworkTableEntry autonPath;
@@ -71,11 +65,11 @@ public class Robot extends TimedRobot {
     INTAKE.intakeMotorOne.stopMotor();
     
     INTAKE.up();
-    //DASHBOARDWS.connect();
-    //DASHBOARDWS.baseConfig();
-    //TRACKINGWS.connect();
+    DASHBOARDWS.connect();
+    TRACKINGWS.connect();
+    
+    DASHBOARDWS.baseConfig();
     FOLLOWER.importPath(ROBOT_MAP.paths);
-    // CommandScheduler.getInstance().schedule(new ChangeRPM());
   }
 
   @Override
@@ -99,7 +93,7 @@ public class Robot extends TimedRobot {
     // SmartDashboard.putString("Auton", "Position: " + this.startingPosition.toString() + "\nDeploying Path" + this.autonPath.toString());
 
     // Vision periodic
-    // VISION_LIGHT.runLights();
+    VISION_LIGHT.runLights();
     DASHBOARDWS.reconnect();
     TRACKINGWS.reconnect();
   }
