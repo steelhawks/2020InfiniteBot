@@ -86,7 +86,7 @@ public final class RobotMap {
   public final int intakeSolOnPort = 6;
   public final int intakeSolOffPort = 7;
 
-  public final double intakeSpeed = 0.8;
+  public final double intakeSpeed = 1;
 
   /*****
    * Storage

@@ -11,7 +11,7 @@ import frc.robot.commands.drivetrain.DrivetrainCoolFalcons;
 import frc.robot.commands.drivetrain.DrivetrainReverseDirection;
 import frc.robot.commands.drivetrain.DrivetrainShiftGear;
 
-import frc.robot.commands.vision.Align;
+import frc.robot.commands.vision.MiracleAlign;
 import frc.robot.commands.vision.Connect;
 import frc.robot.commands.vision.RequestBall;
 import frc.robot.commands.vision.RequestBay;

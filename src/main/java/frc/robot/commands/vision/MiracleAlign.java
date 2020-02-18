@@ -8,9 +8,9 @@
 package frc.robot.commands.vision;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.shooter.ShooterSpoolVision;
+import frc.robot.commands.shooter.ShooterSpool;
 import frc.robot.commands.shooter.ShooterStop;
-import frc.robot.commands.shooter.ShooterSpinVision;
+import frc.robot.commands.shooter.ShooterSpin;
 import frc.robot.commands.storage.StorageMoveBalls;
 import frc.robot.commands.storage.StorageStop;
 import frc.robot.commands.shooter.ShooterSpin;
@@ -45,12 +45,14 @@ public class MiracleAlign implements Command
       {
         Robot.VISION.isPressed = false;
       }
-
+      Robot.DASHBOARDWS.getCameraMode();
       // if camera mode is hex and button wasn't pressed yet, start alignment
       if(!(Robot.VISION.isPressed))
       {
+        System.out.println("passed");
         if (Robot.VISION.objectPresent(Robot.TRACKINGWS.getTargetData()))
         {
+            System.out.println("initialized");
             Robot.DRIVETRAIN.gyro.reset();
             Robot.DRIVETRAIN.stop();
             Robot.DRIVETRAIN.isForward = true;
@@ -58,7 +60,7 @@ public class MiracleAlign implements Command
             Robot.VISION.setAngle(Robot.VISION.getNTAngle());
             Robot.VISION.setXPosLeftLimit(315.0);
             Robot.VISION.setXPosRightLimit(325.0);
-            Robot.VISION.setXPosOffset(-4.5);
+            Robot.VISION.setXPosOffset(3.11 * Math.pow(10, -3) * Robot.VISION.getDistance() - 5.28);
             if(Robot.DASHBOARDWS.cameraMode.equals("BALL")){
               Robot.INTAKE.down();
             }
@@ -80,11 +82,12 @@ public class MiracleAlign implements Command
     public void execute()
     {
         // if object is present then start alignment for objects
-        if (!(Robot.VISION.isPressed) && Robot.VISION.objectIsPresent)
+        if (!(Robot.VISION.isPressed) && Robot.VISION.objectPresent(Robot.TRACKINGWS.getTargetData()))
         {
-
+            System.out.println("1");
             if(Robot.DASHBOARDWS.cameraMode.equals("HEXAGON"))
             {
+                System.out.println("2");
                 Robot.DRIVETRAIN.lowGear();
                 Robot.VISION.align();
             }
@@ -101,7 +104,7 @@ public class MiracleAlign implements Command
         }
         else
         {
-            System.out.println("No object to align to...");
+            System.out.println("No object to align to...1123");
         }
     }
 
@@ -128,13 +131,13 @@ public class MiracleAlign implements Command
         Robot.DRIVETRAIN.isForward = true;
 
         if(Robot.DASHBOARDWS.cameraMode.equals("HEXAGON")){
-          // spool shootor, adjust velocity based on distance and start moving the balls
+          //spool shootor, adjust velocity based on distance and start moving the balls
           if(!(Robot.VISION.isPressed)){
             CommandScheduler.getInstance().schedule(
             new SequentialCommandGroup(
-              new ShooterSpoolVision(), 
+              new ShooterSpool(), 
               new ParallelCommandGroup(
-                new ShooterSpinVision(), new StorageMoveBalls())));
+                new ShooterSpin(), new StorageMoveBalls())));
           }
           else{
             // if button was pressed, stop shooter and storage

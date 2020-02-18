@@ -10,6 +10,9 @@ package frc.robot.subsystems;
 import frc.robot.Robot;
 import frc.util.subsystems.VisionSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import javax.lang.model.util.ElementScanner6;
+
 import org.json.*;
 
 public class Vision extends VisionSubsystem {
@@ -22,6 +25,7 @@ public class Vision extends VisionSubsystem {
   private JSONObject closestTarget;
   public boolean objectIsPresent;
   public boolean isPressed = false;
+  public int alignCount = 0;
 
   public void alignCurve() {
     double tuneValue = 300;
@@ -51,17 +55,26 @@ public class Vision extends VisionSubsystem {
   public void align() {
     if (Robot.COMMAND_LINKER.driveJoystick.getRawButtonPressed(2)) {
       end();
-    } else if (!this.isAligned) {
+    }
+    else if (!this.isAligned) 
+    {
       System.out.println("Aligning");
-      if (Math.abs(Robot.DRIVETRAIN.gyro.getAngle()) < (getAngle() - 0.1) && getXPos() < getXPosLeftLimit()) {
-        Robot.DRIVETRAIN.rotate(0.7*(getXPosDiff(getXPos() - getXPosOffset())/320) - 0.04);
-      } else if (Math.abs(Robot.DRIVETRAIN.gyro.getAngle()) < (getAngle() - 0.1) && getXPos() > getXPosRightLimit()) {
-        Robot.DRIVETRAIN.rotate(-0.7*(getXPosDiff(getXPos()-getXPosOffset())/320) + 0.04);
-      } else {
+      if (getXPos() - getXPosOffset() < getXPosLeftLimit()) {
+        System.out.println("right");
+        Robot.DRIVETRAIN.rotate(0.8*(getXPosDiff(getXPos() - getXPosOffset())/320) - 0.04);
+        System.out.println(0.6*(getXPosDiff(getXPos() - getXPosOffset())/320) - 0.04);
+      } 
+      else if (getXPos() - getXPosOffset() > getXPosRightLimit()) {
+        System.out.println("left");
+        Robot.DRIVETRAIN.rotate(-0.6*(getXPosDiff(getXPos()-getXPosOffset())/320) + 0.04);
+      } 
+      else {
         Robot.DRIVETRAIN.gyro.reset();
         Robot.DRIVETRAIN.stop();
         System.out.println("Aligned!");
         this.isAligned = true;
+
+        //this.isAligned = true;
       }
     }
   }
@@ -217,5 +230,6 @@ public class Vision extends VisionSubsystem {
 
   public void reset() {
     this.isAligned = false;
+    this.alignCount = 0;
   }
 }

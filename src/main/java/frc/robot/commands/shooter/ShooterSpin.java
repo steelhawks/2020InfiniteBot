@@ -33,7 +33,7 @@ public class ShooterSpin implements Command {
   @Override
   public void execute() {
     System.out.println("shooting");
-    Robot.SHOOTER.shoot(1.0); // Insert Vision - distance equation
+    Robot.SHOOTER.shoot(13500); // Insert Vision - distance equation
     }
 
   @Override

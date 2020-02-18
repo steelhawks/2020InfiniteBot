@@ -64,7 +64,7 @@ public class Robot extends TimedRobot {
     DRIVETRAIN.lowGear();
     INTAKE.intakeMotorOne.stopMotor();
     
-    INTAKE.up();
+    // INTAKE.up();
     DASHBOARDWS.connect();
     TRACKINGWS.connect();
     
@@ -94,8 +94,8 @@ public class Robot extends TimedRobot {
 
     // Vision periodic
     VISION_LIGHT.runLights();
-    DASHBOARDWS.reconnect();
-    TRACKINGWS.reconnect();
+    // DASHBOARDWS.reconnect();
+    // TRACKINGWS.reconnect();
   }
 
   @Override

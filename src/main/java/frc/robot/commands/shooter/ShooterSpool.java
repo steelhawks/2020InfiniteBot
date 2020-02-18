@@ -33,7 +33,7 @@ public class ShooterSpool implements Command {
   @Override
   public void execute() {
     System.out.println("spooling");
-    Robot.SHOOTER.spool(1.0); // Insert Vision - distance equation
+    Robot.SHOOTER.spool(13500); // Insert Vision - distance equation
 
   }
 

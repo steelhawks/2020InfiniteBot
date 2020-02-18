@@ -33,7 +33,7 @@ public class ShooterStop implements Command {
   @Override
   public void execute() {
     System.out.println("stopping");
-    Robot.SHOOTER.shoot(0.0); // Insert Vision - distance equation
+    Robot.SHOOTER.stop(); // Insert Vision - distance equation
   }
 
   @Override

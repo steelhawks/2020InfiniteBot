@@ -8,6 +8,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 //import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -16,8 +17,8 @@ import frc.util.subsystems.MechanicalSubsystem;
 
 public class Shooter extends MechanicalSubsystem {
   // declaring motors
-  public WPI_TalonSRX shooterMotorOne;
-  public WPI_TalonSRX shooterMotorTwo;
+  public WPI_TalonFX shooterMotorOne;
+  public WPI_TalonFX shooterMotorTwo;
 
   // declaring PID constants
   public double kP;
@@ -46,14 +47,20 @@ public class Shooter extends MechanicalSubsystem {
 
   public Shooter() {
     // initializing motors
-    this.shooterMotorOne = new WPI_TalonSRX(Robot.ROBOT_MAP.shooterMotorOnePort);
-    this.shooterMotorTwo = new WPI_TalonSRX(Robot.ROBOT_MAP.shooterMotorTwoPort);
+    this.shooterMotorOne = new WPI_TalonFX(Robot.ROBOT_MAP.shooterMotorOnePort);
+    this.shooterMotorTwo = new WPI_TalonFX(Robot.ROBOT_MAP.shooterMotorTwoPort);
 
     // giving PID contants values
-    this.kP = 0.7;
-    this.kI = 0.6;
-    this.kD = 0.4;
-    this.kF = 0.14;
+    // this.kP = 0.7;
+    // this.kI = 0.6;
+    // this.kD = 0.4;
+    // this.kF = 0.14;
+    // this.bias = 0;
+    // this.shooterVelocity = 0;
+    this.kP = 0.8;
+    this.kI = 0.7;
+    this.kD = 0.5;
+    this.kF = 0.15;
     this.bias = 0;
     this.shooterVelocity = 0;
 
@@ -114,9 +121,11 @@ public class Shooter extends MechanicalSubsystem {
   }
 
   public void spool(double output) {
-    this.shooterMotorOne.set(ControlMode.PercentOutput, output);
-    this.shooterMotorTwo.set(ControlMode.PercentOutput, output);
-    System.out.println(output +" : " + this.shooterMotorOne.get());
+    this.shooterMotorOne.set(ControlMode.Velocity, output);
+    this.shooterMotorTwo.set(ControlMode.Velocity, output);
+    System.out.println("Motor one Spool speed " + this.shooterMotorOne.getSensorCollection().getIntegratedSensorVelocity());
+    System.out.println("Motor two spool speed " + this.shooterMotorOne.getSensorCollection().getIntegratedSensorVelocity());
+
     if (this.shooterMotorOne.get() >= output)
     {
       this.isSpooled = true;
@@ -130,8 +139,11 @@ public class Shooter extends MechanicalSubsystem {
   }
 
   public void shoot(double output) {
-    this.shooterMotorOne.set(ControlMode.PercentOutput, output);
-    this.shooterMotorTwo.set(ControlMode.PercentOutput, output);
+    this.shooterMotorOne.set(ControlMode.Velocity, output);
+    System.out.println("Motor one Shot speed " + this.shooterMotorOne.getSelectedSensorVelocity());
+    this.shooterMotorTwo.set(ControlMode.Velocity, output);
+    System.out.println("Motor two shot speed " + this.shooterMotorOne.getSelectedSensorVelocity());
+
   }
 
   public void setShooterVelocity(){

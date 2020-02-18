@@ -25,8 +25,8 @@ public class Connect implements Command
     public void execute()
     {
         try{
-            Robot.TRACKINGWS.connect();
-            Robot.DASHBOARDWS.connect();
+            Robot.TRACKINGWS.reconnect();
+            Robot.DASHBOARDWS.reconnect();
         }
         catch(Exception e){
             System.out.println("idk man i cant connect");
