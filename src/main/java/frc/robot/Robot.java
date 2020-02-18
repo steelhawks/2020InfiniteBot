@@ -19,9 +19,9 @@ import frc.robot.commands.drivetrain.DrivetrainCoolFalcons;
 import frc.robot.commands.intake.IntakeVomit;
 import frc.robot.commands.shooter.ShooterVomit;
 import frc.robot.commands.storage.StorageVomit;
+import frc.robot.commands.vision.ChangeRPM;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Funnel;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Storage;
@@ -52,7 +52,6 @@ public class Robot extends TimedRobot {
   public static final Shooter SHOOTER = new Shooter();
   public static final Storage STORAGE = new Storage();
   public static final Drivetrain DRIVETRAIN = new Drivetrain();
-  public static final Funnel FUNNEL = new Funnel();
   public static final Intake INTAKE = new Intake();
   public static final Vision VISION = new Vision();
   public static final VisionLight VISION_LIGHT = new VisionLight();
@@ -76,6 +75,7 @@ public class Robot extends TimedRobot {
     //DASHBOARDWS.baseConfig();
     //TRACKINGWS.connect();
     FOLLOWER.importPath(ROBOT_MAP.paths);
+    // CommandScheduler.getInstance().schedule(new ChangeRPM());
   }
 
   @Override
@@ -100,11 +100,8 @@ public class Robot extends TimedRobot {
 
     // Vision periodic
     // VISION_LIGHT.runLights();
-    //DASHBOARDWS.reconnect();
-    //TRACKINGWS.reconnect();
-
-    
-
+    DASHBOARDWS.reconnect();
+    TRACKINGWS.reconnect();
   }
 
   @Override
@@ -139,7 +136,7 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     CommandScheduler.getInstance().enable();
     DRIVETRAIN.lowGear();
-    INTAKE.down();
+    // INTAKE.down();
   }
 
   @Override

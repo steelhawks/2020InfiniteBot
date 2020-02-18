@@ -22,11 +22,11 @@ public final class RobotMap {
    * Networking & Auton
    */
 
-  public final String jetsonNanoIP = "10.26.1.74";
+  public final String jetsonNanoIP = "10.26.1.7";
   public final String driveStationIP = "10.26.1.5";
   public final String selfIP = "10.26.1.2";
 
-  public final String jetsonNanoPort = "8080";
+  public final String jetsonNanoPort = "5805";
 
   public final String pathName = "/home/lvuser/deploy/log_2020-02-14_212213.csv";
   public final String[] paths = {"straight.csv", "back.csv" };
@@ -94,8 +94,8 @@ public final class RobotMap {
 
   public final int storageMotorOnePort = 13; // no motorized storage, set to obscure value for init purposes
   public final int storageMotorTwoPort = 14;
-  public final double storageSpeedOne = 0.7; // no motorized storage
-  public final double storageSpeedTwo = 0.9;
+  public final double storageSpeedOne = 1.0; // no motorized storage
+  public final double storageSpeedTwo = 1.0;
 
   /*****
    * Shooter

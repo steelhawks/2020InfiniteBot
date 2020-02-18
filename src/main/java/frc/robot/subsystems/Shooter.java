@@ -119,10 +119,8 @@ public class Shooter extends MechanicalSubsystem {
   }
 
   public void shoot(double output) {
-    this.output = output;
-    double speed = shooterRPM();
-    this.shooterMotorOne.set(ControlMode.PercentOutput, speed);
-    this.shooterMotorTwo.set(ControlMode.PercentOutput, speed);
+    this.shooterMotorOne.set(ControlMode.PercentOutput, output);
+    this.shooterMotorTwo.set(ControlMode.PercentOutput, output);
   }
 
   public double shooterRPM() {
@@ -133,9 +131,11 @@ public class Shooter extends MechanicalSubsystem {
     return shooterRPM;
   }
 
+  
   public void ping() {}
 
   public void smartDashboard() {}
+
 
   public boolean isAlive() {
     return this.shooterMotorOne.isAlive() && this.shooterMotorTwo.isAlive();

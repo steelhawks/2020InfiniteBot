@@ -45,7 +45,7 @@ public class ChangeRPM implements Command
     @Override
     public boolean isFinished()
     {
-        return Robot.VISION.isAligned();
+        return false;
     }
 
     @Override

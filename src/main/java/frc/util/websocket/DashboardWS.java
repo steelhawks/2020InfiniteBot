@@ -98,15 +98,15 @@ public class DashboardWS {
     }
 
     public void baseConfig(){
-      try
-    {
-      TimeUnit.SECONDS.sleep(1);
-      dashboardWS.send("RAW");
-    }
-    catch (Exception e)
-    {
-      System.out.println("Couldn't sleep");
-      dashboardWS.send("RAW");
-    }
+        try
+      {
+        TimeUnit.SECONDS.sleep(1);
+        this.send("BALL");
+      }
+      catch (Exception e)
+      {
+        System.out.println("Couldn't sleep");
+        this.send("BALL");
+      }
     }
 }

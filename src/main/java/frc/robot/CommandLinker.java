@@ -7,42 +7,14 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.button.Button;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.climber.ClimberRollWinch;
-import frc.robot.commands.climber.ClimberToggleSolenoid;
-import frc.robot.commands.climber.ClimberStop;
-import frc.robot.commands.climber.ClimberUnrollWinch;
-import frc.robot.commands.drivetrain.DrivetrainCoolFalcons;
+import edu.wpi.first.wpilibj.Joystick;
+
 import frc.robot.commands.drivetrain.DrivetrainDefault;
-import frc.robot.commands.drivetrain.DrivetrainReverseDirection;
-import frc.robot.commands.drivetrain.DrivetrainShiftGear;
-import frc.robot.commands.intake.IntakeClimb;
-import frc.robot.commands.intake.IntakeSpinRoller;
-import frc.robot.commands.intake.IntakeStop;
-import frc.robot.commands.intake.IntakeToggleSolenoid;
-import frc.robot.commands.intake.IntakeVomit;
-import frc.robot.commands.pathcorder.EndRecording;
-import frc.robot.commands.pathcorder.StartRecording;
-import frc.robot.commands.shooter.ShooterSpin;
-import frc.robot.commands.shooter.ShooterSpool;
-import frc.robot.commands.shooter.ShooterVomit;
-import frc.robot.commands.shooter.ShooterStop;
-import frc.robot.commands.storage.StorageMoveBalls;
-import frc.robot.commands.storage.StorageVomit;
-import frc.robot.commands.storage.StorageStop;
-import frc.robot.commands.vision.Align;
-import frc.robot.commands.vision.Connect;
-import frc.robot.commands.vision.RequestBall;
-import frc.robot.commands.vision.RequestBay;
-import frc.robot.commands.vision.RequestPort;
+
 import frc.robot.controllers.Driver3DProController;
 import frc.robot.controllers.OperatorXboxController;
-import frc.robot.commands.vision.LiftCamera;
+
 import frc.util.Gamepad;
 
 /**
@@ -66,7 +38,6 @@ public class CommandLinker {
   public void configureRegisteredSubsystems() {
     CommandScheduler.getInstance().registerSubsystem(Robot.CLIMBER);
     CommandScheduler.getInstance().registerSubsystem(Robot.DRIVETRAIN);
-    //CommandScheduler.getInstance().registerSubsystem(Robot.FUNNEL);
     CommandScheduler.getInstance().registerSubsystem(Robot.INTAKE);
     CommandScheduler.getInstance().registerSubsystem(Robot.SHOOTER);
     CommandScheduler.getInstance().registerSubsystem(Robot.STORAGE);

@@ -20,9 +20,11 @@ package frc.robot.subsystems;
   }
 
   public void pistonPosition() {
-    if (this.visionPiston.get() == DoubleSolenoid.Value.kForward) {
+    if (this.visionPiston.get().equals(DoubleSolenoid.Value.kReverse)) {
+      System.out.println("extending");
       extendSolenoid();
     } else {
+      System.out.println("retracting");
       retractSolenoid();
     }
   }

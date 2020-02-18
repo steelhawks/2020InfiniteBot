@@ -9,24 +9,20 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.button.Button;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.climber.ClimberRollWinch;
 import frc.robot.commands.climber.ClimberToggleSolenoid;
 import frc.robot.commands.climber.ClimberStop;
 import frc.robot.commands.climber.ClimberUnrollWinch;
-import frc.robot.commands.intake.IntakeClimb;
 import frc.robot.commands.intake.IntakeSpinRoller;
 import frc.robot.commands.intake.IntakeStop;
+import frc.robot.commands.intake.IntakeDown;
 import frc.robot.commands.intake.IntakeToggleSolenoid;
-import frc.robot.commands.intake.IntakeVomit;
 import frc.robot.commands.shooter.ShooterSpin;
 import frc.robot.commands.shooter.ShooterSpool;
-import frc.robot.commands.shooter.ShooterVomit;
 import frc.robot.commands.shooter.ShooterStop;
 import frc.robot.commands.storage.StorageMoveBalls;
-import frc.robot.commands.storage.StorageVomit;
 import frc.robot.commands.storage.StorageStop;
+import frc.robot.commands.vision.Align;
 import frc.robot.commands.vision.Connect;
 import frc.robot.commands.vision.RequestBall;
 import frc.robot.commands.vision.RequestBay;
@@ -48,7 +44,7 @@ public class OperatorXboxController {
 
     // CLIMBER
     this.controller.mapButton(Robot.BUTTON_MAP.climberToggleSolenoidButton)
-      .whenPressed(new ClimberToggleSolenoid());
+      .whenPressed(new SequentialCommandGroup(new IntakeDown(), new ClimberToggleSolenoid()));
 
     this.controller.mapButton(Robot.BUTTON_MAP.climberUnrollButton)
       .whenPressed(new ClimberUnrollWinch())
@@ -60,8 +56,8 @@ public class OperatorXboxController {
     
     this.controller.mapButton(Robot.BUTTON_MAP.shooterSpinForwardButton)
       .whenPressed(new SequentialCommandGroup( new ShooterSpool()
-      ,new ShooterSpin()))
-      .whenReleased(new ShooterStop());
+      , new ParallelCommandGroup( new ShooterSpin(), new StorageMoveBalls())))
+      .whenReleased(new ParallelCommandGroup( new ShooterStop(), new StorageStop()));
 
     this.controller.mapButton(Robot.BUTTON_MAP.intakeSpinRollerForwardButton)
       .whenPressed(new IntakeSpinRoller())
@@ -73,9 +69,6 @@ public class OperatorXboxController {
     this.controller.mapButton(Robot.BUTTON_MAP.storageMoveBallsForwardButton)
       .whenPressed(new StorageMoveBalls())
       .whenReleased(new StorageStop());
-
-    this.controller.mapButton(Robot.BUTTON_MAP.vomitButton)
-      .whenPressed(new ParallelCommandGroup(new IntakeVomit(), new ShooterVomit(), new StorageVomit()));
 
   }
 }
