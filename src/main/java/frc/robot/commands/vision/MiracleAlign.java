@@ -62,6 +62,9 @@ public class MiracleAlign implements Command
             if(Robot.DASHBOARDWS.cameraMode.equals("BALL")){
               Robot.INTAKE.down();
             }
+            else if(Robot.DASHBOARDWS.cameraMode.equals("HEXAGON")){
+              Robot.SHOOTER.setShooterVelocity();
+            }
         }
         else
         {
