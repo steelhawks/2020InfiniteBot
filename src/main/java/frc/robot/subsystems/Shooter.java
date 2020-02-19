@@ -28,8 +28,6 @@ public class Shooter extends MechanicalSubsystem {
   public double kF;
   public double bias;
   public double output;
-  public double shooterVelocity;
-  public double shooterRPM;
 
   // declaring rpm and PID variables
   public int maxRPM;
@@ -57,15 +55,13 @@ public class Shooter extends MechanicalSubsystem {
     // this.kD = 0.4;
     // this.kF = 0.14;
     // this.bias = 0;
-    // this.shooterVelocity = 0;
     this.kP = 0.8;
     this.kI = 0.4;
     this.kD = 0.25;
     this.kF = 0.2;
     this.bias = 0;
-    this.shooterVelocity = 0;
-    this.shooterRPM = 0.735;
-    System.out.println(shooterRPM);
+    // this.shooterRPM = 0.735;
+    // System.out.println(shooterRPM);
 
     // giving rpm a value equal to a port
     this.maxRPM = Robot.ROBOT_MAP.shooterMaxRPM;
