@@ -8,12 +8,15 @@
 package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+
 import frc.robot.Robot;
 import frc.util.pathcorder.JoystickRecorder;
 import frc.util.subsystems.MechanicalSubsystem;
@@ -40,10 +43,8 @@ public class Drivetrain extends MechanicalSubsystem {
   public final AHRS gyro;
 
   // SHIFTING SOLENOIDS
-  public DoubleSolenoid shiftSol = new DoubleSolenoid(Robot.ROBOT_MAP.drivetrainSolOnPort, Robot.ROBOT_MAP.drivetrainSolOffPort);
-  //public DoubleSolenoid falconCoolSol = new DoubleSolenoid(Robot.ROBOT_MAP.falconSolOnPort, Robot.ROBOT_MAP.falconSolOnPort);
-
-
+  public DoubleSolenoid shiftSol = new DoubleSolenoid(Robot.ROBOT_MAP.drivetrainSolOnPort,
+      Robot.ROBOT_MAP.drivetrainSolOffPort);
 
   // DIRECTION
   public boolean isForward;
@@ -75,7 +76,7 @@ public class Drivetrain extends MechanicalSubsystem {
     // NAVX MXP
     this.gyro = new AHRS(SPI.Port.kMXP);
 
-   //
+    //
     //
     //
 
@@ -92,17 +93,13 @@ public class Drivetrain extends MechanicalSubsystem {
   public void arcadeDrive(Joystick stick) {
     double y = stick.getY();
     double rotate = stick.getTwist();
-    if (this.isForward)
-    {
-      //nothing
-    }    
-    else
-    {
+    if (this.isForward) {
+      // nothing
+    } else {
       y = -y;
     }
     this.diffDrive.arcadeDrive(y, -rotate);
-    if (Robot.RECORDER.isRecording)
-    {
+    if (Robot.RECORDER.isRecording) {
       count++;
       Robot.RECORDER.recordJoystick(new JoystickRecorder(y, rotate, false, count));
     }
@@ -151,9 +148,9 @@ public class Drivetrain extends MechanicalSubsystem {
 
   public void coolFalcons() {
     // if (falconCoolSol.get() == DoubleSolenoid.Value.kForward) {
-    //   this.falconCoolSol.set(DoubleSolenoid.Value.kReverse);
+    // this.falconCoolSol.set(DoubleSolenoid.Value.kReverse);
     // } else {
-    //   this.falconCoolSol.set(DoubleSolenoid.Value.kForward);
+    // this.falconCoolSol.set(DoubleSolenoid.Value.kForward);
     // }
     System.out.println("Cooled Falcons!");
   }

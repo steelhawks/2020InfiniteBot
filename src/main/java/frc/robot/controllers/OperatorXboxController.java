@@ -1,14 +1,16 @@
 /*----------------------------------------------------------------------------*/
-/*                               */
+/* Copyright (c) 2020 FIRST. All Rights Reserved.                             */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.controllers;
 
-import frc.robot.Robot;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+
+import frc.robot.Robot;
 import frc.robot.commands.climber.ClimberRollWinch;
 import frc.robot.commands.climber.ClimberToggleSolenoid;
 import frc.robot.commands.climber.ClimberStop;
@@ -23,11 +25,6 @@ import frc.robot.commands.shooter.ShooterStop;
 import frc.robot.commands.storage.StorageMoveBalls;
 import frc.robot.commands.storage.StorageReverseBalls;
 import frc.robot.commands.storage.StorageStop;
-import frc.robot.commands.vision.Connect;
-import frc.robot.commands.vision.RequestBall;
-import frc.robot.commands.vision.RequestBay;
-import frc.robot.commands.vision.RequestPort;
-import frc.util.Gamepad;
 
 
 public class OperatorXboxController {
@@ -69,7 +66,7 @@ public class OperatorXboxController {
       .whenPressed(new StorageMoveBalls())
       .whenReleased(new StorageStop());
 
-    this.controller.mapButton(Robot.BUTTON_MAP.reverseStorageButton)
+    this.controller.mapButton(Robot.BUTTON_MAP.StorageMoveBallsReverseButton)
       .whenPressed(new StorageReverseBalls())
       .whenReleased(new StorageStop());
 

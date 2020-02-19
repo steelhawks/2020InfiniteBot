@@ -7,11 +7,11 @@
 
 package frc.robot.subsystems;
 
-import frc.robot.Robot;
-import frc.util.subsystems.VisionSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import javax.lang.model.util.ElementScanner6;
+import frc.robot.Robot;
+
+import frc.util.subsystems.VisionSubsystem;
 
 import org.json.*;
 
@@ -33,11 +33,13 @@ public class Vision extends VisionSubsystem {
     if (Robot.COMMAND_LINKER.driveJoystick.getRawButtonPressed(2)) {
       end();
     } else if (getDistance() > 35) {
-      if (Math.abs(Robot.DRIVETRAIN.gyro.getAngle()) < getNTAngle() && getXPos() - getXPosOffset() < getXPosLeftLimit()) {
+      if (Math.abs(Robot.DRIVETRAIN.gyro.getAngle()) < getNTAngle()
+          && getXPos() - getXPosOffset() < getXPosLeftLimit()) {
         Robot.DRIVETRAIN.drivetrainLeftMotorGroup.set(-(getDistance()) / tuneValue);
         Robot.DRIVETRAIN.drivetrainRightMotorGroup
             .set((getDistance() * (getXPosDiff(getXPosLeftLimit()) * 0.3)) / tuneValue);
-      } else if (Math.abs(Robot.DRIVETRAIN.gyro.getAngle()) < getNTAngle() && getXPos() - getXPosOffset() > getXPosRightLimit()) {
+      } else if (Math.abs(Robot.DRIVETRAIN.gyro.getAngle()) < getNTAngle()
+          && getXPos() - getXPosOffset() > getXPosRightLimit()) {
         Robot.DRIVETRAIN.drivetrainLeftMotorGroup
             .set(-(getDistance() * (getXPosDiff(getXPosRightLimit()) * 0.3)) / tuneValue);
         Robot.DRIVETRAIN.drivetrainRightMotorGroup.set((getDistance()) / tuneValue);
@@ -55,26 +57,22 @@ public class Vision extends VisionSubsystem {
   public void align() {
     if (Robot.COMMAND_LINKER.driveJoystick.getRawButtonPressed(2)) {
       end();
-    }
-    else if (!this.isAligned) 
-    {
+    } else if (!this.isAligned) {
       System.out.println("Aligning");
       if (getXPos() - getXPosOffset() < getXPosLeftLimit()) {
         System.out.println("right");
-        Robot.DRIVETRAIN.rotate(0.8*(getXPosDiff(getXPos() - getXPosOffset())/320) - 0.04);
-        System.out.println(0.6*(getXPosDiff(getXPos() - getXPosOffset())/320) - 0.04);
-      } 
-      else if (getXPos() - getXPosOffset() > getXPosRightLimit()) {
+        Robot.DRIVETRAIN.rotate(0.8 * (getXPosDiff(getXPos() - getXPosOffset()) / 320) - 0.04);
+        System.out.println(0.6 * (getXPosDiff(getXPos() - getXPosOffset()) / 320) - 0.04);
+      } else if (getXPos() - getXPosOffset() > getXPosRightLimit()) {
         System.out.println("left");
-        Robot.DRIVETRAIN.rotate(-0.6*(getXPosDiff(getXPos()-getXPosOffset())/320) + 0.04);
-      } 
-      else {
+        Robot.DRIVETRAIN.rotate(-0.6 * (getXPosDiff(getXPos() - getXPosOffset()) / 320) + 0.04);
+      } else {
         Robot.DRIVETRAIN.gyro.reset();
         Robot.DRIVETRAIN.stop();
         System.out.println("Aligned!");
         this.isAligned = true;
 
-        //this.isAligned = true;
+        // this.isAligned = true;
       }
     }
   }
@@ -97,8 +95,7 @@ public class Vision extends VisionSubsystem {
         closestTarget = (JSONObject) targetArray.get(0);
         this.objectIsPresent = true;
         return true;
-      } 
-      else {
+      } else {
         this.objectIsPresent = false;
         return false;
       }
@@ -107,11 +104,10 @@ public class Vision extends VisionSubsystem {
     }
   }
 
-  public void press(){
-    if(this.isPressed == true){
+  public void press() {
+    if (this.isPressed == true) {
       this.isPressed = false;
-    }
-    else{
+    } else {
       this.isPressed = true;
     }
   }
@@ -176,8 +172,7 @@ public class Vision extends VisionSubsystem {
     this.xPosRightLimit = xPosRightLimit;
   }
 
-  public void setXPosOffset(double xPosOffset)
-  {
+  public void setXPosOffset(double xPosOffset) {
     this.xPosOffset = xPosOffset;
   }
 
@@ -189,8 +184,7 @@ public class Vision extends VisionSubsystem {
     return this.xPosRightLimit;
   }
 
-  public double getXPosOffset()
-  {
+  public double getXPosOffset() {
     return this.xPosOffset;
   }
 

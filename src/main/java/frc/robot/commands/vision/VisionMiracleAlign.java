@@ -13,9 +13,6 @@ import frc.robot.commands.shooter.ShooterStop;
 import frc.robot.commands.shooter.ShooterSpin;
 import frc.robot.commands.storage.StorageMoveBalls;
 import frc.robot.commands.storage.StorageStop;
-import frc.robot.commands.shooter.ShooterSpin;
-import frc.robot.commands.intake.IntakeSpinRoller;
-import frc.robot.commands.intake.IntakeStop;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -24,9 +21,9 @@ import frc.robot.Robot;
 import java.util.Set;
 import java.util.HashSet;
 
-public class MiracleAlign implements Command
+public class VisionMiracleAlign implements Command
 {
-    public MiracleAlign() {}
+    public VisionMiracleAlign() {}
 
     @Override
     public Set<Subsystem> getRequirements() 

@@ -8,10 +8,13 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.robot.Robot;
+
 import frc.util.subsystems.MechanicalSubsystem;
 
 public class Climber extends MechanicalSubsystem {
@@ -22,8 +25,9 @@ public class Climber extends MechanicalSubsystem {
   public final SpeedControllerGroup climberMotorGroup;
 
   // SOLENOID
-  //commented out 
-  public DoubleSolenoid climberSol = new DoubleSolenoid(Robot.ROBOT_MAP.climberSolOnPort, Robot.ROBOT_MAP.climberSolOffPort);
+  // commented out
+  public DoubleSolenoid climberSol = new DoubleSolenoid(Robot.ROBOT_MAP.climberSolOnPort,
+      Robot.ROBOT_MAP.climberSolOffPort);
 
   public Climber() {
     // TALON SRX MOTOR CONTROLLER
@@ -33,14 +37,14 @@ public class Climber extends MechanicalSubsystem {
     this.climberMotorGroup = new SpeedControllerGroup(this.climberMotorOne);
 
     // SOLENOID
-    //this.climberSol = new DoubleSolenoid(Robot.ROBOT_MAP.climberSolOnPort, Robot.ROBOT_MAP.climberSolOffPort);
+    // this.climberSol = new DoubleSolenoid(Robot.ROBOT_MAP.climberSolOnPort,
+    // Robot.ROBOT_MAP.climberSolOffPort);
   }
 
   public void toggleSolenoid() {
     if (this.climberSol.get().equals(DoubleSolenoid.Value.kForward)) {
       retractSolenoid();
-     } 
-     else {
+    } else {
       extendSolenoid();
     }
   }
@@ -63,8 +67,8 @@ public class Climber extends MechanicalSubsystem {
   }
 
   public void smartDashboard() {
-    SmartDashboard.putBoolean("Climber Solenoid State",  
-       (this.climberSol.get() == DoubleSolenoid.Value.kForward) ? true : false);
+    SmartDashboard.putBoolean("Climber Solenoid State",
+        (this.climberSol.get() == DoubleSolenoid.Value.kForward) ? true : false);
     SmartDashboard.putNumber("Climber Motor One Speed", this.climberMotorOne.get());
   }
 
@@ -72,10 +76,10 @@ public class Climber extends MechanicalSubsystem {
     return climberMotorOne.isAlive();
   }
 
-  public void stopClimb()
-  {
+  public void stopClimb() {
     this.climberMotorGroup.set(0.0);
   }
+
   public void ping() {
   }
 
@@ -84,6 +88,3 @@ public class Climber extends MechanicalSubsystem {
     return true;
   }
 }
-
-
-

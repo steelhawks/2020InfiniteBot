@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import frc.robot.Robot;
+
 import frc.util.subsystems.SensorSubsystem;
 
 public class VisionLight extends SensorSubsystem {
@@ -38,21 +39,15 @@ public class VisionLight extends SensorSubsystem {
     return this.visionLightOne.isAlive();
   }
 
-  public void runLights()
-  {
-    try{
-    
-      if(Robot.DASHBOARDWS.cameraMode.equals("BALL"))
-      {
+  public void runLights() {
+    try {
+      if(Robot.DASHBOARDWS.cameraMode.equals("BALL")) {
         disable();
-      }
-      else
-      {
+      } else {
         enable();
       }
     }
-    catch(Exception e)
-    {
+    catch(Exception e) {
       System.out.println("cannot turn on lights");
     }
   }

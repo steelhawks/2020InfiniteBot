@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2020 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.commands.vision;
 
 import edu.wpi.first.wpilibj2.command.Command;
@@ -14,10 +7,9 @@ import frc.robot.Robot;
 import java.util.HashSet;
 import java.util.Set;
 
-public class RequestBay implements Command
+public class VisionConnect implements Command
 {
-    public RequestBay() {}
-
+    public VisionConnect(){}
     @Override
     public Set<Subsystem> getRequirements() 
     {
@@ -32,7 +24,15 @@ public class RequestBay implements Command
     @Override
     public void execute()
     {
-        Robot.DASHBOARDWS.send("BAY");
+        try{
+            Robot.TRACKINGWS.reconnect();
+            Robot.DASHBOARDWS.reconnect();
+        }
+        catch(Exception e){
+            System.out.println("idk man i cant connect");
+
+        }
+        
     }
 
     @Override
@@ -43,4 +43,5 @@ public class RequestBay implements Command
 
     @Override
     public void end(boolean interrupted) {}
+
 }

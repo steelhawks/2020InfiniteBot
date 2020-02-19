@@ -29,14 +29,15 @@ public final class RobotMap {
   public final String jetsonNanoPort = "5805";
 
   public final String pathName = "/home/lvuser/deploy/log_2020-02-14_212213.csv";
-  public final String[] paths = {"straight.csv", "back.csv" };
+  public final String[] paths = {"straight.csv", "back.csv"};
   public final String deployDirectory = "C:/Code/2020AutonBot/deploy";
   public final SequentialCommandGroup autonCommands = 
-    new SequentialCommandGroup(new RequestBall(), 
-                                new Follow(), 
-                                new RequestBay(), 
-                                new MiracleAlign(), 
-                                new Follow());
+      new SequentialCommandGroup(
+          new VisionRequestBall(), 
+          new Follow(), 
+          new VisionRequestBay(), 
+          new VisionMiracleAlign(), 
+          new Follow());
 
   /*****
    * Drivetrain
@@ -46,9 +47,9 @@ public final class RobotMap {
   public final int drivetrainLeftMotorTwoPort = 2;
   public final int drivetrainLeftMotorThreePort = 3;
   
-  public final int drivetrainRightMotorOnePort = 6; //4;
+  public final int drivetrainRightMotorOnePort = 6;
   public final int drivetrainRightMotorTwoPort = 5;
-  public final int drivetrainRightMotorThreePort = 4; //6;
+  public final int drivetrainRightMotorThreePort = 4;
 
   public final int drivetrainSolOnPort = 0;
   public final int drivetrainSolOffPort = 1;
@@ -78,8 +79,6 @@ public final class RobotMap {
   /*****
    * Intake
    */
- 
- //set climber port to 0 bc runs should be 8
 
   public final int intakeMotorOnePort = 8;
 
@@ -92,9 +91,9 @@ public final class RobotMap {
    * Storage
    */
 
-  public final int storageMotorOnePort = 13; // no motorized storage, set to obscure value for init purposes
+  public final int storageMotorOnePort = 13;
   public final int storageMotorTwoPort = 14;
-  public final double storageSpeedOne = 1.0; // no motorized storage
+  public final double storageSpeedOne = 1.0;
   public final double storageSpeedTwo = 1.0;
 
   /*****
@@ -104,8 +103,10 @@ public final class RobotMap {
   public final int shooterMotorOnePort = 10;
   public final int shooterMotorTwoPort = 11;
 
-  public int shooterMaxRPM = 3000;
+  public final int shooterMaxRPM = 3000;
+  
   public final double distanceToShooterVelocity = 0.21;
+
   /*****
    * Vision
    */
@@ -113,49 +114,4 @@ public final class RobotMap {
   public final int visionLightPortOne = 12;
 
   public final double visionLightIntensity = 1.0;
-  
-  /*****
-   * Input
-   */
-
-  // public final int joystickOnePort = 0;
-  // public final int gamepadOnePort = 1;
- 
-  // public final int climberToggleSolenoidButton = Gamepad.kGamepadButtonBack;
-  // public final int climberRollWinchButton = Gamepad.kGamepadButtonA;
-  // public final int climberUnrollButton = Gamepad.kGamepadButtonStart;
-
-  // public final int drivetrainShiftButton = 1;
-  // public final int drivetrainReverseDirectionButton = 3;
-  // public final int drivetrainCoolFalconsButton = -3;
-
-  // // public final int funnelMoveBallsForwardButton = Gamepad.kGamepadButtonX;
-  // // public final int funnelMoveBallsReverseButton = -1; //not used
-
-  // public final int intakeSpinRollerForwardButton = Gamepad.kGamepadButtonShoulderR;
-  // public final int intakeSpinRollerReverseButton = -1; //not used
-  // public final int intakeToggleSolenoidButton = Gamepad.kGamepadButtonX;
-
-  // public final int shooterSpinForwardButton = Gamepad.kGamepadButtonShoulderL;
-  // // public final int shooterStopButton = Gamepad.kGamepadTriggerLeft;
-  // public final int shooterSpinReverseButton = -1; //not used
-
-  // public final int storageMoveBallsForwardButton = Gamepad.kGamepadButtonY;
-  // public final int storageMoveBallsReverseButton = -1; //not used
-
-  // public final int visionAlignButton = 4;
-  // public final int bayButton = 7;
-  // public final int portButton = 11;
-  // public final int ballButton = 9;
-  // public final int connectButton = 12;
-  // public final int cameraButton = 10;
-
-  // public final int vomitButton = Gamepad.kGamepadButtonB; //used in place of all "Reverse" buttons
-
-  // public final int startRecordingButton = 5;
-  // public final int endRecordingButton = 6;
-
-
-
-  
 }

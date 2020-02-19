@@ -1,35 +1,34 @@
 /*----------------------------------------------------------------------------*/
-/*                               */
+/* Copyright (c) 2020 FIRST. All Rights Reserved.                             */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.controllers;
 
 import edu.wpi.first.wpilibj.Joystick;
-import frc.robot.Robot;
 
-import frc.robot.commands.drivetrain.DrivetrainCoolFalcons;
+import frc.robot.Robot;
 import frc.robot.commands.drivetrain.DrivetrainReverseDirection;
 import frc.robot.commands.drivetrain.DrivetrainShiftGear;
-
-import frc.robot.commands.vision.MiracleAlign;
-import frc.robot.commands.vision.Connect;
-import frc.robot.commands.vision.RequestBall;
-import frc.robot.commands.vision.RequestBay;
-import frc.robot.commands.vision.RequestPort;
 import frc.robot.commands.pathcorder.EndRecording;
 import frc.robot.commands.pathcorder.StartRecording;
-import frc.robot.commands.vision.LiftCamera;
+import frc.robot.commands.vision.VisionMiracleAlign;
+import frc.robot.commands.vision.VisionConnect;
+import frc.robot.commands.vision.VisionRequestBall;
+import frc.robot.commands.vision.VisionRequestBay;
+import frc.robot.commands.vision.VisionRequestPort;
+import frc.robot.commands.vision.VisionCameraToggleSolenoid;
 
 
 public class Driver3DProController {
 
   private final Controller controller;
 
-  public Driver3DProController(Joystick joystickPort){
+  public Driver3DProController(Joystick joystickPort) {
     this.controller = new Controller(joystickPort);
   }
-
-  // replace Robot.ROBOT_Map.button_name with corresponding buttons on joystick
 
   public void mapButtons() {
 
@@ -40,24 +39,21 @@ public class Driver3DProController {
     this.controller.mapButton(Robot.BUTTON_MAP.drivetrainReverseDirectionButton)
         .whenPressed(new DrivetrainReverseDirection());
 
-    // this.controller.mapButton(3)
-    //   .whenPressed(new DrivetrainCoolFalcons());
-
     // VISION
     this.controller.mapButton(Robot.BUTTON_MAP.visionAlignButton)
-      .whenPressed(new MiracleAlign());
+      .whenPressed(new VisionMiracleAlign());
 
-    this.controller.mapButton(Robot.BUTTON_MAP.bayButton)
-      .whenPressed(new RequestBay());
+    this.controller.mapButton(Robot.BUTTON_MAP.visionRequestBayButton)
+      .whenPressed(new VisionRequestBay());
 
-    this.controller.mapButton(Robot.BUTTON_MAP.ballButton)
-      .whenPressed(new RequestBall());
+    this.controller.mapButton(Robot.BUTTON_MAP.visionRequestBallButton)
+      .whenPressed(new VisionRequestBall());
 
-    this.controller.mapButton(Robot.BUTTON_MAP.portButton)
-      .whenPressed(new RequestPort());
+    this.controller.mapButton(Robot.BUTTON_MAP.visionRequestPortButton)
+      .whenPressed(new VisionRequestPort());
 
-    this.controller.mapButton(Robot.BUTTON_MAP.connectButton)
-      .whenPressed(new Connect());
+    this.controller.mapButton(Robot.BUTTON_MAP.visionRequestConnectButton)
+      .whenPressed(new VisionConnect());
 
     this.controller.mapButton(Robot.BUTTON_MAP.startRecordingButton)
       .whenPressed(new StartRecording());
@@ -65,8 +61,8 @@ public class Driver3DProController {
       this.controller.mapButton(Robot.BUTTON_MAP.endRecordingButton)
       .whenPressed(new EndRecording());
 
-    this.controller.mapButton(Robot.BUTTON_MAP.cameraButton)
-      .whenPressed(new LiftCamera());
+    this.controller.mapButton(Robot.BUTTON_MAP.visionCameraToggleSolenoidButton)
+      .whenPressed(new VisionCameraToggleSolenoid());
 
   }
 }

@@ -12,7 +12,9 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.robot.Robot;
+
 import frc.util.subsystems.MechanicalSubsystem;
 
 public class Intake extends MechanicalSubsystem {
@@ -24,7 +26,6 @@ public class Intake extends MechanicalSubsystem {
 
   // SOLENOID
   public DoubleSolenoid intakeSol;
-
 
   // DRIVETRAIN CONSTRUCTOR
   public Intake() {
@@ -83,7 +84,6 @@ public class Intake extends MechanicalSubsystem {
   }
 
   public boolean stop() {
-    // System.out.println("3");
     this.intakeMotorOne.stopMotor();
     return true;
   }

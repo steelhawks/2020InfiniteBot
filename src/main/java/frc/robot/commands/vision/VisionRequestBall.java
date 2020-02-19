@@ -14,33 +14,33 @@ import frc.robot.Robot;
 import java.util.HashSet;
 import java.util.Set;
 
-public class LiftCamera implements Command {
+public class VisionRequestBall implements Command
+{
+    public VisionRequestBall() {}
 
-  public LiftCamera() {
-  }
+    @Override
+    public Set<Subsystem> getRequirements() 
+    {
+        Set<Subsystem> list = new HashSet<Subsystem>();
+        list.add(Robot.VISION);
+        return list;
+    }
 
-  @Override
-  public Set<Subsystem> getRequirements() {
-    Set<Subsystem> list = new HashSet<Subsystem>();
-    list.add(Robot.VISION_MOUNT);
-    return list;
-  }
+    @Override
+    public void initialize() {}
 
-  @Override
-  public void initialize() {
-  }
+    @Override
+    public void execute()
+    {
+        Robot.DASHBOARDWS.send("BALL");
+    }
 
-  @Override
-  public void execute() {
-    Robot.VISION_MOUNT.pistonPosition();
-  }
+    @Override
+    public boolean isFinished()
+    {
+        return true;
+    }
 
-  @Override
-  public boolean isFinished() {
-    return true;
-  }
-
-  @Override
-  public void end(boolean interrupted) {
-  }
+    @Override
+    public void end(boolean interrupted) {}
 }

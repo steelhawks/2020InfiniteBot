@@ -9,10 +9,11 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-//import edu.wpi.first.wpilibj.DoubleSolenoid;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.robot.Robot;
+
 import frc.util.subsystems.MechanicalSubsystem;
 
 public class Shooter extends MechanicalSubsystem {
@@ -30,7 +31,6 @@ public class Shooter extends MechanicalSubsystem {
   public double shooterVelocity;
   public double shooterRPM;
 
-
   // declaring rpm and PID variables
   public int maxRPM;
   public double integralPrior;
@@ -41,7 +41,7 @@ public class Shooter extends MechanicalSubsystem {
 
   public int spoolTime = 250;
   // solenoid
-  //public DoubleSolenoid falconCoolSol;
+  // public DoubleSolenoid falconCoolSol;
 
   // is the shooter spooled?
   public boolean isSpooled;
@@ -88,7 +88,7 @@ public class Shooter extends MechanicalSubsystem {
 
     this.shooterMotorOne.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 30);
     this.shooterMotorTwo.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 30);
-    
+
     shooterMotorOne.setInverted(true);
     shooterMotorTwo.setInverted(false);
 
@@ -126,17 +126,17 @@ public class Shooter extends MechanicalSubsystem {
   public void spool(double output) {
     this.shooterMotorOne.set(ControlMode.PercentOutput, output);
     this.shooterMotorTwo.set(ControlMode.PercentOutput, output);
-    System.out.println("Motor one Spool speed " + this.shooterMotorOne.getSensorCollection().getIntegratedSensorVelocity());
-    System.out.println("Motor two spool speed " + this.shooterMotorOne.getSensorCollection().getIntegratedSensorVelocity());
+    System.out
+        .println("Motor one Spool speed " + this.shooterMotorOne.getSensorCollection().getIntegratedSensorVelocity());
+    System.out
+        .println("Motor two spool speed " + this.shooterMotorOne.getSensorCollection().getIntegratedSensorVelocity());
 
-    if (this.shooterMotorOne.get() >= output)
-    {
+    if (this.shooterMotorOne.get() >= output) {
       this.isSpooled = true;
     }
-    if(spoolTime<=0)
-    {
+    if (spoolTime <= 0) {
       this.isSpooled = true;
-    }   
+    }
     spoolTime--;
 
   }
@@ -149,40 +149,38 @@ public class Shooter extends MechanicalSubsystem {
 
   }
 
-  public void setShooterVelocity(){
+  public void setShooterVelocity() {
     this.shooterVelocity = Robot.VISION.getDistance() / Robot.ROBOT_MAP.distanceToShooterVelocity;
 
   }
 
-  public void visionShoot(){
+  public void visionShoot() {
     this.shooterMotorOne.set(ControlMode.Velocity, this.shooterVelocity);
     this.shooterMotorTwo.set(ControlMode.Velocity, this.shooterVelocity);
   }
 
-  public void visionSpool(){
+  public void visionSpool() {
     this.shooterMotorOne.set(ControlMode.Velocity, this.shooterVelocity);
     this.shooterMotorTwo.set(ControlMode.Velocity, this.shooterVelocity);
-    if(spoolTime<=0)
-    {
+    if (spoolTime <= 0) {
       this.isSpooled = true;
-    }   
+    }
     spoolTime--;
 
   }
 
   public double shooterRPM() {
-    // calculating/displaying rpm
     double shooterRPM;
     shooterRPM = ((this.output / this.maxRPM) * 3000) / 4096;
     SmartDashboard.putNumber("ShooterRPM", shooterRPM);
     return shooterRPM;
   }
 
+  public void ping() {
+  }
 
-  public void ping() {}
-
-  public void smartDashboard() {}
-
+  public void smartDashboard() {
+  }
 
   public boolean isAlive() {
     return this.shooterMotorOne.isAlive() && this.shooterMotorTwo.isAlive();

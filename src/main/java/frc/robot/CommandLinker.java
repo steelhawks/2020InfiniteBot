@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.Joystick;
 
 import frc.robot.commands.drivetrain.DrivetrainDefault;
-
 import frc.robot.controllers.Driver3DProController;
 import frc.robot.controllers.OperatorXboxController;
 
@@ -46,8 +45,6 @@ public class CommandLinker {
   }
 
   public void configurePeriodicBindings() {
-    // DRIVETRAIN
-
     CommandScheduler.getInstance().setDefaultCommand(Robot.DRIVETRAIN, new DrivetrainDefault());
   }
 

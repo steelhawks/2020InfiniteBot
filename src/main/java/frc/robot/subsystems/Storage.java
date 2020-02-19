@@ -8,9 +8,12 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.robot.Robot;
+
 import frc.util.subsystems.MechanicalSubsystem;
 
 public class Storage extends MechanicalSubsystem {
@@ -42,19 +45,18 @@ public class Storage extends MechanicalSubsystem {
     if (isForward) {
       this.storageMotorGroup.set(Robot.ROBOT_MAP.storageSpeedOne);
       this.storageMotorGroupTwo.set(-Robot.ROBOT_MAP.storageSpeedTwo);
-
     } else {
       this.storageMotorGroup.set(-Robot.ROBOT_MAP.storageSpeedOne);
       this.storageMotorGroupTwo.set(Robot.ROBOT_MAP.storageSpeedTwo);
       reverseCount--;
-      if(reverseCount <= 0){
+      if (reverseCount <= 0) {
         this.isFullyReversed = true;
 
       }
     }
   }
 
-  public void stopStorage(){
+  public void stopStorage() {
     this.storageMotorGroup.set(0.0);
     this.storageMotorGroupTwo.set(0.0);
   }
@@ -62,7 +64,6 @@ public class Storage extends MechanicalSubsystem {
   public void smartDashboard() {
     SmartDashboard.putNumber("Intake Motor One Speed", this.storageMotorOne.get());
   }
-
 
   public boolean isAlive() {
     return storageMotorOne.isAlive();

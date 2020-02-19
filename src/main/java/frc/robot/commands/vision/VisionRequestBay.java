@@ -14,9 +14,9 @@ import frc.robot.Robot;
 import java.util.HashSet;
 import java.util.Set;
 
-public class RequestPort implements Command
+public class VisionRequestBay implements Command
 {
-    public RequestPort() {}
+    public VisionRequestBay() {}
 
     @Override
     public Set<Subsystem> getRequirements() 
@@ -32,7 +32,7 @@ public class RequestPort implements Command
     @Override
     public void execute()
     {
-        Robot.DASHBOARDWS.send("HEXAGON");
+        Robot.DASHBOARDWS.send("BAY");
     }
 
     @Override

@@ -14,33 +14,33 @@ import frc.robot.Robot;
 import java.util.HashSet;
 import java.util.Set;
 
-public class RequestBall implements Command
-{
-    public RequestBall() {}
+public class VisionCameraToggleSolenoid implements Command {
 
-    @Override
-    public Set<Subsystem> getRequirements() 
-    {
-        Set<Subsystem> list = new HashSet<Subsystem>();
-        list.add(Robot.VISION);
-        return list;
-    }
+  public VisionCameraToggleSolenoid() {
+  }
 
-    @Override
-    public void initialize() {}
+  @Override
+  public Set<Subsystem> getRequirements() {
+    Set<Subsystem> list = new HashSet<Subsystem>();
+    list.add(Robot.VISION_MOUNT);
+    return list;
+  }
 
-    @Override
-    public void execute()
-    {
-        Robot.DASHBOARDWS.send("BALL");
-    }
+  @Override
+  public void initialize() {
+  }
 
-    @Override
-    public boolean isFinished()
-    {
-        return true;
-    }
+  @Override
+  public void execute() {
+    Robot.VISION_MOUNT.pistonPosition();
+  }
 
-    @Override
-    public void end(boolean interrupted) {}
+  @Override
+  public boolean isFinished() {
+    return true;
+  }
+
+  @Override
+  public void end(boolean interrupted) {
+  }
 }

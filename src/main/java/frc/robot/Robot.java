@@ -7,14 +7,12 @@
 
 package frc.robot;
 
-import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+
 import frc.robot.commands.drivetrain.DrivetrainCoolFalcons;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
@@ -24,6 +22,7 @@ import frc.robot.subsystems.Storage;
 import frc.robot.subsystems.Vision;
 import frc.robot.subsystems.VisionLight;
 import frc.robot.subsystems.VisionMount;
+
 import frc.util.pathcorder.Follower;
 import frc.util.pathcorder.Recorder;
 import frc.util.websocket.DashboardWS;
@@ -52,8 +51,6 @@ public class Robot extends TimedRobot {
   public static final VisionLight VISION_LIGHT = new VisionLight();
   public static final VisionMount VISION_MOUNT = new VisionMount();
   public static final CommandLinker COMMAND_LINKER = new CommandLinker();
-  public NetworkTableEntry startingPosition;
-  public NetworkTableEntry autonPath;
 
   @Override
   public void robotInit() {

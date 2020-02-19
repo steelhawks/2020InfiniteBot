@@ -18,7 +18,7 @@ public class Gamepad extends Joystick {
   // GAMEPAD AXES
   public static final int kGamepadLeftStickX = 0;
   public static final int kGamepadLeftStickY = 1;
-  //shooter stop
+  // shooter stop
   public static final int kGamepadTriggerLeft = 2;
   public static final int kGamepadTriggerRight = 3;
   public static final int kGamepadRightStickX = 4;
@@ -32,7 +32,7 @@ public class Gamepad extends Joystick {
   // Pistons
   public static final int kGamepadButtonX = 3;
   // Storage
-  public static final int kGamepadButtonY = 4; 
+  public static final int kGamepadButtonY = 4;
   // Shooter
   public static final int kGamepadButtonShoulderL = 5;
   // Intake
