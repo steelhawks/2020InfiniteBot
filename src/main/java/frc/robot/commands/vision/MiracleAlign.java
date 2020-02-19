@@ -40,12 +40,12 @@ public class MiracleAlign implements Command
     @Override
     public void initialize()
     {
+      Robot.DASHBOARDWS.getCameraMode();
       // if camera mode is not hex, only one press to start/stop alignment
       if(!(Robot.DASHBOARDWS.cameraMode.equals("HEXAGON")))
       {
         Robot.VISION.isPressed = false;
       }
-      Robot.DASHBOARDWS.getCameraMode();
       // if camera mode is hex and button wasn't pressed yet, start alignment
       if(!(Robot.VISION.isPressed))
       {

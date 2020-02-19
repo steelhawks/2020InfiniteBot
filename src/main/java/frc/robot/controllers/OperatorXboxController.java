@@ -21,6 +21,7 @@ import frc.robot.commands.shooter.ShooterSpin;
 import frc.robot.commands.shooter.ShooterSpool;
 import frc.robot.commands.shooter.ShooterStop;
 import frc.robot.commands.storage.StorageMoveBalls;
+import frc.robot.commands.storage.StorageReverseBalls;
 import frc.robot.commands.storage.StorageStop;
 import frc.robot.commands.vision.Connect;
 import frc.robot.commands.vision.RequestBall;
@@ -66,6 +67,10 @@ public class OperatorXboxController {
 
     this.controller.mapButton(Robot.BUTTON_MAP.storageMoveBallsForwardButton)
       .whenPressed(new StorageMoveBalls())
+      .whenReleased(new StorageStop());
+
+    this.controller.mapButton(Robot.BUTTON_MAP.reverseStorageButton)
+      .whenPressed(new StorageReverseBalls())
       .whenReleased(new StorageStop());
 
   }

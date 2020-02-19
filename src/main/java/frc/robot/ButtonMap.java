@@ -28,7 +28,6 @@ public class ButtonMap{
   public final int shooterSpinReverseButton = -1; //not used
 
   public final int storageMoveBallsForwardButton = Gamepad.kGamepadButtonY;
-  public final int storageMoveBallsReverseButton = -1; //not used
 
   public final int visionAlignButton = 4;
   public final int bayButton = 7;
@@ -37,7 +36,7 @@ public class ButtonMap{
   public final int connectButton = 12;
   public final int cameraButton = 10;
 
-  public final int visionShootButton = Gamepad.kGamepadButtonB; //used in place of all "Reverse" buttons
+  public final int reverseStorageButton = Gamepad.kGamepadButtonB; //used in place of all "Reverse" buttons
 
   public final int startRecordingButton = 5;
   public final int endRecordingButton = 6;

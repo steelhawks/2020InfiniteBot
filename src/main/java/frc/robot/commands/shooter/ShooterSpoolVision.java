@@ -35,7 +35,7 @@ public class ShooterSpoolVision implements Command
     @Override
     public void execute()
     {
-      if(Robot.VISION.objectIsPresent){
+      if(Robot.VISION.objectPresent(Robot.TRACKINGWS.getTargetData())){
           Robot.SHOOTER.visionSpool();
       }
     }

@@ -32,20 +32,30 @@ public class ShooterSpool implements Command {
 
   @Override
   public void execute() {
-    System.out.println("spooling");
-    Robot.SHOOTER.spool(13500); // Insert Vision - distance equation
-
+    if(Robot.VISION.objectPresent(Robot.TRACKINGWS.getTargetData())){
+      // Robot.SHOOTER.shoot((0.0119*Math.pow(Robot.VISION.getDistance(), 2)) + (13.8 * Robot.VISION.getDistance()) + 17484);
+      Robot.SHOOTER.spool( 
+        (-2.92 * Math.pow(10, -10) * Math.pow(Robot.VISION.getDistance(), 4)) + 
+        (4.7 * Math.pow(10, -7) * Math.pow(Robot.VISION.getDistance(), 3)) +
+        (2.7 * Math.pow(10, -4) * Math.pow(Robot.VISION.getDistance(), 2)) +
+        (0.0651 * Robot.VISION.getDistance()) +
+        -4.86);
+    }
+    else
+    {
+      Robot.SHOOTER.spool(0.75);
+    }
   }
 
   @Override
   public boolean isFinished() {
     return Robot.SHOOTER.isSpooled;
-  }
+    }
 
   @Override
   public void end(boolean interrupted) {
     if (interrupted) {
-      Robot.SHOOTER.stop();
+      // Robot.SHOOTER.stop();
     }
   }
 }

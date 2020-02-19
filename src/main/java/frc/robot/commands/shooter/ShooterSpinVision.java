@@ -35,8 +35,8 @@ public class ShooterSpinVision implements Command
     @Override
     public void execute()
     {
-      if(Robot.VISION.objectIsPresent){
-          Robot.SHOOTER.visionShoot();
+      if(Robot.VISION.objectPresent(Robot.TRACKINGWS.getTargetData())){
+          Robot.SHOOTER.shoot((0.0119*Math.pow(Robot.VISION.getDistance(), 2)) + (13.8 * Robot.VISION.getDistance()) + 17484);
       }
     }
 

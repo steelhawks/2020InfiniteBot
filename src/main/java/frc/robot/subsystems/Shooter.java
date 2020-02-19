@@ -28,6 +28,7 @@ public class Shooter extends MechanicalSubsystem {
   public double bias;
   public double output;
   public double shooterVelocity;
+  public double shooterRPM;
 
 
   // declaring rpm and PID variables
@@ -58,11 +59,13 @@ public class Shooter extends MechanicalSubsystem {
     // this.bias = 0;
     // this.shooterVelocity = 0;
     this.kP = 0.8;
-    this.kI = 0.7;
-    this.kD = 0.5;
-    this.kF = 0.15;
+    this.kI = 0.4;
+    this.kD = 0.25;
+    this.kF = 0.2;
     this.bias = 0;
     this.shooterVelocity = 0;
+    this.shooterRPM = 0.735;
+    System.out.println(shooterRPM);
 
     // giving rpm a value equal to a port
     this.maxRPM = Robot.ROBOT_MAP.shooterMaxRPM;
@@ -121,8 +124,8 @@ public class Shooter extends MechanicalSubsystem {
   }
 
   public void spool(double output) {
-    this.shooterMotorOne.set(ControlMode.Velocity, output);
-    this.shooterMotorTwo.set(ControlMode.Velocity, output);
+    this.shooterMotorOne.set(ControlMode.PercentOutput, output);
+    this.shooterMotorTwo.set(ControlMode.PercentOutput, output);
     System.out.println("Motor one Spool speed " + this.shooterMotorOne.getSensorCollection().getIntegratedSensorVelocity());
     System.out.println("Motor two spool speed " + this.shooterMotorOne.getSensorCollection().getIntegratedSensorVelocity());
 
@@ -139,9 +142,9 @@ public class Shooter extends MechanicalSubsystem {
   }
 
   public void shoot(double output) {
-    this.shooterMotorOne.set(ControlMode.Velocity, output);
+    this.shooterMotorOne.set(ControlMode.PercentOutput, output);
     System.out.println("Motor one Shot speed " + this.shooterMotorOne.getSelectedSensorVelocity());
-    this.shooterMotorTwo.set(ControlMode.Velocity, output);
+    this.shooterMotorTwo.set(ControlMode.PercentOutput, output);
     System.out.println("Motor two shot speed " + this.shooterMotorOne.getSelectedSensorVelocity());
 
   }

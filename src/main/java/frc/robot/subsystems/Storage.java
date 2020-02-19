@@ -22,6 +22,10 @@ public class Storage extends MechanicalSubsystem {
   public final SpeedControllerGroup storageMotorGroup;
   public final SpeedControllerGroup storageMotorGroupTwo;
 
+  // FINISHED VARIABLES
+  public boolean isFullyReversed = false;
+  private int reverseCount = 50;
+
   // DRIVETRAIN CONSTRUCTOR
   public Storage() {
     // SPARK MAX LEFT MOTORS
@@ -42,6 +46,11 @@ public class Storage extends MechanicalSubsystem {
     } else {
       this.storageMotorGroup.set(-Robot.ROBOT_MAP.storageSpeedOne);
       this.storageMotorGroupTwo.set(Robot.ROBOT_MAP.storageSpeedTwo);
+      reverseCount--;
+      if(reverseCount <= 0){
+        this.isFullyReversed = true;
+
+      }
     }
   }
 
