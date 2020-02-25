@@ -145,25 +145,6 @@ public class Shooter extends MechanicalSubsystem {
 
   }
 
-  public void setShooterVelocity() {
-    this.shooterVelocity = Robot.VISION.getDistance() / Robot.ROBOT_MAP.distanceToShooterVelocity;
-
-  }
-
-  public void visionShoot() {
-    this.shooterMotorOne.set(ControlMode.Velocity, this.shooterVelocity);
-    this.shooterMotorTwo.set(ControlMode.Velocity, this.shooterVelocity);
-  }
-
-  public void visionSpool() {
-    this.shooterMotorOne.set(ControlMode.Velocity, this.shooterVelocity);
-    this.shooterMotorTwo.set(ControlMode.Velocity, this.shooterVelocity);
-    if (spoolTime <= 0) {
-      this.isSpooled = true;
-    }
-    spoolTime--;
-
-  }
 
   public double shooterRPM() {
     double shooterRPM;
