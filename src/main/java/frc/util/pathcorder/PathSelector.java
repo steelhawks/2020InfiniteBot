@@ -7,11 +7,13 @@
 
 package frc.util.pathcorder;
 import frc.robot.Robot;
-import frc.util.pathcorder.PathList;;
+import frc.util.pathcorder.PathList;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import java.util.ArrayList;
+import frc.robot.commands.pathcorder.AddPath;
 import java.io.File;
 
 
@@ -49,6 +51,7 @@ public class PathSelector {
   }
 
   public void customPath(){
+    // load all paths to be selected
     for(int i = 0; i < autonFiles.length; i++){
       String fileName = autonFiles[i].toString();
       pathCreater.addOption(fileName, fileName);
@@ -59,7 +62,13 @@ public class PathSelector {
     pathCreater.addOption("Ball Mode", "BALL");
     SmartDashboard.putData("Custom Path Selector", pathCreater);
 
-    // create select button and loader
+    // create select button and add path command
+    Trigger selectButton = new Trigger();
+    selectButton.whenActive(new AddPath());
+    SmartDashboard.putData("Select Option", selectButton);
+
+    // display selected paths and load them into csv
+    
   }
 
 
