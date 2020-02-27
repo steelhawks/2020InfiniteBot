@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -36,9 +37,7 @@ public class Climber extends MechanicalSubsystem {
     // SPEED CONTROLLER GROUP
     this.climberMotorGroup = new SpeedControllerGroup(this.climberMotorOne);
 
-    // SOLENOID
-    // this.climberSol = new DoubleSolenoid(Robot.ROBOT_MAP.climberSolOnPort,
-    // Robot.ROBOT_MAP.climberSolOffPort);
+    configureMotors();
   }
 
   public void toggleSolenoid() {
@@ -64,6 +63,12 @@ public class Climber extends MechanicalSubsystem {
     } else {
       this.climberMotorGroup.set(-Robot.ROBOT_MAP.climberSpeed);
     }
+  }
+
+  public void configureMotors() {
+    this.climberMotorOne.configFactoryDefault();
+
+    this.climberMotorOne.setNeutralMode(NeutralMode.Coast);
   }
 
   public void smartDashboard() {

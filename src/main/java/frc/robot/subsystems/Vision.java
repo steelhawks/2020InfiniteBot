@@ -58,14 +58,15 @@ public class Vision extends VisionSubsystem {
     if (Robot.COMMAND_LINKER.driveJoystick.getRawButtonPressed(2)) {
       end();
     } else if (!this.isAligned) {
-      System.out.println("Aligning");
+      System.out.println("Aligning " + getXPosDiff(getXPos() - getXPosOffset()) + " xposoffset " + getXPosOffset());
       if (getXPos() - getXPosOffset() < getXPosLeftLimit()) {
         System.out.println("right");
-        Robot.DRIVETRAIN.rotate(0.8 * (getXPosDiff(getXPos() - getXPosOffset()) / 320) - 0.04);
-        System.out.println(0.6 * (getXPosDiff(getXPos() - getXPosOffset()) / 320) - 0.04);
+        Robot.DRIVETRAIN.rotate(0.6* (getXPosDiff(getXPos() - getXPosOffset()) / 320) - (-0.24));
+        System.out.println(0.6 * (getXPosDiff(getXPos() - getXPosOffset()) / 320) - (-0.24));
       } else if (getXPos() - getXPosOffset() > getXPosRightLimit()) {
         System.out.println("left");
-        Robot.DRIVETRAIN.rotate(-0.6 * (getXPosDiff(getXPos() - getXPosOffset()) / 320) + 0.04);
+        Robot.DRIVETRAIN.rotate(-1.1 * (getXPosDiff(getXPos() - getXPosOffset()) / 320) + (-0.24));
+        System.out.println(-1.1 * (getXPosDiff(getXPos() - getXPosOffset()) / 320) + (-0.24));
       } else {
         Robot.DRIVETRAIN.gyro.reset();
         Robot.DRIVETRAIN.stop();
@@ -189,10 +190,10 @@ public class Vision extends VisionSubsystem {
   }
 
   public double getXPosDiff(double xPos) {
-    if (xPos > 160) {
-      return xPos - 160;
+    if (xPos > 320) {
+      return xPos - 320;
     }
-    return Math.abs(160 - xPos);
+    return Math.abs(320 - xPos);
   }
 
   public boolean isAligned() {

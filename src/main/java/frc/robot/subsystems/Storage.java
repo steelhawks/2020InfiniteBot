@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -38,6 +39,8 @@ public class Storage extends MechanicalSubsystem {
     // SPEED CONTROLLER GROUPS
     this.storageMotorGroup = new SpeedControllerGroup(this.storageMotorOne);
     this.storageMotorGroupTwo = new SpeedControllerGroup(this.storageMotorTwo);
+
+    configureMotors();
   }
 
   public void moveBalls(boolean isForward) {
@@ -59,6 +62,14 @@ public class Storage extends MechanicalSubsystem {
   public void stopStorage() {
     this.storageMotorGroup.set(0.0);
     this.storageMotorGroupTwo.set(0.0);
+  }
+
+  public void configureMotors() {
+    this.storageMotorOne.configFactoryDefault();
+    this.storageMotorTwo.configFactoryDefault();
+    
+    this.storageMotorOne.setNeutralMode(NeutralMode.Coast);
+    this.storageMotorTwo.setNeutralMode(NeutralMode.Coast);
   }
 
   public void smartDashboard() {

@@ -5,9 +5,8 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.drivetrain;
+package frc.robot.commands.turret;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.Robot;
@@ -15,15 +14,14 @@ import frc.robot.Robot;
 import java.util.HashSet;
 import java.util.Set;
 
-public class DrivetrainCoolFalcons implements Command {
-
-  public DrivetrainCoolFalcons() {
+public class TurretDefault implements Command {
+  public TurretDefault() {
   }
 
   @Override
   public Set<Subsystem> getRequirements() {
     Set<Subsystem> list = new HashSet<Subsystem>();
-    list.add(Robot.DRIVETRAIN);
+    list.add(Robot.TURRET);
     return list;
   }
 
@@ -33,18 +31,15 @@ public class DrivetrainCoolFalcons implements Command {
 
   @Override
   public void execute() {
-    System.out.print("Preparing to cool Falcons...");
-    SmartDashboard.putBoolean("Cooling Falcons?", true);
-    Robot.DRIVETRAIN.coolFalcons();
+    //Robot.TURRET.align();
   }
 
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 
   @Override
   public void end(boolean interrupted) {
-    SmartDashboard.putBoolean("Cooling Falcons?", false);
   }
 }

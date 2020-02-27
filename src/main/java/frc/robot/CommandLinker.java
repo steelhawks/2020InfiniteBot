@@ -40,8 +40,10 @@ public class CommandLinker {
     CommandScheduler.getInstance().registerSubsystem(Robot.INTAKE);
     CommandScheduler.getInstance().registerSubsystem(Robot.SHOOTER);
     CommandScheduler.getInstance().registerSubsystem(Robot.STORAGE);
+    CommandScheduler.getInstance().registerSubsystem(Robot.TURRET);
     CommandScheduler.getInstance().registerSubsystem(Robot.VISION);
     CommandScheduler.getInstance().registerSubsystem(Robot.VISION_LIGHT);
+    CommandScheduler.getInstance().registerSubsystem(Robot.VISION_MOUNT);
   }
 
   public void configurePeriodicBindings() {

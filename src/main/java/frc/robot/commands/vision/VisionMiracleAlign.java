@@ -56,9 +56,7 @@ public class VisionMiracleAlign implements Command
             Robot.DRIVETRAIN.isForward = true;
             Robot.VISION.reset();
             Robot.VISION.setAngle(Robot.VISION.getNTAngle());
-            Robot.VISION.setXPosLeftLimit(315.0);
-            Robot.VISION.setXPosRightLimit(325.0);
-            Robot.VISION.setXPosOffset(3.11 * Math.pow(10, -3) * Robot.VISION.getDistance() - 5.28);
+            Robot.VISION.setXPosOffset(3.11 * Math.pow(10, -3) * Robot.VISION.getDistance() - 3.78);
             if(Robot.DASHBOARDWS.cameraMode.equals("BALL")){
               Robot.INTAKE.down();
             }
@@ -125,29 +123,29 @@ public class VisionMiracleAlign implements Command
         Robot.DRIVETRAIN.drivetrainRightMotorGroup.set(0);
         Robot.DRIVETRAIN.isForward = true;
 
-        if(Robot.DASHBOARDWS.cameraMode.equals("HEXAGON")){
-          //spools shooter first, then reverses the storage 
-          //and feeds the balls in as the shooter spins
-          if(!(Robot.VISION.isPressed)){
-            CommandScheduler.getInstance().schedule(
-            new SequentialCommandGroup(
-              new ShooterSpool(), 
-              new ParallelCommandGroup(
-                new SequentialCommandGroup(
-                  new StorageReverseBalls(), new StorageMoveBalls(),
-                new ShooterSpin() 
-                ))));
-          }
-          else{
-            // if button was pressed, stop shooter and storage
-            CommandScheduler.getInstance().schedule(new ParallelCommandGroup(
-              new ShooterStop(), new StorageStop()));
-          }
+        // if(Robot.DASHBOARDWS.cameraMode.equals("HEXAGON")){
+        //   //spools shooter first, then reverses the storage 
+        //   //and feeds the balls in as the shooter spins
+        //   if(!(Robot.VISION.isPressed)){
+        //     CommandScheduler.getInstance().schedule(
+        //     new SequentialCommandGroup(
+        //       new ShooterSpool(), 
+        //       new ParallelCommandGroup(
+        //         new SequentialCommandGroup(
+        //           new StorageReverseBalls(), new StorageMoveBalls(),
+        //         new ShooterSpin() 
+        //         ))));
+        //   }
+        //   else{
+        //     // if button was pressed, stop shooter and storage
+        //     CommandScheduler.getInstance().schedule(new ParallelCommandGroup(
+        //       new ShooterStop(), new StorageStop()));
+        //   }
           
-        }
-        else if(Robot.DASHBOARDWS.cameraMode.equals("BAY")){
-          Robot.INTAKE.stop();
-        }
+        // }
+        // else if(Robot.DASHBOARDWS.cameraMode.equals("BAY")){
+        //   Robot.INTAKE.stop();
+        // }
     
         Robot.VISION.press();
     }

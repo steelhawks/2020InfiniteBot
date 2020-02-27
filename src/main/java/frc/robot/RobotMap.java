@@ -108,6 +108,12 @@ public final class RobotMap {
   public final double distanceToShooterVelocity = 0.21;
 
   /*****
+   * Turret
+   */
+
+  public final int turretMotorOnePort = 16;
+
+  /*****
    * Vision
    */
 

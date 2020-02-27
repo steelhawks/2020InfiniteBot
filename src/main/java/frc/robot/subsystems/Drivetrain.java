@@ -8,7 +8,7 @@
 package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
-
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -54,12 +54,12 @@ public class Drivetrain extends MechanicalSubsystem {
 
   // DRIVETRAIN CONTRUCTOR
   public Drivetrain() {
-    // CANSPARK MAX LEFT MOTORS
+    // DRIVETRAIN LEFT MOTORS
     this.drivetrainLeftMotorOne = new WPI_TalonSRX(Robot.ROBOT_MAP.drivetrainLeftMotorOnePort);
     this.drivetrainLeftMotorTwo = new WPI_TalonSRX(Robot.ROBOT_MAP.drivetrainLeftMotorTwoPort);
     this.drivetrainLeftMotorThree = new WPI_TalonSRX(Robot.ROBOT_MAP.drivetrainLeftMotorThreePort);
 
-    // CANSPARK MAX RIGHT MOTORS
+    // DRIVETRAIN RIGHT MOTORS
     this.drivetrainRightMotorOne = new WPI_TalonSRX(Robot.ROBOT_MAP.drivetrainRightMotorOnePort);
     this.drivetrainRightMotorTwo = new WPI_TalonSRX(Robot.ROBOT_MAP.drivetrainRightMotorTwoPort);
     this.drivetrainRightMotorThree = new WPI_TalonSRX(Robot.ROBOT_MAP.drivetrainRightMotorThreePort);
@@ -75,10 +75,6 @@ public class Drivetrain extends MechanicalSubsystem {
 
     // NAVX MXP
     this.gyro = new AHRS(SPI.Port.kMXP);
-
-    //
-    //
-    //
 
     // DIRECTION & FOLLOWER
     this.isForward = true;
@@ -146,15 +142,6 @@ public class Drivetrain extends MechanicalSubsystem {
     this.shiftSol.set(DoubleSolenoid.Value.kReverse);
   }
 
-  public void coolFalcons() {
-    // if (falconCoolSol.get() == DoubleSolenoid.Value.kForward) {
-    // this.falconCoolSol.set(DoubleSolenoid.Value.kReverse);
-    // } else {
-    // this.falconCoolSol.set(DoubleSolenoid.Value.kForward);
-    // }
-    System.out.println("Cooled Falcons!");
-  }
-
   public void configureMotors() {
     this.drivetrainLeftMotorOne.configFactoryDefault();
     this.drivetrainLeftMotorTwo.configFactoryDefault();
@@ -162,6 +149,13 @@ public class Drivetrain extends MechanicalSubsystem {
     this.drivetrainRightMotorOne.configFactoryDefault();
     this.drivetrainRightMotorTwo.configFactoryDefault();
     this.drivetrainRightMotorThree.configFactoryDefault();
+
+    this.drivetrainLeftMotorOne.setNeutralMode(NeutralMode.Brake);
+    this.drivetrainLeftMotorTwo.setNeutralMode(NeutralMode.Coast);
+    this.drivetrainLeftMotorThree.setNeutralMode(NeutralMode.Coast);
+    this.drivetrainRightMotorOne.setNeutralMode(NeutralMode.Brake);
+    this.drivetrainRightMotorTwo.setNeutralMode(NeutralMode.Coast);
+    this.drivetrainRightMotorThree.setNeutralMode(NeutralMode.Coast);
   }
 
   public void smartDashboard() {

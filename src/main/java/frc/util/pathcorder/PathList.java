@@ -11,5 +11,10 @@ public class PathList
     existingPaths = new ArrayList<DashboardPath>(0);
   }
 
+  public void setDefaults(){
+    // DashboardPath path1 
+    // existingPaths.add(path1);
+  }
+
 
 }

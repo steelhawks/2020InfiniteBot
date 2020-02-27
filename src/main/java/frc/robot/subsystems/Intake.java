@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -37,6 +38,8 @@ public class Intake extends MechanicalSubsystem {
 
     // SOLENOID
     this.intakeSol = new DoubleSolenoid(Robot.ROBOT_MAP.intakeSolOnPort, Robot.ROBOT_MAP.intakeSolOffPort);
+    
+    configureMotors();
   }
 
   public void spinRoller(boolean isForward) {
@@ -70,6 +73,12 @@ public class Intake extends MechanicalSubsystem {
   public void down() {
     System.out.println("down");
     this.intakeSol.set(DoubleSolenoid.Value.kForward);
+  }
+
+  public void configureMotors() {
+    this.intakeMotorOne.configFactoryDefault();
+
+    this.intakeMotorOne.setNeutralMode(NeutralMode.Coast);
   }
 
   public void smartDashboard() {

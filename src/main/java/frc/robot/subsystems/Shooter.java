@@ -8,6 +8,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -108,6 +109,8 @@ public class Shooter extends MechanicalSubsystem {
     this.shooterMotorTwo.config_kP(0, this.kP, 30);
     this.shooterMotorTwo.config_kI(0, this.kI, 30);
     this.shooterMotorTwo.config_kD(0, this.kD, 30);
+    
+    configureMotors();
   }
 
   // initalizing shooter
@@ -145,12 +148,19 @@ public class Shooter extends MechanicalSubsystem {
 
   }
 
-
   public double shooterRPM() {
     double shooterRPM;
     shooterRPM = ((this.output / this.maxRPM) * 3000) / 4096;
     SmartDashboard.putNumber("ShooterRPM", shooterRPM);
     return shooterRPM;
+  }
+
+  public void configureMotors() {
+    this.shooterMotorOne.configFactoryDefault();
+    this.shooterMotorTwo.configFactoryDefault();
+    
+    this.shooterMotorOne.setNeutralMode(NeutralMode.Coast);
+    this.shooterMotorTwo.setNeutralMode(NeutralMode.Coast);
   }
 
   public void ping() {

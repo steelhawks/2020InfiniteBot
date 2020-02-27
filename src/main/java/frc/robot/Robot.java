@@ -9,16 +9,15 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
-import frc.robot.commands.drivetrain.DrivetrainCoolFalcons;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Storage;
+import frc.robot.subsystems.Turret;
 import frc.robot.subsystems.Vision;
 import frc.robot.subsystems.VisionLight;
 import frc.robot.subsystems.VisionMount;
@@ -43,10 +42,11 @@ public class Robot extends TimedRobot {
   public static final Recorder RECORDER = new Recorder();
   public static final Follower FOLLOWER = new Follower();
   public static final Climber CLIMBER = new Climber();
-  public static final Shooter SHOOTER = new Shooter();
-  public static final Storage STORAGE = new Storage();
   public static final Drivetrain DRIVETRAIN = new Drivetrain();
   public static final Intake INTAKE = new Intake();
+  public static final Shooter SHOOTER = new Shooter();
+  public static final Storage STORAGE = new Storage();
+  public static final Turret TURRET = new Turret();
   public static final Vision VISION = new Vision();
   public static final VisionLight VISION_LIGHT = new VisionLight();
   public static final VisionMount VISION_MOUNT = new VisionMount();
@@ -57,15 +57,16 @@ public class Robot extends TimedRobot {
     COMMAND_LINKER.configureRegisteredSubsystems();
     COMMAND_LINKER.configurePeriodicBindings();
     COMMAND_LINKER.configureButtonBindings();
-    //CLIMBER.retractSolenoid();
+
     DRIVETRAIN.lowGear();
-    INTAKE.intakeMotorOne.stopMotor();
     
-    // INTAKE.up();
     DASHBOARDWS.connect();
     TRACKINGWS.connect();
-    
     DASHBOARDWS.baseConfig();
+
+    Robot.VISION.setXPosLeftLimit(315.0);
+    Robot.VISION.setXPosRightLimit(325.0);
+
     FOLLOWER.importPath(ROBOT_MAP.paths);
   }
 
@@ -84,15 +85,7 @@ public class Robot extends TimedRobot {
       SmartDashboard.putString("Match Time", matchTime);
     }
 
-    // this.startingPosition = Shuffleboard.getTab("Auton").add("Starting Position", 3).withPosition(0, 0).getEntry();
-    // this.autonPath = Shuffleboard.getTab("Auton").add("Path", 3).withPosition(0, 0).getEntry();
-
-    // SmartDashboard.putString("Auton", "Position: " + this.startingPosition.toString() + "\nDeploying Path" + this.autonPath.toString());
-
-    // Vision periodic
     VISION_LIGHT.runLights();
-    // DASHBOARDWS.reconnect();
-    // TRACKINGWS.reconnect();
   }
 
   @Override
@@ -127,27 +120,10 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     CommandScheduler.getInstance().enable();
     DRIVETRAIN.lowGear();
-    // INTAKE.down();
   }
 
   @Override
   public void teleopPeriodic() {
     CommandScheduler.getInstance().run();
-    // if (DriverStation.getInstance().getMatchTime() < 10) {
-    //   CommandScheduler.getInstance().schedule(
-    //       new ParallelCommandGroup(new IntakeVomit(), new ShooterVomit(), new StorageVomit()));
-    // }
-  }
-
-  public void shouldCoolFalcons() {
-    int lastTimeCooled = -1;
-
-    boolean shouldCool = !(lastTimeCooled == (int) Timer.getFPGATimestamp())
-        && ((int) (Timer.getFPGATimestamp() % 5) == 0);
-    System.out.println("Setting boolean: " + shouldCool);
-    if (shouldCool) {
-      CommandScheduler.getInstance().schedule(true, new DrivetrainCoolFalcons());
-      lastTimeCooled = (int) Timer.getFPGATimestamp();
-    }
   }
 }

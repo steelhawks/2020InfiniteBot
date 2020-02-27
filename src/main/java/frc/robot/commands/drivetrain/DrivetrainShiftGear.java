@@ -34,7 +34,6 @@ public class DrivetrainShiftGear implements Command {
   public void execute() {
     System.out.print("Preparing to shift gears...");
     Robot.DRIVETRAIN.shiftGear();
-    Robot.DRIVETRAIN.coolFalcons();
     Robot.DRIVETRAIN.ping();
   }
 
