@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.turret;
+package frc.robot.commands.intake;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
@@ -14,14 +14,14 @@ import frc.robot.Robot;
 import java.util.HashSet;
 import java.util.Set;
 
-public class TurretDefault implements Command {
-  public TurretDefault() {
+public class IntakeSpinRollerReverse implements Command {
+  public IntakeSpinRollerReverse() {
   }
 
   @Override
   public Set<Subsystem> getRequirements() {
     Set<Subsystem> list = new HashSet<Subsystem>();
-    list.add(Robot.TURRET);
+    list.add(Robot.INTAKE);
     return list;
   }
 
@@ -31,21 +31,19 @@ public class TurretDefault implements Command {
 
   @Override
   public void execute() {
-    //Robot.TURRET.align();
-    
+    Robot.INTAKE.spinRoller(-Robot.ROBOT_MAP.intakeSpeed);
   }
 
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 
   @Override
   public void end(boolean interrupted) {
     if(interrupted)
     {
-      Robot.TURRET.stop();
+      Robot.INTAKE.stop();
     }
   }
-
 }

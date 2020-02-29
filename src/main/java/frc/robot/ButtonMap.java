@@ -23,6 +23,7 @@ public class ButtonMap {
 
   public final int intakeSpinRollerForwardButton = Gamepad.kGamepadButtonShoulderR;
   public final int intakeToggleSolenoidButton = Gamepad.kGamepadButtonX;
+  public final int intakeSpinRollerReverseButton = Gamepad.kGamepadButtonLeftStick;
 
   public final int shooterSpinForwardButton = Gamepad.kGamepadButtonShoulderL;
 

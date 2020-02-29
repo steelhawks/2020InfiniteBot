@@ -27,7 +27,7 @@ public class VisionLight extends SensorSubsystem {
 
   @Override
   public void disable() {
-    this.visionLightOne.set(0.1);
+    this.visionLightOne.set(0.0);
   }
 
   @Override

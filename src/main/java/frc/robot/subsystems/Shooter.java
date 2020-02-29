@@ -86,7 +86,7 @@ public class Shooter extends MechanicalSubsystem {
     this.shooterMotorOne.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 30);
     this.shooterMotorTwo.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 30);
 
-    shooterMotorOne.setInverted(true);
+    shooterMotorOne.setInverted(false);
     shooterMotorTwo.setInverted(false);
 
     this.shooterMotorOne.setSensorPhase(true);

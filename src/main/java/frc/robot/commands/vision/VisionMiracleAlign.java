@@ -20,6 +20,8 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.Robot;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
+import java.sql.Time;
 import java.util.HashSet;
 
 public class VisionMiracleAlign implements Command
@@ -29,17 +31,27 @@ public class VisionMiracleAlign implements Command
     @Override
     public Set<Subsystem> getRequirements() 
     {
-        Set<Subsystem> list = new HashSet<Subsystem>();
-        list.add(Robot.DRIVETRAIN);
-        list.add(Robot.VISION);
-        return list;
-    }
+      Set<Subsystem> list = new HashSet<Subsystem>();
+      list.add(Robot.DRIVETRAIN);
+      list.add(Robot.VISION);
+      return list;
+  }
 
     @Override
     public void initialize()
     {
+      Robot.VISION_LIGHT.enable();
+      try {
+        Thread.sleep(150);
+      }
+      catch (Exception e)
+      {
+
+      }
+
       Robot.DASHBOARDWS.getCameraMode();
       // if camera mode is not hex, only one press to start/stop alignment
+      
       if(!(Robot.DASHBOARDWS.cameraMode.equals("HEXAGON")))
       {
         Robot.VISION.isPressed = false;
@@ -56,9 +68,16 @@ public class VisionMiracleAlign implements Command
             Robot.DRIVETRAIN.isForward = true;
             Robot.VISION.reset();
             Robot.VISION.setAngle(Robot.VISION.getNTAngle());
-            Robot.VISION.setXPosOffset(3.11 * Math.pow(10, -3) * Robot.VISION.getDistance() - 3.78);
+            Robot.VISION.setXPosOffset(-115);
+              // (-1.27 * Math.pow(10, -6) * Math.pow(Robot.VISION.getDistance(), 4)) +
+              // (1.11 * Math.pow(10, -3) * Math.pow(Robot.VISION.getDistance(), 3)) +
+              // (-0.36 * Math.pow(Robot.VISION.getDistance(), 2)) +
+              // (51.4 * Robot.VISION.getDistance()) +
+              // -2798
+              // );
             if(Robot.DASHBOARDWS.cameraMode.equals("BALL")){
               Robot.INTAKE.down();
+              Robot.VISION_LIGHT.disable();
             }
         }
         else

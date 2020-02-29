@@ -20,16 +20,6 @@ public class Encorder {
     leftEncoder = left.getPosition();
   }
 
-  public boolean isTurning() {
-    boolean turning;
-
-    if ((rightEncoder > leftEncoder) || (leftEncoder > rightEncoder)) {
-      turning = true;
-    } else {
-      turning = false;
-    }
-    return turning;
-  }
 
   public String toString() {
     return ("Right Encoder: " + this.rightEncoder + "\nLeft Encoder: " + this.leftEncoder);

@@ -50,6 +50,8 @@ public class Vision extends VisionSubsystem {
     } else {
       Robot.DRIVETRAIN.drivetrainLeftMotorGroup.set(0);
       Robot.DRIVETRAIN.drivetrainRightMotorGroup.set(0);
+      
+      //Robot.VISION_LIGHT.disable();
       this.isAligned = true;
     }
   }
@@ -61,17 +63,19 @@ public class Vision extends VisionSubsystem {
       System.out.println("Aligning " + getXPosDiff(getXPos() - getXPosOffset()) + " xposoffset " + getXPosOffset());
       if (getXPos() - getXPosOffset() < getXPosLeftLimit()) {
         System.out.println("right");
-        Robot.DRIVETRAIN.rotate(0.6* (getXPosDiff(getXPos() - getXPosOffset()) / 320) - (-0.24));
-        System.out.println(0.6 * (getXPosDiff(getXPos() - getXPosOffset()) / 320) - (-0.24));
+        Robot.DRIVETRAIN.rotate(0.3 * (getXPosDiff(getXPos() - getXPosOffset()) / 320) - (-0.31));
+        System.out.println(0.3 * (getXPosDiff(getXPos() - getXPosOffset()) / 320) - (-0.31));
       } else if (getXPos() - getXPosOffset() > getXPosRightLimit()) {
         System.out.println("left");
-        Robot.DRIVETRAIN.rotate(-1.1 * (getXPosDiff(getXPos() - getXPosOffset()) / 320) + (-0.24));
-        System.out.println(-1.1 * (getXPosDiff(getXPos() - getXPosOffset()) / 320) + (-0.24));
+        Robot.DRIVETRAIN.rotate(-0.5 * (getXPosDiff(getXPos() - getXPosOffset()) / 320) + (-0.31));
+        System.out.println(-0.5 * (getXPosDiff(getXPos() - getXPosOffset()) / 320) + (-0.31));
       } else {
         Robot.DRIVETRAIN.gyro.reset();
         Robot.DRIVETRAIN.stop();
         System.out.println("Aligned!");
         this.isAligned = true;
+        
+        //Robot.VISION_LIGHT.disable();
 
         // this.isAligned = true;
       }
@@ -219,6 +223,7 @@ public class Vision extends VisionSubsystem {
 
   public void end() {
     Robot.DRIVETRAIN.stop();
+    Robot.VISION_LIGHT.disable();
     System.out.println("Quit...");
     this.isAligned = true;
   }

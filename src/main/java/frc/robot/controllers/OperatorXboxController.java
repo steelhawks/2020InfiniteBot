@@ -16,6 +16,7 @@ import frc.robot.commands.climber.ClimberToggleSolenoid;
 import frc.robot.commands.climber.ClimberStop;
 import frc.robot.commands.climber.ClimberUnrollWinch;
 import frc.robot.commands.intake.IntakeSpinRoller;
+import frc.robot.commands.intake.IntakeSpinRollerReverse;
 import frc.robot.commands.intake.IntakeStop;
 import frc.robot.commands.intake.IntakeDown;
 import frc.robot.commands.intake.IntakeToggleSolenoid;
@@ -57,6 +58,10 @@ public class OperatorXboxController {
 
     this.controller.mapButton(Robot.BUTTON_MAP.intakeSpinRollerForwardButton)
       .whenPressed(new IntakeSpinRoller())
+      .whenReleased(new IntakeStop());
+
+      this.controller.mapButton(Robot.BUTTON_MAP.intakeSpinRollerReverseButton)
+      .whenPressed(new IntakeSpinRollerReverse())
       .whenReleased(new IntakeStop());
 
     this.controller.mapButton(Robot.BUTTON_MAP.intakeToggleSolenoidButton)

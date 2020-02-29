@@ -56,6 +56,11 @@ public class Intake extends MechanicalSubsystem {
     this.intakeMotorGroup.set(speed);
   }
 
+  public void spinRollerReverse(double speed) {
+    System.out.println(-2);
+    this.intakeMotorGroup.set(-speed);
+  }
+
   public void togglePosition() {
     if (this.intakeSol.get() == DoubleSolenoid.Value.kForward) {
       up();
