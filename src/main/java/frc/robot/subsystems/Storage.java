@@ -27,7 +27,7 @@ public class Storage extends MechanicalSubsystem {
 
   // FINISHED VARIABLES
   public boolean isFullyReversed = false;
-  private int reverseCount = 100;
+  private int reverseCount = 50;
 
   // DRIVETRAIN CONSTRUCTOR
   public Storage() {

@@ -12,7 +12,6 @@ import frc.robot.commands.shooter.ShooterSpool;
 import frc.robot.commands.shooter.ShooterStop;
 import frc.robot.commands.shooter.ShooterSpin;
 import frc.robot.commands.storage.StorageMoveBalls;
-import frc.robot.commands.storage.StorageReverseBalls;
 import frc.robot.commands.storage.StorageStop;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
@@ -61,6 +60,9 @@ public class VisionMiracleAlign implements Command
             Robot.VISION.setXPosOffset(3.11 * Math.pow(10, -3) * Robot.VISION.getDistance() - 5.28);
             if(Robot.DASHBOARDWS.cameraMode.equals("BALL")){
               Robot.INTAKE.down();
+            }
+            else if(Robot.DASHBOARDWS.cameraMode.equals("HEXAGON")){
+              Robot.SHOOTER.setShooterVelocity();
             }
         }
         else
@@ -126,17 +128,13 @@ public class VisionMiracleAlign implements Command
         Robot.DRIVETRAIN.isForward = true;
 
         if(Robot.DASHBOARDWS.cameraMode.equals("HEXAGON")){
-          //spools shooter first, then reverses the storage 
-          //and feeds the balls in as the shooter spins
+          //spool shootor, adjust velocity based on distance and start moving the balls
           if(!(Robot.VISION.isPressed)){
             CommandScheduler.getInstance().schedule(
             new SequentialCommandGroup(
               new ShooterSpool(), 
               new ParallelCommandGroup(
-                new SequentialCommandGroup(
-                  new StorageReverseBalls(), new StorageMoveBalls(),
-                new ShooterSpin() 
-                ))));
+                new ShooterSpin(), new StorageMoveBalls())));
           }
           else{
             // if button was pressed, stop shooter and storage
