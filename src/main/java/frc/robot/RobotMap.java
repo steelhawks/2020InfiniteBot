@@ -6,8 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
-import frc.robot.commands.vision.*;
-import frc.robot.commands.pathcorder.*;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 public final class RobotMap {
@@ -112,6 +110,8 @@ public final class RobotMap {
    */
 
   public final int visionLightPortOne = 12;
+
+  public final int stripLightPortOne = 0;
 
   public final double visionLightIntensity = 1.0;
 }

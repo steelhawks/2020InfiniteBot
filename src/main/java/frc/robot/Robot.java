@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import java.sql.Driver;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -17,6 +19,7 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Storage;
+import frc.robot.subsystems.StripLight;
 import frc.robot.subsystems.Turret;
 import frc.robot.subsystems.Vision;
 import frc.robot.subsystems.VisionLight;
@@ -50,24 +53,27 @@ public class Robot extends TimedRobot {
   public static final Vision VISION = new Vision();
   public static final VisionLight VISION_LIGHT = new VisionLight();
   public static final VisionMount VISION_MOUNT = new VisionMount();
+  public static final StripLight STRIP_LIGHT = new StripLight();
   public static final CommandLinker COMMAND_LINKER = new CommandLinker();
 
   @Override
   public void robotInit() {
-    COMMAND_LINKER.configureRegisteredSubsystems();
-    COMMAND_LINKER.configurePeriodicBindings();
-    COMMAND_LINKER.configureButtonBindings();
+    Robot.COMMAND_LINKER.configureRegisteredSubsystems();
+    Robot.COMMAND_LINKER.configurePeriodicBindings();
+    Robot.COMMAND_LINKER.configureButtonBindings();
 
-    DRIVETRAIN.lowGear();
+    Robot.DRIVETRAIN.lowGear();
     
-    DASHBOARDWS.connect();
-    TRACKINGWS.connect();
-    DASHBOARDWS.baseConfig();
+    Robot.DASHBOARDWS.connect();
+    Robot.TRACKINGWS.connect();
+    Robot.DASHBOARDWS.baseConfig();
 
     Robot.VISION.setXPosLeftLimit(315.0);
     Robot.VISION.setXPosRightLimit(325.0);
 
-    FOLLOWER.importPath(ROBOT_MAP.paths);
+    Robot.FOLLOWER.importPath(ROBOT_MAP.paths);
+
+    Robot.STRIP_LIGHT.enable();
   }
 
   @Override
@@ -107,6 +113,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     Robot.DRIVETRAIN.lowGear();
     Robot.FOLLOWER.index = 0;
+    Robot.STRIP_LIGHT.autonomousDefault(DriverStation.getInstance().getAlliance());
     CommandScheduler.getInstance().schedule(ROBOT_MAP.autonCommands);
   }
 
@@ -117,7 +124,12 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     CommandScheduler.getInstance().enable();
-    DRIVETRAIN.lowGear();
+    Robot.DRIVETRAIN.lowGear();
+    if (DriverStation.getInstance().getMatchTime() <= 30) {
+      Robot.STRIP_LIGHT.endgameDeafult(DriverStation.getInstance().getAlliance());
+    } else {
+      Robot.STRIP_LIGHT.teleopDefault(DriverStation.getInstance().getAlliance());
+    }
   }
 
   @Override

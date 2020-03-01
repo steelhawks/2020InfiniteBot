@@ -51,7 +51,8 @@ public class Vision extends VisionSubsystem {
       Robot.DRIVETRAIN.drivetrainLeftMotorGroup.set(0);
       Robot.DRIVETRAIN.drivetrainRightMotorGroup.set(0);
       
-      //Robot.VISION_LIGHT.disable();
+      Robot.VISION_LIGHT.disable();
+      Robot.STRIP_LIGHT.aligned();
       this.isAligned = true;
     }
   }
@@ -73,11 +74,10 @@ public class Vision extends VisionSubsystem {
         Robot.DRIVETRAIN.gyro.reset();
         Robot.DRIVETRAIN.stop();
         System.out.println("Aligned!");
-        this.isAligned = true;
         
-        //Robot.VISION_LIGHT.disable();
-
-        // this.isAligned = true;
+        Robot.VISION_LIGHT.disable();
+        Robot.STRIP_LIGHT.aligned();
+        this.isAligned = true;
       }
     }
   }

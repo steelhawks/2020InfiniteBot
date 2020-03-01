@@ -27,7 +27,7 @@ public class ShooterSpin implements Command {
 
   @Override
   public void initialize() {
-    
+    Robot.STRIP_LIGHT.shooting();
   }
 
   @Override
