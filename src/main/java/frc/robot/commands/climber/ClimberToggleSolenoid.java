@@ -7,23 +7,14 @@
 
 package frc.robot.commands.climber;
 
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+
 import frc.robot.Robot;
 
-import java.util.HashSet;
-import java.util.Set;
-
-public class ClimberToggleSolenoid implements Command {
+public class ClimberToggleSolenoid extends CommandBase {
 
   public ClimberToggleSolenoid() {
-  }
-
-  @Override
-  public Set<Subsystem> getRequirements() {
-    Set<Subsystem> list = new HashSet<Subsystem>();
-    list.add(Robot.CLIMBER);
-    return list;
+    addRequirements(Robot.CLIMBER);
   }
 
   @Override

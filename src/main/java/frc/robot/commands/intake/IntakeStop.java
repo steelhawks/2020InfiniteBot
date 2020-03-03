@@ -7,22 +7,13 @@
 
 package frc.robot.commands.intake;
 
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+
 import frc.robot.Robot;
 
-import java.util.HashSet;
-import java.util.Set;
-
-public class IntakeStop implements Command {
+public class IntakeStop extends CommandBase {
   public IntakeStop() {
-  }
-
-  @Override
-  public Set<Subsystem> getRequirements() {
-    Set<Subsystem> list = new HashSet<Subsystem>();
-    list.add(Robot.INTAKE);
-    return list;
+    addRequirements(Robot.INTAKE);
   }
 
   @Override

@@ -7,23 +7,14 @@
 
 package frc.robot.commands.drivetrain;
 
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+
 import frc.robot.Robot;
 
-import java.util.HashSet;
-import java.util.Set;
-
-public class DrivetrainReverseDirection implements Command {
+public class DrivetrainReverseDirection extends CommandBase {
 
   public DrivetrainReverseDirection() {
-  }
-
-  @Override
-  public Set<Subsystem> getRequirements() {
-    Set<Subsystem> list = new HashSet<Subsystem>();
-    list.add(Robot.DRIVETRAIN);
-    return list;
+    addRequirements(Robot.DRIVETRAIN);
   }
 
   @Override

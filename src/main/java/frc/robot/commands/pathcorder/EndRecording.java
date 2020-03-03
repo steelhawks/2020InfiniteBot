@@ -7,22 +7,13 @@
 
 package frc.robot.commands.pathcorder;
 
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Subsystem;
-import frc.robot.Robot;
-import java.util.HashSet;
-import java.util.Set;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class EndRecording implements Command 
-{
-  public EndRecording() {}
- 
-  @Override
-  public Set<Subsystem> getRequirements() 
-  {
-    Set<Subsystem> list = new HashSet<Subsystem>();
-    list.add(Robot.DRIVETRAIN);
-    return list;
+import frc.robot.Robot;
+
+public class EndRecording extends CommandBase {
+  public EndRecording() {
+    addRequirements(Robot.DRIVETRAIN);
   }
 
   @Override

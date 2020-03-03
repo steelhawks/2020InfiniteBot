@@ -7,22 +7,13 @@
 
 package frc.robot.commands.storage;
 
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+
 import frc.robot.Robot;
 
-import java.util.HashSet;
-import java.util.Set;
-
-public class StorageVomit implements Command {
+public class StorageVomit extends CommandBase {
   public StorageVomit() {
-  }
-
-  @Override
-  public Set<Subsystem> getRequirements() {
-    Set<Subsystem> list = new HashSet<Subsystem>();
-    list.add(Robot.STORAGE);
-    return list;
+    addRequirements(Robot.STORAGE);
   }
 
   @Override

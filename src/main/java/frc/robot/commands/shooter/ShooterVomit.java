@@ -7,22 +7,13 @@
 
 package frc.robot.commands.shooter;
 
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+
 import frc.robot.Robot;
 
-import java.util.HashSet;
-import java.util.Set;
-
-public class ShooterVomit implements Command {
+public class ShooterVomit extends CommandBase {
   public ShooterVomit() {
-  }
-
-  @Override
-  public Set<Subsystem> getRequirements() {
-    Set<Subsystem> list = new HashSet<Subsystem>();
-    list.add(Robot.SHOOTER);
-    return list;
+    addRequirements(Robot.SHOOTER);
   }
 
   @Override

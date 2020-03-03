@@ -1,22 +1,12 @@
 package frc.robot.commands.pathcorder;
 
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+
 import frc.robot.Robot;
-import java.util.HashSet;
-import java.util.Set;
 
-public class Follow implements Command 
-{
-  public Follow() {}
- 
-
-  @Override
-  public Set<Subsystem> getRequirements() 
-  {
-    Set<Subsystem> list = new HashSet<Subsystem>();
-    list.add(Robot.DRIVETRAIN);
-    return list;
+public class Follow extends CommandBase {
+  public Follow() {
+    addRequirements(Robot.DRIVETRAIN);
   }
 
   @Override

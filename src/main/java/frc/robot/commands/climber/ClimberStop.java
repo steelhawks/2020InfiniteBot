@@ -1,21 +1,13 @@
 package frc.robot.commands.climber;
 
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Subsystem;
-import frc.robot.Robot;
-import java.util.HashSet;
-import java.util.Set;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class ClimberStop implements Command {
+import frc.robot.Robot;
+
+public class ClimberStop extends CommandBase {
 
   public ClimberStop() {
-  }
-
-  @Override
-  public Set<Subsystem> getRequirements() {
-    Set<Subsystem> list = new HashSet<Subsystem>();
-    list.add(Robot.CLIMBER);
-    return list;
+    addRequirements(Robot.CLIMBER);
   }
 
   @Override

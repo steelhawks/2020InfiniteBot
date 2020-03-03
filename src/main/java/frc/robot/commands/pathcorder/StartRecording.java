@@ -7,29 +7,14 @@
 
 package frc.robot.commands.pathcorder;
 
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+
 import frc.robot.Robot;
-import java.util.HashSet;
-import java.util.Set;
-import frc.util.pathcorder.Recorder;
-import edu.wpi.first.wpilibj.Joystick;
 
-
-public class StartRecording implements Command 
-{
-  Joystick stick = Robot.COMMAND_LINKER.driveJoystick;
-  Recorder record = new Recorder();
-
-  public StartRecording() {}  
- 
-  @Override
-  public Set<Subsystem> getRequirements() 
-  {
-    Set<Subsystem> list = new HashSet<Subsystem>();
-    list.add(Robot.DRIVETRAIN);
-    return list;
-  }
+public class StartRecording extends CommandBase {
+  public StartRecording() {
+    addRequirements(Robot.DRIVETRAIN);
+  }  
 
   @Override
   public void initialize() {
