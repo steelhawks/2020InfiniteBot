@@ -105,6 +105,9 @@ public final class RobotMap {
 
   public final int turretMotorOnePort = 16;
 
+  public final int turretZeroPos = -10500;
+  public final int turretQuarterPos = 0;
+
   /*****
    * Vision
    */

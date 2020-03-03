@@ -21,7 +21,9 @@ public class Turret extends MechanicalSubsystem {
   // SPEED CONTROLLER GROUP
   public final SpeedControllerGroup turretMotorGroup;
 
+  // POSITIONS
   public int zeroPosition;
+  public int quarterPosition;
 
   // TURRET CONSTRUCTOR
   public Turret() {
@@ -31,21 +33,20 @@ public class Turret extends MechanicalSubsystem {
     // SPEED CONTROLLER GROUPS
     this.turretMotorGroup = new SpeedControllerGroup(this.turretMotorOne);
 
-    // ZERO POSITION
+    // POSITIONS
+    this.zeroPosition = Robot.ROBOT_MAP.turretZeroPos;
+    this.quarterPosition = Robot.ROBOT_MAP.turretQuarterPos;
   }
 
-  public void align()
-  {
-    if (Robot.VISION.getXPos() - Robot.VISION.getXPosOffset() < Robot.VISION.getXPosLeftLimit()) {
-      System.out.println("right");
-      this.turretMotorGroup.set(0.6* (Robot.VISION.getXPosDiff(Robot.VISION.getXPos() - Robot.VISION.getXPosOffset()) / 320) - (0.04));
-      System.out.println(0.6 * (Robot.VISION.getXPosDiff(Robot.VISION.getXPos() - Robot.VISION.getXPosOffset()) / 320) - (0.04));
-    } else if (Robot.VISION.getXPos() - Robot.VISION.getXPosOffset() > Robot.VISION.getXPosRightLimit()) {
-      System.out.println("left");
-      this.turretMotorGroup.set(-0.6 * (Robot.VISION.getXPosDiff(Robot.VISION.getXPos() - Robot.VISION.getXPosOffset()) / 320) + (0.04));
-      System.out.println(-0.6 * (Robot.VISION.getXPosDiff(Robot.VISION.getXPos() - Robot.VISION.getXPosOffset()) / 320) + (0.04));
+  public void goTo(int position) {
+    if (position < this.turretMotorOne.getSelectedSensorPosition()) {
+      this.turretMotorOne.set(
+          -0.15 * ((this.turretMotorOne.getSelectedSensorPosition() / Math.abs((this.zeroPosition - this.quarterPosition ) / 90)) / 45) + (-0.125));
+    } else if (position > this.turretMotorOne.getSelectedSensorPosition()) {
+      this.turretMotorOne
+          .set(0.15 * ((this.turretMotorOne.getSelectedSensorPosition() / Math.abs((this.zeroPosition - this.quarterPosition ) / 90)) / 45) + (0.125));
     } else {
-      stop();
+      this.turretMotorOne.set(0.0);
     }
   }
 

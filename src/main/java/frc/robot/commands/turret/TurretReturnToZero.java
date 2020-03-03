@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.Robot;
 
-public class TurretDefault extends CommandBase {
-  public TurretDefault() {
+public class TurretReturnToZero extends CommandBase {
+  public TurretReturnToZero() {
     addRequirements(Robot.TURRET);
   }
 
@@ -22,7 +22,7 @@ public class TurretDefault extends CommandBase {
 
   @Override
   public void execute() {
-    //Robot.TURRET.align();
+    Robot.TURRET.goTo(Robot.ROBOT_MAP.turretZeroPos);
   }
 
   @Override
