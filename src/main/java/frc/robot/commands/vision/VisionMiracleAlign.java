@@ -12,11 +12,11 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
-
 import frc.robot.commands.shooter.ShooterSpool;
 import frc.robot.commands.shooter.ShooterStop;
 import frc.robot.commands.shooter.ShooterSpin;
 import frc.robot.commands.storage.StorageMoveBalls;
+import frc.robot.commands.storage.StorageReverseBalls;
 import frc.robot.commands.storage.StorageStop;
 import frc.robot.Robot;
 
@@ -117,8 +117,9 @@ public class VisionMiracleAlign extends CommandBase {
     if (Robot.DASHBOARDWS.cameraMode.equals("HEXAGON")) {
       // spool shootor, adjust velocity based on distance and start moving the balls
       if (!(Robot.VISION.isPressed)) {
-        CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new ShooterSpool(),
-            new ParallelCommandGroup(new ShooterSpin(), new StorageMoveBalls())));
+        CommandScheduler.getInstance().schedule(
+            new SequentialCommandGroup(new ParallelCommandGroup(new ShooterSpool(), new StorageReverseBalls()),
+                new ParallelCommandGroup(new ShooterSpin(), new StorageMoveBalls())));
       } else {
         // if button was pressed, stop shooter and storage
         CommandScheduler.getInstance().schedule(new ParallelCommandGroup(new ShooterStop(), new StorageStop()));

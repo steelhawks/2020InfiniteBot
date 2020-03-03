@@ -11,10 +11,8 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import frc.robot.Robot;
-
+import frc.util.Waiter;
 import frc.util.subsystems.MechanicalSubsystem;
 
 public class Shooter extends MechanicalSubsystem {
@@ -27,24 +25,9 @@ public class Shooter extends MechanicalSubsystem {
   public double kI;
   public double kD;
   public double kF;
-  public double bias;
-  public double output;
-  public double shooterVelocity;
-  public double shooterRPM;
-
-  // declaring rpm and PID variables
-  public int maxRPM;
-  public double integralPrior;
-  public double errorPrior;
-
-  // encoder values
-  public int shooterEncoderValue;
-
-  public int spoolTime = 250;
-  // solenoid
-  // public DoubleSolenoid falconCoolSol;
 
   // is the shooter spooled?
+  public Waiter spoolTime;
   public boolean isSpooled;
 
   public Shooter() {
@@ -63,23 +46,9 @@ public class Shooter extends MechanicalSubsystem {
     this.kI = 0.4;
     this.kD = 0.25;
     this.kF = 0.2;
-    this.bias = 0;
-    this.shooterVelocity = 0;
-    this.shooterRPM = 0.735;
-    System.out.println(shooterRPM);
-
-    // giving rpm a value equal to a port
-    this.maxRPM = Robot.ROBOT_MAP.shooterMaxRPM;
-
-    // giving priors values
-    this.integralPrior = 0;
-    this.errorPrior = 0;
-    this.output = 0;
-
-    // encoders
-    this.shooterEncoderValue = 0;
 
     // is the shooter spooled?
+    this.spoolTime = new Waiter(250);
     this.isSpooled = false;
 
     // setting PID
@@ -117,11 +86,11 @@ public class Shooter extends MechanicalSubsystem {
     configureMotors();
   }
 
-  // initalizing shooter
   public boolean stop() {
     System.out.println("stopping");
     this.shooterMotorOne.set(ControlMode.PercentOutput, 0);
     this.shooterMotorTwo.set(ControlMode.PercentOutput, 0);
+    this.spoolTime.reset();
     this.isSpooled = false;
     return true;
   }
@@ -134,13 +103,10 @@ public class Shooter extends MechanicalSubsystem {
     System.out
         .println("Motor two spool speed " + this.shooterMotorOne.getSensorCollection().getIntegratedSensorVelocity());
 
-    if (this.shooterMotorOne.get() >= output) {
+    if (this.spoolTime.getIsExpired()) {
       this.isSpooled = true;
     }
-    if (spoolTime <= 0) {
-      this.isSpooled = true;
-    }
-    spoolTime--;
+    this.spoolTime.increment();
 
   }
 
@@ -150,13 +116,6 @@ public class Shooter extends MechanicalSubsystem {
     this.shooterMotorTwo.set(ControlMode.PercentOutput, output);
     System.out.println("Motor two shot speed " + this.shooterMotorOne.getSelectedSensorVelocity());
 
-  }
-
-  public double shooterRPM() {
-    double shooterRPM;
-    shooterRPM = ((this.output / this.maxRPM) * 3000) / 4096;
-    SmartDashboard.putNumber("ShooterRPM", shooterRPM);
-    return shooterRPM;
   }
 
   public void configureMotors() {

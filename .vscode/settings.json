@@ -35,9 +35,14 @@
     "list.hoverBackground": "#88000f44",
     "list.hoverForeground": "#cecece",
 
-    "activityBar.background": "#88000f8e",
+    //"activityBar.background": "#88000f8e",
 
     "editorLineNumber.foreground": "#d4af37",
+    "editor.foreground": "#d4af37",
+    "editorCursor.foreground": "#d4af37",
+    "editor.selectionBackground": "#d4af371f",
+    //"editor.lineHighlightBorder": "#ffffff44",
+    //"editorWhitespace.foreground": "#d4af37b2",
 
     "statusBar.background": "#88000f8e",
 

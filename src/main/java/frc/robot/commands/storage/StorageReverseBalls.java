@@ -18,7 +18,6 @@ public class StorageReverseBalls extends CommandBase {
 
   @Override
   public void initialize() {
-    Robot.STORAGE.isFullyReversed = false;
   }
 
   @Override
@@ -28,7 +27,7 @@ public class StorageReverseBalls extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return Robot.STORAGE.isFullyReversed;
+    return true;
   }
 
   @Override

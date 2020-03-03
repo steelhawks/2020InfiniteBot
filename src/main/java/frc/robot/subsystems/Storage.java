@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Robot;
-
 import frc.util.subsystems.MechanicalSubsystem;
 
 public class Storage extends MechanicalSubsystem {
@@ -26,9 +25,6 @@ public class Storage extends MechanicalSubsystem {
   public final SpeedControllerGroup storageMotorGroup;
   public final SpeedControllerGroup storageMotorGroupTwo;
 
-  // FINISHED VARIABLES
-  public boolean isFullyReversed = false;
-  private int reverseCount = 50;
 
   // DRIVETRAIN CONSTRUCTOR
   public Storage() {
@@ -44,18 +40,12 @@ public class Storage extends MechanicalSubsystem {
   }
 
   public void moveBalls(boolean isForward) {
-    System.out.println("storing");
     if (isForward) {
       this.storageMotorGroup.set(Robot.ROBOT_MAP.storageSpeedOne);
       this.storageMotorGroupTwo.set(-Robot.ROBOT_MAP.storageSpeedTwo);
     } else {
       this.storageMotorGroup.set(-Robot.ROBOT_MAP.storageSpeedOne);
       this.storageMotorGroupTwo.set(Robot.ROBOT_MAP.storageSpeedTwo);
-      reverseCount--;
-      if (reverseCount <= 0) {
-        this.isFullyReversed = true;
-
-      }
     }
   }
 

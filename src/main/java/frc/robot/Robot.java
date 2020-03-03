@@ -61,7 +61,7 @@ public class Robot extends TimedRobot {
     Robot.COMMAND_LINKER.configureButtonBindings();
 
     Robot.DRIVETRAIN.lowGear();
-    
+
     Robot.DASHBOARDWS.connect();
     Robot.TRACKINGWS.connect();
     Robot.DASHBOARDWS.baseConfig();
