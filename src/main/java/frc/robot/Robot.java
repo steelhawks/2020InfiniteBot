@@ -133,5 +133,18 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     CommandScheduler.getInstance().run();
+    Robot.SHOOTER.shoot(13000);
+    // if (Robot.COMMAND_LINKER.operatorGamepad.getRightY() > 0.05 || Robot.COMMAND_LINKER.operatorGamepad.getRightY() < -0.05)
+    // {
+    //   System.out.println("running!");
+    //   Robot.SHOOTER.shoot(Robot.COMMAND_LINKER.operatorGamepad.getRightY() * 6000 * 2048 / 600);
+    // }
+    // else
+    // {
+    //   System.out.println("not running...");
+    //   Robot.SHOOTER.stop();
+    // }
+    
+    // System.out.println("Stick Output: " + Robot.COMMAND_LINKER.operatorGamepad.getRightY() + "\nCalculated output: " + Robot.COMMAND_LINKER.operatorGamepad.getRightY() * 500 * 2048 / 600);
   }
 }

@@ -9,6 +9,8 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
+import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import frc.robot.Robot;
@@ -42,10 +44,10 @@ public class Shooter extends MechanicalSubsystem {
     // this.kF = 0.14;
     // this.bias = 0;
     // this.shooterVelocity = 0;
-    this.kP = 0.8;
-    this.kI = 0.4;
-    this.kD = 0.25;
-    this.kF = 0.2;
+    this.kP = 0.1;
+    this.kI = 0.001;
+    this.kD = 0.4;
+    this.kF = 1023.0/20660.0;
 
     // is the shooter spooled?
     this.spoolTime = new Waiter(250);
@@ -53,26 +55,29 @@ public class Shooter extends MechanicalSubsystem {
 
     // setting PID
 
+    
+    configureMotors();
+
     this.shooterMotorOne.configFactoryDefault();
     this.shooterMotorTwo.configFactoryDefault();
 
-    this.shooterMotorOne.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 30);
-    this.shooterMotorTwo.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 30);
+    this.shooterMotorOne.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 30);
+    this.shooterMotorTwo.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 30);
 
-    shooterMotorOne.setInverted(false);
-    shooterMotorTwo.setInverted(true);
+    shooterMotorOne.setInverted(true);
+    shooterMotorTwo.setInverted(false);
 
     this.shooterMotorOne.setSensorPhase(true);
     this.shooterMotorTwo.setSensorPhase(true);
 
-    this.shooterMotorOne.configNominalOutputForward(0, 30);
-    this.shooterMotorOne.configNominalOutputReverse(0, 30);
-    this.shooterMotorOne.configPeakOutputForward(1, 30);
-    this.shooterMotorOne.configPeakOutputReverse(-1, 30);
-    this.shooterMotorTwo.configNominalOutputForward(0, 30);
-    this.shooterMotorTwo.configNominalOutputReverse(0, 30);
-    this.shooterMotorTwo.configPeakOutputForward(1, 30);
-    this.shooterMotorTwo.configPeakOutputReverse(-1, 30);
+    // this.shooterMotorOne.configNominalOutputForward(0, 30);
+    // this.shooterMotorOne.configNominalOutputReverse(0, 30);
+    // this.shooterMotorOne.configPeakOutputForward(1, 30);
+    // this.shooterMotorOne.configPeakOutputReverse(-1, 30);
+    // this.shooterMotorTwo.configNominalOutputForward(0, 30);
+    // this.shooterMotorTwo.configNominalOutputReverse(0, 30);
+    // this.shooterMotorTwo.configPeakOutputForward(1, 30);
+    // this.shooterMotorTwo.configPeakOutputReverse(-1, 30);
 
     this.shooterMotorOne.config_kF(0, this.kF, 30);
     this.shooterMotorOne.config_kP(0, this.kP, 30);
@@ -82,14 +87,12 @@ public class Shooter extends MechanicalSubsystem {
     this.shooterMotorTwo.config_kP(0, this.kP, 30);
     this.shooterMotorTwo.config_kI(0, this.kI, 30);
     this.shooterMotorTwo.config_kD(0, this.kD, 30);
-    
-    configureMotors();
   }
 
   public boolean stop() {
     System.out.println("stopping");
-    this.shooterMotorOne.set(ControlMode.PercentOutput, 0);
-    this.shooterMotorTwo.set(ControlMode.PercentOutput, 0);
+    this.shooterMotorOne.set(TalonFXControlMode.PercentOutput, 0);
+    this.shooterMotorTwo.set(TalonFXControlMode.PercentOutput, 0);
     this.spoolTime.reset();
     this.isSpooled = false;
     return true;
@@ -111,10 +114,10 @@ public class Shooter extends MechanicalSubsystem {
   }
 
   public void shoot(double output) {
-    this.shooterMotorOne.set(ControlMode.PercentOutput, output);
-    System.out.println("Motor one Shot speed " + this.shooterMotorOne.getSelectedSensorVelocity());
-    this.shooterMotorTwo.set(ControlMode.PercentOutput, output);
-    System.out.println("Motor two shot speed " + this.shooterMotorOne.getSelectedSensorVelocity());
+    this.shooterMotorOne.set(TalonFXControlMode.Velocity, output);
+    System.out.println("Motor one Shot speed " + this.shooterMotorOne.getSensorCollection().getIntegratedSensorVelocity() + "Expected: " + output);
+    this.shooterMotorTwo.set(TalonFXControlMode.Velocity, output);
+    System.out.println("Motor two shot speed " + this.shooterMotorOne.getSensorCollection().getIntegratedSensorVelocity() + "Expected: " + output);
 
   }
 
