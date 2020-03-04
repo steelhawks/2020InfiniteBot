@@ -46,7 +46,7 @@ public class Shooter extends MechanicalSubsystem {
     // this.shooterVelocity = 0;
     this.kP = 0.1;
     this.kI = 0.001;
-    this.kD = 0.4;
+    this.kD = 0.5;
     this.kF = 1023.0/20660.0;
 
     // is the shooter spooled?
