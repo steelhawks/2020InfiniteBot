@@ -20,6 +20,7 @@ public class Storage extends MechanicalSubsystem {
   // TALON SRX MOTOR CONTROLLER
   public final WPI_TalonSRX storageMotorOne;
   public final WPI_TalonSRX storageMotorTwo;
+  public final WPI_TalonSRX storageMotorThree;
 
   // SPEED CONTROLLER GROUP
   public final SpeedControllerGroup storageMotorGroup;
@@ -31,10 +32,15 @@ public class Storage extends MechanicalSubsystem {
     // SPARK MAX LEFT MOTORS
     this.storageMotorOne = new WPI_TalonSRX(Robot.ROBOT_MAP.storageMotorOnePort);
     this.storageMotorTwo = new WPI_TalonSRX(Robot.ROBOT_MAP.storageMotorTwoPort);
+    this.storageMotorThree = new WPI_TalonSRX(Robot.ROBOT_MAP.storageMotorThreePort);
+
+    this.storageMotorOne.setInverted(false);
+    this.storageMotorTwo.setInverted(true);
+    this.storageMotorThree.setInverted(false);
 
     // SPEED CONTROLLER GROUPS
-    this.storageMotorGroup = new SpeedControllerGroup(this.storageMotorOne);
-    this.storageMotorGroupTwo = new SpeedControllerGroup(this.storageMotorTwo);
+    this.storageMotorGroup = new SpeedControllerGroup(this.storageMotorOne, this.storageMotorTwo);
+    this.storageMotorGroupTwo = new SpeedControllerGroup(this.storageMotorThree);
 
     configureMotors();
   }

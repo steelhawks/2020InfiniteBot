@@ -85,6 +85,7 @@ public final class RobotMap {
 
   public final int storageMotorOnePort = 13;
   public final int storageMotorTwoPort = 14;
+  public final int storageMotorThreePort = 15;
   public final double storageSpeedOne = 1.0;
   public final double storageSpeedTwo = 1.0;
 
