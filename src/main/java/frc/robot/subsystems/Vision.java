@@ -57,33 +57,6 @@ public class Vision extends VisionSubsystem {
     }
   }
 
-  public void align() {
-    if (Robot.COMMAND_LINKER.driveJoystick.getRawButtonPressed(2)) {
-      end();
-    } else if (!this.isAligned) {
-      System.out.println("Aligning " + getXPosDiff(getXPos() - getXPosOffset()) + " xposoffset " + getXPosOffset());
-      if (getXPos() - getXPosOffset() < getXPosLeftLimit()) {
-        System.out.println("right");
-        Robot.DRIVETRAIN.rotate(0.3 * (getXPosDiff(getXPos() - getXPosOffset()) / 320) - (-0.31));
-        System.out.println(0.3 * (getXPosDiff(getXPos() - getXPosOffset()) / 320) - (-0.31));
-      } else if (getXPos() - getXPosOffset() > getXPosRightLimit()) {
-        System.out.println("left");
-        Robot.DRIVETRAIN.rotate(-0.5 * (getXPosDiff(getXPos() - getXPosOffset()) / 320) + (-0.31));
-        System.out.println(-0.5 * (getXPosDiff(getXPos() - getXPosOffset()) / 320) + (-0.31));
-      } else {
-        Robot.DRIVETRAIN.gyro.reset();
-        Robot.DRIVETRAIN.stop();
-        System.out.println("Aligned!");
-        
-        Robot.VISION_LIGHT.disable();
-        Robot.STRIP_LIGHT.aligned();
-        this.isAligned = true;
-      }
-    }
-  }
-
-  // FOR TURRET, if looking for drivetrain it is the method above *********
-  //
   // public void align() {
   //   if (Robot.COMMAND_LINKER.driveJoystick.getRawButtonPressed(2)) {
   //     end();
@@ -91,12 +64,15 @@ public class Vision extends VisionSubsystem {
   //     System.out.println("Aligning " + getXPosDiff(getXPos() - getXPosOffset()) + " xposoffset " + getXPosOffset());
   //     if (getXPos() - getXPosOffset() < getXPosLeftLimit()) {
   //       System.out.println("right");
-  //       Robot.TURRET.turretMotorGroup.set(0.3 * (getXPosDiff(getXPos() - getXPosOffset()) / 320) - (-0.31));
+  //       Robot.DRIVETRAIN.rotate(0.3 * (getXPosDiff(getXPos() - getXPosOffset()) / 320) - (-0.31));
+  //       System.out.println(0.3 * (getXPosDiff(getXPos() - getXPosOffset()) / 320) - (-0.31));
   //     } else if (getXPos() - getXPosOffset() > getXPosRightLimit()) {
   //       System.out.println("left");
-  //       Robot.TURRET.turretMotorGroup.set(-0.5 * (getXPosDiff(getXPos() - getXPosOffset()) / 320) + (-0.31));
+  //       Robot.DRIVETRAIN.rotate(-0.5 * (getXPosDiff(getXPos() - getXPosOffset()) / 320) + (-0.31));
+  //       System.out.println(-0.5 * (getXPosDiff(getXPos() - getXPosOffset()) / 320) + (-0.31));
   //     } else {
-  //       Robot.TURRET.stop();
+  //       Robot.DRIVETRAIN.gyro.reset();
+  //       Robot.DRIVETRAIN.stop();
   //       System.out.println("Aligned!");
         
   //       Robot.VISION_LIGHT.disable();
@@ -105,6 +81,30 @@ public class Vision extends VisionSubsystem {
   //     }
   //   }
   // }
+
+  // FOR TURRET, if looking for drivetrain it is the method above *********
+  
+  public void align() {
+    if (Robot.COMMAND_LINKER.driveJoystick.getRawButtonPressed(2)) {
+      end();
+    } else if (!this.isAligned) {
+      System.out.println("Aligning");
+      if (getXPos()< getXPosLeftLimit() && !Robot.TURRET.rightLimitSwitch.get()) {
+        System.out.println("right");
+        Robot.TURRET.turretMotorGroup.set(0.05 * (getXPosDiff(getXPos()) / 320) - (-0.1));
+      } else if (getXPos()> getXPosRightLimit() && !Robot.TURRET.leftLimitSwitch.get()) {
+        System.out.println("left");
+        Robot.TURRET.turretMotorGroup.set(-0.55 * (getXPosDiff(getXPos()) / 320) + (-0.1));
+      } else {
+        Robot.TURRET.stop();
+        System.out.println("Aligned!");
+        
+        Robot.VISION_LIGHT.disable();
+        Robot.STRIP_LIGHT.aligned();
+        this.isAligned = true;
+      }
+    }
+  }
 
   public boolean containsData(String data) {
     if (data.equals("{\"target\":[]}")) {

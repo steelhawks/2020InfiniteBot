@@ -8,6 +8,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
@@ -25,6 +26,13 @@ public class Turret extends MechanicalSubsystem {
   public int zeroPosition;
   public int quarterPosition;
 
+  // LIMIT SWITCHES
+  public DigitalInput leftLimitSwitch;
+  public DigitalInput rightLimitSwitch;
+
+  // Testing
+  public boolean testing;
+  
   // TURRET CONSTRUCTOR
   public Turret() {
     // SPARK MAX LEFT MOTORS
@@ -36,15 +44,22 @@ public class Turret extends MechanicalSubsystem {
     // POSITIONS
     this.zeroPosition = Robot.ROBOT_MAP.turretZeroPos;
     this.quarterPosition = Robot.ROBOT_MAP.turretQuarterPos;
+
+    // LIMIT SWITCHES
+    this.leftLimitSwitch = new DigitalInput(Robot.ROBOT_MAP.turretLeftLimitSwitchPort);
+    this.rightLimitSwitch = new DigitalInput(Robot.ROBOT_MAP.turretRightLimitSwitchPort);
+
+    // TESTING
+    this.testing = false;
   }
 
   public void goTo(int position) {
-    if (position < this.turretMotorOne.getSelectedSensorPosition()) {
+    if (position < this.turretMotorOne.getSelectedSensorPosition() && !this.leftLimitSwitch.get()) {
       this.turretMotorOne.set(
           -0.15 * ((this.turretMotorOne.getSelectedSensorPosition() / Math.abs((this.zeroPosition - this.quarterPosition ) / 90)) / 45) + (-0.125));
-    } else if (position > this.turretMotorOne.getSelectedSensorPosition()) {
-      this.turretMotorOne
-          .set(0.15 * ((this.turretMotorOne.getSelectedSensorPosition() / Math.abs((this.zeroPosition - this.quarterPosition ) / 90)) / 45) + (0.125));
+    } else if (position > this.turretMotorOne.getSelectedSensorPosition() && !this.rightLimitSwitch.get()) {
+      this.turretMotorOne.set(
+          0.15 * ((this.turretMotorOne.getSelectedSensorPosition() / Math.abs((this.zeroPosition - this.quarterPosition ) / 90)) / 45) + (0.125));
     } else {
       this.turretMotorOne.set(0.0);
     }

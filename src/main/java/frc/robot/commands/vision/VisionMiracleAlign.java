@@ -18,6 +18,7 @@ import frc.robot.commands.shooter.ShooterSpin;
 import frc.robot.commands.storage.StorageMoveBalls;
 import frc.robot.commands.storage.StorageReverseBalls;
 import frc.robot.commands.storage.StorageStop;
+import frc.robot.commands.turret.TurretReturnToZero;
 import frc.robot.Robot;
 
 public class VisionMiracleAlign extends CommandBase {
@@ -52,7 +53,7 @@ public class VisionMiracleAlign extends CommandBase {
         Robot.DRIVETRAIN.isForward = true;
         Robot.VISION.reset();
         Robot.VISION.setAngle(Robot.VISION.getNTAngle());
-        Robot.VISION.setXPosOffset(-5);
+        Robot.VISION.setXPosOffset(0);
         // (-1.27 * Math.pow(10, -6) * Math.pow(Robot.VISION.getDistance(), 4)) +
         // (1.11 * Math.pow(10, -3) * Math.pow(Robot.VISION.getDistance(), 3)) +
         // (-0.36 * Math.pow(Robot.VISION.getDistance(), 2)) +
@@ -122,7 +123,7 @@ public class VisionMiracleAlign extends CommandBase {
                 new ParallelCommandGroup(new ShooterSpin(), new StorageMoveBalls())));
       } else {
         // if button was pressed, stop shooter and storage
-        CommandScheduler.getInstance().schedule(new ParallelCommandGroup(new ShooterStop(), new StorageStop()));
+        CommandScheduler.getInstance().schedule(new ParallelCommandGroup(new ShooterStop(), new StorageStop(), new TurretReturnToZero()));
       }
 
       Robot.VISION.press();

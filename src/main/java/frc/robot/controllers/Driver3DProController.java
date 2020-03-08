@@ -10,16 +10,17 @@ package frc.robot.controllers;
 import edu.wpi.first.wpilibj.Joystick;
 
 import frc.robot.Robot;
+import frc.robot.commands.climber.ClimberToggleSafetySolenoid;
 import frc.robot.commands.drivetrain.DrivetrainReverseDirection;
 import frc.robot.commands.drivetrain.DrivetrainShiftGear;
 import frc.robot.commands.pathcorder.EndRecording;
 import frc.robot.commands.pathcorder.StartRecording;
+import frc.robot.commands.turret.TurretTest;
 import frc.robot.commands.vision.VisionMiracleAlign;
 import frc.robot.commands.vision.VisionConnect;
 import frc.robot.commands.vision.VisionRequestBall;
 import frc.robot.commands.vision.VisionRequestBay;
 import frc.robot.commands.vision.VisionRequestPort;
-import frc.robot.commands.vision.VisionCameraToggleSolenoid;
 
 
 public class Driver3DProController {
@@ -61,8 +62,11 @@ public class Driver3DProController {
       this.controller.mapButton(Robot.BUTTON_MAP.endRecordingButton)
       .whenPressed(new EndRecording());
 
-    this.controller.mapButton(Robot.BUTTON_MAP.visionCameraToggleSolenoidButton)
-      .whenPressed(new VisionCameraToggleSolenoid());
+    this.controller.mapButton(Robot.BUTTON_MAP.climberToggleSafetySolenoidButton)
+      .whenPressed(new ClimberToggleSafetySolenoid());
+
+    this.controller.mapButton(Robot.BUTTON_MAP.turretToggleTestingButton)
+      .whenPressed(new TurretTest());
 
   }
 }

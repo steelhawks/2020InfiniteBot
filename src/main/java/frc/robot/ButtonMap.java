@@ -14,6 +14,7 @@ public class ButtonMap {
   public final int gamepadOnePort = 1;
 
   public final int climberToggleSolenoidButton = Gamepad.kGamepadButtonBack;
+  public final int climberToggleSafetySolenoidButton = 10;
   public final int climberRollWinchButton = Gamepad.kGamepadButtonA;
   public final int climberUnrollButton = Gamepad.kGamepadButtonStart;
 
@@ -35,9 +36,10 @@ public class ButtonMap {
   public final int visionRequestPortButton = 11;
   public final int visionRequestBallButton = 9;
   public final int visionRequestConnectButton = 12;
-  public final int visionCameraToggleSolenoidButton = 10;
 
   public final int startRecordingButton = 5;
   public final int endRecordingButton = 6;
+
+  public final int turretToggleTestingButton = 8;
 
 }

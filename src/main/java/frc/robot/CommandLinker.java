@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.Joystick;
 
 import frc.robot.commands.drivetrain.DrivetrainDefault;
+import frc.robot.commands.turret.TurretDefault;
 import frc.robot.controllers.Driver3DProController;
 import frc.robot.controllers.OperatorXboxController;
 
@@ -43,11 +44,12 @@ public class CommandLinker {
     CommandScheduler.getInstance().registerSubsystem(Robot.TURRET);
     CommandScheduler.getInstance().registerSubsystem(Robot.VISION);
     CommandScheduler.getInstance().registerSubsystem(Robot.VISION_LIGHT);
-    CommandScheduler.getInstance().registerSubsystem(Robot.VISION_MOUNT);
   }
 
   public void configurePeriodicBindings() {
     CommandScheduler.getInstance().setDefaultCommand(Robot.DRIVETRAIN, new DrivetrainDefault());
+    CommandScheduler.getInstance().setDefaultCommand(Robot.TURRET, new TurretDefault());
+
   }
 
   public void configureButtonBindings() {

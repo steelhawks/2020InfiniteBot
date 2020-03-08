@@ -1,5 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2020 FIRST. All Rights Reserved.                             */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
@@ -11,8 +9,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.Robot;
 
-public class TurretDefault extends CommandBase {
-  public TurretDefault() {
+public class TurretTest extends CommandBase {
+  public TurretTest() {
     addRequirements(Robot.TURRET);
   }
 
@@ -22,22 +20,21 @@ public class TurretDefault extends CommandBase {
 
   @Override
   public void execute() {
-    if(Robot.TURRET.testing){
-      Robot.TURRET.turretMotorOne.set(Robot.COMMAND_LINKER.driveJoystick.getRawAxis(3) / 5);
+    if(Robot.TURRET.testing == true){
+      Robot.TURRET.testing = false;
+    }
+    else{
+      Robot.TURRET.testing = true;
     }
   }
 
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 
   @Override
   public void end(boolean interrupted) {
-    if(interrupted)
-    {
-      Robot.TURRET.stop();
-    }
   }
 
 }

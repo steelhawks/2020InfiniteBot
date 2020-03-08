@@ -21,7 +21,6 @@ import frc.robot.subsystems.StripLight;
 import frc.robot.subsystems.Turret;
 import frc.robot.subsystems.Vision;
 import frc.robot.subsystems.VisionLight;
-import frc.robot.subsystems.VisionMount;
 
 import frc.util.pathcorder.Follower;
 import frc.util.pathcorder.Recorder;
@@ -50,7 +49,6 @@ public class Robot extends TimedRobot {
   public static final Turret TURRET = new Turret();
   public static final Vision VISION = new Vision();
   public static final VisionLight VISION_LIGHT = new VisionLight();
-  public static final VisionMount VISION_MOUNT = new VisionMount();
   public static final StripLight STRIP_LIGHT = new StripLight();
   public static final CommandLinker COMMAND_LINKER = new CommandLinker();
 
@@ -68,6 +66,7 @@ public class Robot extends TimedRobot {
 
     Robot.VISION.setXPosLeftLimit(315.0);
     Robot.VISION.setXPosRightLimit(325.0);
+    Robot.VISION.setXPosOffset(0);
 
     Robot.FOLLOWER.importPath(ROBOT_MAP.paths);
 

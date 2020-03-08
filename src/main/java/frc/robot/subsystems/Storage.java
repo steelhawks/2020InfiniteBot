@@ -19,7 +19,6 @@ import frc.util.subsystems.MechanicalSubsystem;
 public class Storage extends MechanicalSubsystem {
   // TALON SRX MOTOR CONTROLLER
   public final WPI_TalonSRX storageMotorOne;
-  public final WPI_TalonSRX storageMotorTwo;
   public final WPI_TalonSRX storageMotorThree;
 
   // SPEED CONTROLLER GROUP
@@ -31,15 +30,13 @@ public class Storage extends MechanicalSubsystem {
   public Storage() {
     // SPARK MAX LEFT MOTORS
     this.storageMotorOne = new WPI_TalonSRX(Robot.ROBOT_MAP.storageMotorOnePort);
-    this.storageMotorTwo = new WPI_TalonSRX(Robot.ROBOT_MAP.storageMotorTwoPort);
     this.storageMotorThree = new WPI_TalonSRX(Robot.ROBOT_MAP.storageMotorThreePort);
 
     this.storageMotorOne.setInverted(false);
-    this.storageMotorTwo.setInverted(true);
     this.storageMotorThree.setInverted(false);
 
     // SPEED CONTROLLER GROUPS
-    this.storageMotorGroup = new SpeedControllerGroup(this.storageMotorOne, this.storageMotorTwo);
+    this.storageMotorGroup = new SpeedControllerGroup(this.storageMotorOne);
     this.storageMotorGroupTwo = new SpeedControllerGroup(this.storageMotorThree);
 
     configureMotors();
@@ -62,10 +59,10 @@ public class Storage extends MechanicalSubsystem {
 
   public void configureMotors() {
     this.storageMotorOne.configFactoryDefault();
-    this.storageMotorTwo.configFactoryDefault();
+    this.storageMotorThree.configFactoryDefault();
     
     this.storageMotorOne.setNeutralMode(NeutralMode.Coast);
-    this.storageMotorTwo.setNeutralMode(NeutralMode.Coast);
+    this.storageMotorThree.setNeutralMode(NeutralMode.Coast);
   }
 
   public void smartDashboard() {
@@ -81,7 +78,7 @@ public class Storage extends MechanicalSubsystem {
 
   public boolean stop() {
     this.storageMotorOne.stopMotor();
-    this.storageMotorTwo.stopMotor();
+    this.storageMotorThree.stopMotor();
     return true;
   }
 }

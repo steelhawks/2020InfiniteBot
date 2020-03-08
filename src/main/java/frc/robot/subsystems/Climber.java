@@ -26,9 +26,10 @@ public class Climber extends MechanicalSubsystem {
   public final SpeedControllerGroup climberMotorGroup;
 
   // SOLENOID
-  // commented out
   public DoubleSolenoid climberSol = new DoubleSolenoid(Robot.ROBOT_MAP.climberSolOnPort,
       Robot.ROBOT_MAP.climberSolOffPort);
+  public DoubleSolenoid climberSafetySol = new DoubleSolenoid(Robot.ROBOT_MAP.safetySolOnPort,
+      Robot.ROBOT_MAP.safetySolOffPort);
 
   public Climber() {
     // TALON SRX MOTOR CONTROLLER
@@ -54,6 +55,22 @@ public class Climber extends MechanicalSubsystem {
 
   public void retractSolenoid() {
     this.climberSol.set(DoubleSolenoid.Value.kReverse);
+  }
+
+  public void toggleSafetySolenoid() {
+    if (this.climberSafetySol.get().equals(DoubleSolenoid.Value.kForward)) {
+      retractSafetySolenoid();
+    } else {
+      extendSafetySolenoid();
+    }
+  }
+
+  public void extendSafetySolenoid() {
+    this.climberSafetySol.set(DoubleSolenoid.Value.kForward);
+  }
+
+  public void retractSafetySolenoid() {
+    this.climberSafetySol.set(DoubleSolenoid.Value.kReverse);
   }
 
   public void rollWinch(boolean isForward) {

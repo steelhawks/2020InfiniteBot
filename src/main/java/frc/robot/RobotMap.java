@@ -20,7 +20,7 @@ public final class RobotMap {
    * Networking & Auton
    */
 
-  public final String jetsonNanoIP = "10.26.1.102";
+  public final String jetsonNanoIP = "10.26.1.74";
   public final String driveStationIP = "10.26.1.5";
   public final String selfIP = "10.26.1.2";
 
@@ -39,15 +39,12 @@ public final class RobotMap {
   public final int drivetrainLeftMotorTwoPort = 2;
   public final int drivetrainLeftMotorThreePort = 3;
   
-  public final int drivetrainRightMotorOnePort = 6;
+  public final int drivetrainRightMotorOnePort = 4;
   public final int drivetrainRightMotorTwoPort = 5;
-  public final int drivetrainRightMotorThreePort = 4;
+  public final int drivetrainRightMotorThreePort = 6;
 
   public final int drivetrainSolOnPort = 0;
   public final int drivetrainSolOffPort = 1;
-
-  public final int visionSolOnPort = 2;
-  public final int visionSolOffPort = 3;
 
   /*****
    * Climber
@@ -55,18 +52,13 @@ public final class RobotMap {
 
   public final int climbMotorOnePort = 7;
 
+  public final int safetySolOnPort = 2;
+  public final int safetySolOffPort = 3;
+
   public final int climberSolOnPort = 4;
   public final int climberSolOffPort = 5;
 
   public final double climberSpeed = 1.0;
-
-  /*****
-   * Funnel
-   */
-
-  public final int funnelMotorOnePort= 9;
-
-  public final double funnelSpeed = 0.5;
 
   /*****
    * Intake
@@ -84,7 +76,6 @@ public final class RobotMap {
    */
 
   public final int storageMotorOnePort = 13;
-  public final int storageMotorTwoPort = 14;
   public final int storageMotorThreePort = 15;
   public final double storageSpeedOne = 1.0;
   public final double storageSpeedTwo = 1.0;
@@ -104,7 +95,10 @@ public final class RobotMap {
    * Turret
    */
 
-  public final int turretMotorOnePort = 16; // 14
+  public final int turretMotorOnePort = 14;
+
+  public final int turretLeftLimitSwitchPort = 0;
+  public final int turretRightLimitSwitchPort = 1;
 
   public final int turretZeroPos = -10500;
   public final int turretQuarterPos = 0;

@@ -5,16 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.vision;
+package frc.robot.commands.climber;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.Robot;
 
-public class VisionCameraToggleSolenoid extends CommandBase {
+public class ClimberToggleSafetySolenoid extends CommandBase {
 
-  public VisionCameraToggleSolenoid() {
-    addRequirements(Robot.VISION_MOUNT);
+  public ClimberToggleSafetySolenoid() {
+    addRequirements(Robot.CLIMBER);
   }
 
   @Override
@@ -23,7 +23,7 @@ public class VisionCameraToggleSolenoid extends CommandBase {
 
   @Override
   public void execute() {
-    Robot.VISION_MOUNT.pistonPosition();
+    Robot.CLIMBER.toggleSafetySolenoid();
   }
 
   @Override
