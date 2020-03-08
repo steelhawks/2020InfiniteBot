@@ -87,6 +87,8 @@ public class Robot extends TimedRobot {
           + DriverStation.getInstance().getMatchTime() % 60;
       SmartDashboard.putString("Match Time", matchTime);
     }
+    VISION_LIGHT.runLights();
+
   }
 
   @Override

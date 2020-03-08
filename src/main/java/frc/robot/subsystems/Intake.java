@@ -45,39 +45,39 @@ public class Intake extends MechanicalSubsystem {
   public void spinRoller(boolean isForward) {
     System.out.println("spinning motors");
     if (isForward) {
-      this.intakeMotorGroup.set(Robot.ROBOT_MAP.intakeSpeed);
-    } else {
       this.intakeMotorGroup.set(-Robot.ROBOT_MAP.intakeSpeed);
+    } else {
+      this.intakeMotorGroup.set(Robot.ROBOT_MAP.intakeSpeed);
     }
   }
 
   public void spinRoller(double speed) {
     System.out.println("2");
-    this.intakeMotorGroup.set(speed);
+    this.intakeMotorGroup.set(-speed);
   }
 
   public void spinRollerReverse(double speed) {
     System.out.println(-2);
-    this.intakeMotorGroup.set(-speed);
+    this.intakeMotorGroup.set(speed);
   }
 
   public void togglePosition() {
     if (this.intakeSol.get() == DoubleSolenoid.Value.kForward) {
-      up();
-    } else {
       down();
+    } else {
+      up();
     }
     System.out.println("Shifted gears!");
   }
 
   public void up() {
     System.out.println("up");
-    this.intakeSol.set(DoubleSolenoid.Value.kReverse);
+    this.intakeSol.set(DoubleSolenoid.Value.kForward);
   }
 
   public void down() {
     System.out.println("down");
-    this.intakeSol.set(DoubleSolenoid.Value.kForward);
+    this.intakeSol.set(DoubleSolenoid.Value.kReverse);
   }
 
   public void configureMotors() {

@@ -32,7 +32,7 @@ public class Turret extends MechanicalSubsystem {
 
   // Testing
   public boolean testing;
-  
+
   // TURRET CONSTRUCTOR
   public Turret() {
     // SPARK MAX LEFT MOTORS
@@ -63,7 +63,24 @@ public class Turret extends MechanicalSubsystem {
     } else {
       this.turretMotorOne.set(0.0);
     }
+    this.turretMotorOne.set(0);
   }
+
+  public boolean leftLimit(){
+    System.out.println(this.turretMotorOne.getSelectedSensorPosition());
+    if(this.turretMotorOne.getSelectedSensorPosition() >= Robot.ROBOT_MAP.turretLeftEncoderLimit){
+      return true;
+    }
+    return false;
+  }
+
+  public boolean rightLimit(){
+    if(this.turretMotorOne.getSelectedSensorPosition() <= Robot.ROBOT_MAP.turretRightEncoderLimit){
+      return true;
+    }
+    return false;
+  }
+  
 
   public void smartDashboard() {
     SmartDashboard.putNumber("Turret Motor One Speed", this.turretMotorOne.get());

@@ -22,7 +22,8 @@ public class TurretDefault extends CommandBase {
 
   @Override
   public void execute() {
-    if(Robot.TURRET.testing){
+    if(Robot.TURRET.testing && Robot.TURRET.leftLimitSwitch.get() && Robot.TURRET.rightLimitSwitch.get()){
+      System.out.println(Robot.TURRET.turretMotorOne.getSelectedSensorPosition());
       Robot.TURRET.turretMotorOne.set(Robot.COMMAND_LINKER.driveJoystick.getRawAxis(3) / 5);
     }
   }

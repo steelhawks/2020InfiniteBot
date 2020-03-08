@@ -97,11 +97,14 @@ public final class RobotMap {
 
   public final int turretMotorOnePort = 14;
 
+  public final int turretZeroPos = -10500;
+  public final int turretQuarterPos = 0;
+
   public final int turretLeftLimitSwitchPort = 0;
   public final int turretRightLimitSwitchPort = 1;
 
-  public final int turretZeroPos = -10500;
-  public final int turretQuarterPos = 0;
+  public final int turretLeftEncoderLimit = 0;
+  public final int turretRightEncoderLimit = turretZeroPos * 2;
 
   /*****
    * Vision

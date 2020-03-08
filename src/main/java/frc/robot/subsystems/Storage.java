@@ -44,10 +44,10 @@ public class Storage extends MechanicalSubsystem {
 
   public void moveBalls(boolean isForward) {
     if (isForward) {
-      this.storageMotorGroup.set(Robot.ROBOT_MAP.storageSpeedOne);
+      this.storageMotorGroup.set(-Robot.ROBOT_MAP.storageSpeedOne);
       this.storageMotorGroupTwo.set(-Robot.ROBOT_MAP.storageSpeedTwo);
     } else {
-      this.storageMotorGroup.set(-Robot.ROBOT_MAP.storageSpeedOne);
+      this.storageMotorGroup.set(Robot.ROBOT_MAP.storageSpeedOne);
       this.storageMotorGroupTwo.set(Robot.ROBOT_MAP.storageSpeedTwo);
     }
   }

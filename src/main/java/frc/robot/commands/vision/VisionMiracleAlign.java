@@ -115,18 +115,18 @@ public class VisionMiracleAlign extends CommandBase {
     Robot.DRIVETRAIN.drivetrainRightMotorGroup.set(0);
     Robot.DRIVETRAIN.isForward = true;
 
-    if (Robot.DASHBOARDWS.cameraMode.equals("HEXAGON")) {
-      // spool shootor, adjust velocity based on distance and start moving the balls
-      if (!(Robot.VISION.isPressed)) {
-        CommandScheduler.getInstance().schedule(
-            new SequentialCommandGroup(new ParallelCommandGroup(new ShooterSpool(), new StorageReverseBalls()),
-                new ParallelCommandGroup(new ShooterSpin(), new StorageMoveBalls())));
-      } else {
-        // if button was pressed, stop shooter and storage
-        CommandScheduler.getInstance().schedule(new ParallelCommandGroup(new ShooterStop(), new StorageStop(), new TurretReturnToZero()));
-      }
+    // if (Robot.DASHBOARDWS.cameraMode.equals("HEXAGON")) {
+    //   // spool shootor, adjust velocity based on distance and start moving the balls
+    //   if (!(Robot.VISION.isPressed)) {
+    //     CommandScheduler.getInstance().schedule(
+    //         new SequentialCommandGroup(new ParallelCommandGroup(new ShooterSpool(), new StorageReverseBalls()),
+    //             new ParallelCommandGroup(new ShooterSpin(), new StorageMoveBalls())));
+    //   } else {
+    //     // if button was pressed, stop shooter and storage
+    //     CommandScheduler.getInstance().schedule(new ParallelCommandGroup(new ShooterStop(), new StorageStop(), new TurretReturnToZero()));
+    //   }
 
-      Robot.VISION.press();
-    }
+    Robot.VISION.press();
+    // }
   }
 }

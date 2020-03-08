@@ -89,12 +89,12 @@ public class Vision extends VisionSubsystem {
       end();
     } else if (!this.isAligned) {
       System.out.println("Aligning");
-      if (getXPos()< getXPosLeftLimit() && !Robot.TURRET.rightLimitSwitch.get()) {
+      if (getXPos()< getXPosLeftLimit() && Robot.TURRET.rightLimitSwitch.get()) {
         System.out.println("right");
-        Robot.TURRET.turretMotorGroup.set(0.05 * (getXPosDiff(getXPos()) / 320) - (-0.1));
-      } else if (getXPos()> getXPosRightLimit() && !Robot.TURRET.leftLimitSwitch.get()) {
+        Robot.TURRET.turretMotorGroup.set(0.025 * (getXPosDiff(getXPos()) / 320) - (-0.1));
+      } else if (getXPos()> getXPosRightLimit() && Robot.TURRET.leftLimitSwitch.get()) {
         System.out.println("left");
-        Robot.TURRET.turretMotorGroup.set(-0.55 * (getXPosDiff(getXPos()) / 320) + (-0.1));
+        Robot.TURRET.turretMotorGroup.set(-0.025 * (getXPosDiff(getXPos()) / 320) + (-0.1));
       } else {
         Robot.TURRET.stop();
         System.out.println("Aligned!");

@@ -23,6 +23,7 @@ public class ClimberRollWinch extends CommandBase {
 
   @Override
   public void execute() {
+    Robot.CLIMBER.retractSolenoid();
     Robot.CLIMBER.rollWinch(true);
   }
 
