@@ -34,7 +34,7 @@ public class ShooterSpin extends CommandBase {
     }
     else
     {
-      Robot.SHOOTER.shoot(0.75);
+      Robot.SHOOTER.shoot(12700);
     }
   }
 

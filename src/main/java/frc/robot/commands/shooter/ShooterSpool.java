@@ -33,7 +33,7 @@ public class ShooterSpool extends CommandBase {
     }
     else
     {
-      Robot.SHOOTER.spool(0.75);
+      Robot.SHOOTER.spool(12700);
     }
   }
 

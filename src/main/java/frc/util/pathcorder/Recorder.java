@@ -20,6 +20,7 @@ public class Recorder {
   public ArrayList<Encorder> encoderValues;
   public boolean isRecording;
   public boolean usingRecording;
+  public int currentButton;
   public int index;
   public String[] name = { "joystick value y", "joystick twist", "right encoder", "left encoder" };
   public String[] value = { "", "", "rpm", "rpm" };
@@ -32,6 +33,7 @@ public class Recorder {
     this.isRecording = false;
     this.usingRecording = false;
     this.index = 0;
+    this.currentButton = 0;
 
   }
 

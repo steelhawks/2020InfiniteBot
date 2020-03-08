@@ -27,7 +27,7 @@ public final class RobotMap {
   public final String jetsonNanoPort = "5805";
 
   public final String pathName = "/home/lvuser/deploy/log_2020-02-14_212213.csv";
-  public final String[] paths = {"straight.csv", "back.csv"};
+  public String[] paths = {"straight.csv", "back.csv"};
   public final String deployDirectory = "C:/Code/2020AutonBot/deploy";
   public SequentialCommandGroup autonCommands;
 
@@ -104,7 +104,7 @@ public final class RobotMap {
    * Turret
    */
 
-  public final int turretMotorOnePort = 16;
+  public final int turretMotorOnePort = 16; // 14
 
   public final int turretZeroPos = -10500;
   public final int turretQuarterPos = 0;

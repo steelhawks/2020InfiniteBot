@@ -44,9 +44,9 @@ public class Shooter extends MechanicalSubsystem {
     // this.kF = 0.14;
     // this.bias = 0;
     // this.shooterVelocity = 0;
-    this.kP = 0.1;
+    this.kP = 0.0625;
     this.kI = 0.001;
-    this.kD = 0.5;
+    this.kD = 0.540775;
     this.kF = 1023.0/20660.0;
 
     // is the shooter spooled?
@@ -99,8 +99,8 @@ public class Shooter extends MechanicalSubsystem {
   }
 
   public void spool(double output) {
-    this.shooterMotorOne.set(ControlMode.PercentOutput, output);
-    this.shooterMotorTwo.set(ControlMode.PercentOutput, output);
+    this.shooterMotorOne.set(TalonFXControlMode.Velocity, output);
+    this.shooterMotorTwo.set(TalonFXControlMode.Velocity, output);
     System.out
         .println("Motor one Spool speed " + this.shooterMotorOne.getSensorCollection().getIntegratedSensorVelocity());
     System.out
