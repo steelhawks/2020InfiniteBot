@@ -10,8 +10,11 @@ package frc.util;
 public abstract class SteelHawk extends ThreeLaws {
   public SteelHawk() {
     /*
-     * Our mission is to empower our diverse team to develop abilities, create
-     * opportunities in STEM, and inspire the next generation of innovators.
+     * The Steel Hawks’ mission is to empower our diverse team to develop our
+     * abilities through a collaborative learning environment. We create
+     * opportunities to explore a myriad of fields to ignite and fuel our passions.
+     * Our enthusiasm drives us to share our knowledge globally to inspire the next
+     * generation of innovators.
      */
   }
 }
