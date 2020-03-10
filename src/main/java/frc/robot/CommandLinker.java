@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Joystick;
 
 import frc.robot.commands.drivetrain.DrivetrainDefault;
 import frc.robot.commands.turret.TurretDefault;
+import frc.robot.commands.vision.VisionTurretAlign;
 import frc.robot.controllers.Driver3DProController;
 import frc.robot.controllers.OperatorXboxController;
 
@@ -48,7 +49,8 @@ public class CommandLinker {
 
   public void configurePeriodicBindings() {
     CommandScheduler.getInstance().setDefaultCommand(Robot.DRIVETRAIN, new DrivetrainDefault());
-    CommandScheduler.getInstance().setDefaultCommand(Robot.TURRET, new TurretDefault());
+    // CommandScheduler.getInstance().setDefaultCommand(Robot.TURRET, new TurretDefault());
+    CommandScheduler.getInstance().setDefaultCommand(Robot.VISION, new VisionTurretAlign());
 
   }
 

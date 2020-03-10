@@ -41,10 +41,10 @@ public class VisionMiracleAlign extends CommandBase {
     // if camera mode is not hex, only one press to start/stop alignment
 
     if (!(Robot.DASHBOARDWS.cameraMode.equals("HEXAGON"))) {
-      Robot.VISION.isPressed = false;
+      Robot.VISION.toggleAlign = false;
     }
     // if camera mode is hex and button wasn't pressed yet, start alignment
-    if (!(Robot.VISION.isPressed)) {
+    if (!(Robot.VISION.toggleAlign)) {
       System.out.println("passed");
       if (Robot.VISION.objectPresent(Robot.TRACKINGWS.getTargetData())) {
         System.out.println("initialized");
@@ -76,7 +76,7 @@ public class VisionMiracleAlign extends CommandBase {
   @Override
   public void execute() {
     // if object is present then start alignment for objects
-    if (!(Robot.VISION.isPressed) && Robot.VISION.objectPresent(Robot.TRACKINGWS.getTargetData())) {
+    if (!(Robot.VISION.toggleAlign) && Robot.VISION.objectPresent(Robot.TRACKINGWS.getTargetData())) {
       Robot.STRIP_LIGHT.aligningTarget();
       System.out.println("1");
       if (Robot.DASHBOARDWS.cameraMode.equals("HEXAGON")) {
@@ -100,7 +100,7 @@ public class VisionMiracleAlign extends CommandBase {
   @Override
   public boolean isFinished() {
     boolean finished;
-    if (!(Robot.VISION.isPressed)) {
+    if (!(Robot.VISION.toggleAlign)) {
       finished = Robot.VISION.isAligned();
     } else {
       finished = true;
@@ -117,7 +117,7 @@ public class VisionMiracleAlign extends CommandBase {
 
     // if (Robot.DASHBOARDWS.cameraMode.equals("HEXAGON")) {
     //   // spool shootor, adjust velocity based on distance and start moving the balls
-    //   if (!(Robot.VISION.isPressed)) {
+    //   if (!(Robot.VISION.toggleAlign)) {
     //     CommandScheduler.getInstance().schedule(
     //         new SequentialCommandGroup(new ParallelCommandGroup(new ShooterSpool(), new StorageReverseBalls()),
     //             new ParallelCommandGroup(new ShooterSpin(), new StorageMoveBalls())));
@@ -126,7 +126,7 @@ public class VisionMiracleAlign extends CommandBase {
     //     CommandScheduler.getInstance().schedule(new ParallelCommandGroup(new ShooterStop(), new StorageStop(), new TurretReturnToZero()));
     //   }
 
-    Robot.VISION.press();
+    Robot.VISION.toggleAlign();
     // }
   }
 }

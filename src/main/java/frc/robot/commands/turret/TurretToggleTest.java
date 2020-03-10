@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.Robot;
 
-public class TurretTest extends CommandBase {
-  public TurretTest() {
+public class TurretToggleTest extends CommandBase {
+  public TurretToggleTest() {
     addRequirements(Robot.TURRET);
   }
 

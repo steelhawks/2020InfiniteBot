@@ -24,8 +24,9 @@ public class Vision extends VisionSubsystem {
   private double xPosOffset;
   private JSONObject closestTarget;
   public boolean objectIsPresent;
-  public boolean isPressed = false;
+  public boolean toggleAlign = false;
   public int alignCount = 0;
+  public boolean stopShooting = false;
 
   public void alignCurve() {
     double tuneValue = 300;
@@ -87,15 +88,18 @@ public class Vision extends VisionSubsystem {
   public void align() {
     if (Robot.COMMAND_LINKER.driveJoystick.getRawButtonPressed(2)) {
       end();
-    } else if (!this.isAligned) {
+    } 
+    else if (!this.isAligned) {
       System.out.println("Aligning");
       if (getXPos()< getXPosLeftLimit() && Robot.TURRET.rightLimitSwitch.get()) {
         System.out.println("right");
         Robot.TURRET.turretMotorGroup.set(0.025 * (getXPosDiff(getXPos()) / 320) - (-0.1));
-      } else if (getXPos()> getXPosRightLimit() && Robot.TURRET.leftLimitSwitch.get()) {
+      } 
+      else if (getXPos()> getXPosRightLimit() && Robot.TURRET.leftLimitSwitch.get()) {
         System.out.println("left");
         Robot.TURRET.turretMotorGroup.set(-0.025 * (getXPosDiff(getXPos()) / 320) + (-0.1));
-      } else {
+      }
+      else {
         Robot.TURRET.stop();
         System.out.println("Aligned!");
         
@@ -133,11 +137,11 @@ public class Vision extends VisionSubsystem {
     }
   }
 
-  public void press() {
-    if (this.isPressed == true) {
-      this.isPressed = false;
+  public void toggleAlign() {
+    if (this.toggleAlign == true) {
+      this.toggleAlign = false;
     } else {
-      this.isPressed = true;
+      this.toggleAlign = true;
     }
   }
 
