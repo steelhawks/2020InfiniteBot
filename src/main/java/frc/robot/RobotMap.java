@@ -7,6 +7,7 @@
 
 package frc.robot;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.turret.TurretReturnToZero;
 
 public final class RobotMap {
   /*****
@@ -29,7 +30,7 @@ public final class RobotMap {
   public final String pathName = "/home/lvuser/deploy/log_2020-02-14_212213.csv";
   public String[] paths = {"straight.csv", "back.csv"};
   public final String deployDirectory = "C:/Code/2020AutonBot/deploy";
-  public SequentialCommandGroup autonCommands;
+  public SequentialCommandGroup autonCommands = new SequentialCommandGroup(new TurretReturnToZero());
 
   /*****
    * Drivetrain

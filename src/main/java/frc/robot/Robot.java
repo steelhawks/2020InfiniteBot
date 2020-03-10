@@ -124,16 +124,16 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     CommandScheduler.getInstance().enable();
     Robot.DRIVETRAIN.lowGear();
-    if (DriverStation.getInstance().getMatchTime() <= 30) {
-      Robot.STRIP_LIGHT.endgameDeafult(DriverStation.getInstance().getAlliance());
-    } else {
-      Robot.STRIP_LIGHT.teleopDefault(DriverStation.getInstance().getAlliance());
-    }
   }
 
   @Override
   public void teleopPeriodic() {
     CommandScheduler.getInstance().run();
+    if (DriverStation.getInstance().getMatchTime() <= 30) {
+      Robot.STRIP_LIGHT.endgameDeafult(DriverStation.getInstance().getAlliance());
+    } else {
+      Robot.STRIP_LIGHT.teleopDefault(DriverStation.getInstance().getAlliance());
+    }
     // Robot.SHOOTER.shoot(14000);
     // if (Robot.COMMAND_LINKER.operatorGamepad.getRightY() > 0.05 || Robot.COMMAND_LINKER.operatorGamepad.getRightY() < -0.05)
     // {

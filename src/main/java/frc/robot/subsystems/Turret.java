@@ -55,32 +55,31 @@ public class Turret extends MechanicalSubsystem {
 
   public void goTo(int position) {
     if (position < this.turretMotorOne.getSelectedSensorPosition() && !this.leftLimitSwitch.get()) {
-      this.turretMotorOne.set(
-          -0.15 * ((this.turretMotorOne.getSelectedSensorPosition() / Math.abs((this.zeroPosition - this.quarterPosition ) / 90)) / 45) + (-0.125));
+      this.turretMotorOne.set(-0.1 * ((this.turretMotorOne.getSelectedSensorPosition()
+          / Math.abs((this.zeroPosition - this.quarterPosition) / 90)) / 45) + (-0.1));
     } else if (position > this.turretMotorOne.getSelectedSensorPosition() && !this.rightLimitSwitch.get()) {
-      this.turretMotorOne.set(
-          0.15 * ((this.turretMotorOne.getSelectedSensorPosition() / Math.abs((this.zeroPosition - this.quarterPosition ) / 90)) / 45) + (0.125));
+      this.turretMotorOne.set(0.1 * ((this.turretMotorOne.getSelectedSensorPosition()
+          / Math.abs((this.zeroPosition - this.quarterPosition) / 90)) / 45) + (0.1));
     } else {
       this.turretMotorOne.set(0.0);
     }
     this.turretMotorOne.set(0);
   }
 
-  public boolean leftLimit(){
+  public boolean leftLimit() {
     System.out.println(this.turretMotorOne.getSelectedSensorPosition());
-    if(this.turretMotorOne.getSelectedSensorPosition() >= Robot.ROBOT_MAP.turretLeftEncoderLimit){
+    if (this.turretMotorOne.getSelectedSensorPosition() >= Robot.ROBOT_MAP.turretLeftEncoderLimit) {
       return true;
     }
     return false;
   }
 
-  public boolean rightLimit(){
-    if(this.turretMotorOne.getSelectedSensorPosition() <= Robot.ROBOT_MAP.turretRightEncoderLimit){
+  public boolean rightLimit() {
+    if (this.turretMotorOne.getSelectedSensorPosition() <= Robot.ROBOT_MAP.turretRightEncoderLimit) {
       return true;
     }
     return false;
   }
-  
 
   public void smartDashboard() {
     SmartDashboard.putNumber("Turret Motor One Speed", this.turretMotorOne.get());
