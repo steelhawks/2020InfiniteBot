@@ -18,6 +18,9 @@ public class StorageReverseBalls extends CommandBase {
 
   @Override
   public void initialize() {
+    if(Robot.RECORDER.isRecording){
+      Robot.RECORDER.buttonPressed = Robot.BUTTON_MAP.StorageMoveBallsReverseButton;
+    }
   }
 
   @Override

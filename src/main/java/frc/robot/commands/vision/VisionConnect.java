@@ -23,8 +23,10 @@ public class VisionConnect extends CommandBase {
   @Override
   public void execute() {
     try {
-      Robot.TRACKINGWS.reconnect();
-      Robot.DASHBOARDWS.reconnect();
+      for(int i = 0; i < 4; i++){
+        Robot.TRACKINGWS = Robot.TRACKINGWS.reconnect();
+        Robot.DASHBOARDWS = Robot.DASHBOARDWS.reconnect();
+      }
     } catch (Exception e) {
       System.out.println("idk man i cant connect");
 

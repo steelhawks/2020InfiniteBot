@@ -52,6 +52,10 @@ public class PathSelector {
   public void loadPresetPath(){
     DashboardPath choice = (DashboardPath)chooser.getSelected();
     Robot.ROBOT_MAP.autonCommands = choice.commands;
-    Robot.ROBOT_MAP.paths = choice.csvFiles;
+    ArrayList<String> csvFiles = new ArrayList<String>();
+    for(String file : choice.csvFiles){
+      csvFiles.add(file);
+    }
+    Robot.ROBOT_MAP.paths = csvFiles;
   }
 }

@@ -17,7 +17,7 @@ import org.json.*;
 
 public class Vision extends VisionSubsystem {
 
-  private boolean isAligned;
+  public boolean isAligned;
   private double angle;
   private double xPosLeftLimit;
   private double xPosRightLimit;
@@ -105,7 +105,7 @@ public class Vision extends VisionSubsystem {
         
         Robot.VISION_LIGHT.disable();
         Robot.STRIP_LIGHT.aligned();
-        this.isAligned = true;
+        // this.isAligned = true;
       }
     }
   }

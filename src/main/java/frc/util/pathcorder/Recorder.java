@@ -16,8 +16,7 @@ import frc.util.CsvLogger;
 import frc.robot.Robot;
 
 public class Recorder {
-  public ArrayList<JoystickRecorder> joystickValues;
-  public ArrayList<Encorder> encoderValues;
+  public double buttonPressed;
   public boolean isRecording;
   public boolean usingRecording;
   public int currentButton;
@@ -28,8 +27,7 @@ public class Recorder {
   CsvLogger logger = new CsvLogger();
 
   public Recorder() {
-    this.joystickValues = new ArrayList<JoystickRecorder>();
-    this.encoderValues = new ArrayList<Encorder>();
+    this.buttonPressed = -1;
     this.isRecording = false;
     this.usingRecording = false;
     this.index = 0;
@@ -42,10 +40,13 @@ public class Recorder {
 
   }
 
-  public void recordJoystick(JoystickRecorder stick) {
-    logger.writeData(stick.joystickY, stick.joystickTwist, stick.count);
+  public void resetButton(){
+    this.buttonPressed = -1;
   }
-
+  public void recordJoystick(JoystickRecorder stick) {
+    logger.writeData(stick.joystickY, stick.joystickTwist, stick.count, this.buttonPressed);
+    this.resetButton();
+  }
   public void recordEncoderValues(Encorder enc) {
     logger.writeData(enc.rightEncoder, enc.leftEncoder);
   }

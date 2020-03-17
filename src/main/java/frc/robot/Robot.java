@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
+import frc.robot.commands.vision.VisionMiracleAlign;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
@@ -24,6 +24,7 @@ import frc.robot.subsystems.VisionLight;
 
 import frc.util.pathcorder.Follower;
 import frc.util.pathcorder.Recorder;
+import frc.util.websocket.AutonSelectorWS;
 import frc.util.websocket.DashboardWS;
 import frc.util.websocket.TrackingWS;
 
@@ -37,8 +38,9 @@ import frc.util.websocket.TrackingWS;
 public class Robot extends TimedRobot {
   public static final RobotMap ROBOT_MAP = new RobotMap();
   public static final ButtonMap BUTTON_MAP = new ButtonMap();
-  public static final DashboardWS DASHBOARDWS = new DashboardWS();
-  public static final TrackingWS TRACKINGWS = new TrackingWS();
+  public static DashboardWS DASHBOARDWS = new DashboardWS();
+  public static TrackingWS TRACKINGWS = new TrackingWS();
+  public static AutonSelectorWS AUTON_SELECTORWS = new AutonSelectorWS();
   public static final Recorder RECORDER = new Recorder();
   public static final Follower FOLLOWER = new Follower();
   public static final Climber CLIMBER = new Climber();
@@ -59,7 +61,7 @@ public class Robot extends TimedRobot {
     Robot.COMMAND_LINKER.configureButtonBindings();
 
     Robot.DRIVETRAIN.lowGear();
-    
+    Robot.TURRET.goTo(Robot.ROBOT_MAP.turretQuarterPos);
     Robot.DASHBOARDWS.connect();
     Robot.TRACKINGWS.connect();
     Robot.DASHBOARDWS.baseConfig();
@@ -68,8 +70,8 @@ public class Robot extends TimedRobot {
     Robot.VISION.setXPosRightLimit(325.0);
     Robot.VISION.setXPosOffset(0);
 
+    ROBOT_MAP.paths.add("straight.csv");
     Robot.FOLLOWER.importPath(ROBOT_MAP.paths);
-
     Robot.STRIP_LIGHT.enable();
   }
 
@@ -87,7 +89,7 @@ public class Robot extends TimedRobot {
           + DriverStation.getInstance().getMatchTime() % 60;
       SmartDashboard.putString("Match Time", matchTime);
     }
-    VISION_LIGHT.runLights();
+    // VISION_LIGHT.runLights();
 
   }
 
@@ -113,11 +115,13 @@ public class Robot extends TimedRobot {
     Robot.DRIVETRAIN.lowGear();
     Robot.FOLLOWER.index = 0;
     Robot.STRIP_LIGHT.autonomousDefault(DriverStation.getInstance().getAlliance());
+    CommandScheduler.getInstance().schedule(new VisionMiracleAlign());
     CommandScheduler.getInstance().schedule(ROBOT_MAP.autonCommands);
   }
 
   @Override
   public void autonomousPeriodic() {
+    SHOOTER.spool(12500);
   }
 
   @Override

@@ -33,9 +33,7 @@ public class EndRecording extends CommandBase {
   @Override
   public void end(boolean interrupted) 
   {
-    Robot.RECORDER.exportPath(Robot.ROBOT_MAP.pathName);
-    Robot.RECORDER.joystickValues.clear();
-    
+    Robot.RECORDER.exportPath(Robot.ROBOT_MAP.pathName);    
   }
 }
 

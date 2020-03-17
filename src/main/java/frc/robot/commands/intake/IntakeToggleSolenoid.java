@@ -18,6 +18,9 @@ public class IntakeToggleSolenoid extends CommandBase {
 
   @Override
   public void initialize() {
+    if(Robot.RECORDER.isRecording){
+      Robot.RECORDER.buttonPressed = Robot.BUTTON_MAP.intakeToggleSolenoidButton;
+    }
   }
 
   @Override

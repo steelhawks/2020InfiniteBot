@@ -33,22 +33,32 @@ public class Follower {
 
   public void follow() {
     AutonPath currentPath = AutonPaths.get(pathIndex);
+
+    // FOLLOW JOYSTICK RECORDING
     if (index < currentPath.joystickYValues.size()) {
-      System.out.println(index);
       Robot.DRIVETRAIN.arcadeDrive(currentPath.joystickYValues.get(index),
           currentPath.joystickRotationValues.get(index));
+
+      // FOLLLOW BUTTON RECORDING
+      int currentButtonInput = (int)Math.round(currentPath.joystickButtonInputs.get(index));
+      readButtonInput(currentButtonInput);
+      
+      // DOUBLING FILES TO ENSURE ACCURACY
       index++;
-      if (shouldDouble == true) {
+      if (shouldDouble == true) 
+      {
         shouldDouble = false;
         index++;
-      } else {
+      } 
+      else {
         shouldDouble = true;
       }
 
       isFinished = false;
-      // Robot.DRIVETRAIN.enc_right.setPosition(this.encoderRightValues.get(index));
-      // Robot.DRIVETRAIN.enc_left.setPosition(this.encoderLeftValues.get(index));
-    } else {
+    } 
+
+    else 
+    {
       Robot.DRIVETRAIN.arcadeDrive(0, 0);
       System.out.println(index);
       pathIndex++;
@@ -56,8 +66,9 @@ public class Follower {
     }
   }
 
-  public void importPath(String[] paths) {
+  public void importPath(ArrayList<String> paths) {
     try {
+      this.AutonPaths.clear();
       // insert path to csv
       for (String pathName : paths) {
         System.out.println("PATH NAME" + pathName);
@@ -93,17 +104,23 @@ public class Follower {
       br.readLine();
       AutonPath newPath = new AutonPath();
       String line = null;
+
       while ((line = br.readLine()) != null) {
         String[] joystickValue = line.split(",");
-        double valueOne = Double.parseDouble(joystickValue[0]);
-        double valueTwo = Double.parseDouble(joystickValue[1]);
-        if (valueOne > 1 || valueOne < -1 || valueTwo > 1 || valueTwo < -1) {
-          newPath.encoderRightValues.add(valueOne);
-          newPath.encoderLeftValues.add(valueTwo);
-        } else {
-          newPath.joystickYValues.add(valueOne);
-          newPath.joystickRotationValues.add(valueTwo);
-        }
+        double joystickY = Double.parseDouble(joystickValue[0]);
+        double joystickRotation = Double.parseDouble(joystickValue[1]);
+        double joystickButtonInput = Double.parseDouble(joystickValue[3]);
+        // if (valueOne > 1 || valueOne < -1 || valueTwo > 1 || valueTwo < -1) {
+        //   newPath.encoderRightValues.add(valueOne);
+        //   newPath.encoderLeftValues.add(valueTwo);
+        // } 
+        // else {
+          // newPath.joystickYValues.add(valueOne);
+          // newPath.joystickRotationValues.add(valueTwo);
+        // }
+        newPath.joystickYValues.add(joystickY);
+        newPath.joystickRotationValues.add(joystickRotation);
+        newPath.joystickButtonInputs.add(joystickButtonInput);
 
       }
       AutonPaths.add(newPath);
@@ -113,6 +130,32 @@ public class Follower {
     } catch (Exception e) {
       System.out.println("Could not find file");
     }
+  }
+
+
+  private void readButtonInput(int buttonInput){
+    if(buttonInput == -1){
+      // do nothing
+    }
+    else if(buttonInput == Robot.BUTTON_MAP.intakeToggleSolenoidButton){
+      Robot.INTAKE.togglePosition();
+    }
+    else if(buttonInput == Robot.BUTTON_MAP.intakeSpinRollerForwardButton){
+      Robot.INTAKE.spinRoller(Robot.ROBOT_MAP.intakeSpeed);
+    }
+    else if(buttonInput == -Robot.BUTTON_MAP.intakeSpinRollerForwardButton){
+      Robot.INTAKE.stop();
+    }
+    else if(buttonInput == Robot.BUTTON_MAP.storageMoveBallsForwardButton){
+      Robot.STORAGE.moveBalls(true);
+    }
+    else if(buttonInput == Robot.BUTTON_MAP.StorageMoveBallsReverseButton){
+      Robot.STORAGE.moveBalls(false);
+    }
+    else if(buttonInput == -Robot.BUTTON_MAP.storageMoveBallsForwardButton){
+      Robot.STORAGE.stopStorage();
+    }
+
   }
 
   // String csvFile = " ";

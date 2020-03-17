@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
+import java.util.ArrayList;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.turret.TurretReturnToZero;
 
@@ -28,7 +29,7 @@ public final class RobotMap {
   public final String jetsonNanoPort = "5805";
 
   public final String pathName = "/home/lvuser/deploy/log_2020-02-14_212213.csv";
-  public String[] paths = {"straight.csv", "back.csv"};
+  public ArrayList<String> paths = new ArrayList<String>();
   public final String deployDirectory = "C:/Code/2020AutonBot/deploy";
   public SequentialCommandGroup autonCommands = new SequentialCommandGroup(new TurretReturnToZero());
 
